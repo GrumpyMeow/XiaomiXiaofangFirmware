@@ -42,9 +42,10 @@ else
   sed -i -- '/iperf-2.0.4:/i onvif:\n	if [ -d $(PRJ_DIR)/app/onvif/rootfs ]; then \\n		cp -av $(PRJ_DIR)/app/onvif/rootfs/* $(FS_DIR); \\n	fi\n onvif-clean:\n' ../snx_sdk/buildscript/Makefile.mod
 fi
 
-
-
-
-echo adding sc2035 and sc2135 
-sed -i -- '/config VIDEO_SENSOR_OV2740/i config VIDEO_SENSOR_SC2035\n bool "SC2035"\n default n\n\n config VIDEO_SENSOR_SC2135\n bool "SC2135"\n default y\n\n' ../snx_sdk/buildscript/driver_Kconfig
-
+if grep -q 'config VIDEO_SENSOR_SC2135' ../snx_sdk/buildscript/driver_Kconfig
+then
+   echo sc2035 and sc2135 is already present in driver_Kconfig
+else
+   echo adding sc2035 and sc2135 
+   sed -i -- '/config VIDEO_SENSOR_OV2740/i config VIDEO_SENSOR_SC2035\n bool "SC2035"\n default n\n\n config VIDEO_SENSOR_SC2135\n bool "SC2135"\n default y\n\n' ../snx_sdk/buildscript/driver_Kconfig
+fi
