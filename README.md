@@ -11,7 +11,6 @@ This repository will host files to build a custom firmware for the Xiaomi Xiaofa
 # FAQ
 
 # TODO
-* Patch password/shadow file
 * Add the SC2035 and SC2135 driver and build options.
 * snx_isp.ko replace for SC2135 support
 * Enable the rtl8188eu wifi driver
