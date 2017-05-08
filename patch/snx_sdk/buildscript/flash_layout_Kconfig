@@ -1,0 +1,225 @@
+####################################################
+#
+# SONiX Flash Layout Configurartion
+#
+####################################################
+
+menu "Flash Layout and firmware/_f setting"
+
+config ENABLE_BURNBIN_LOG
+	bool "Turn on firmware binary console log"
+	default y
+
+choice
+	prompt "Flash size select"
+	default SYSTEM_SERIAL_FLASH_16M
+
+config SYSTEM_SERIAL_FLASH_32M
+	bool "32M Serial Flash" 
+
+config SYSTEM_SERIAL_FLASH_16M
+	bool "16M Serial Flash"
+
+endchoice
+
+menu "Uboot Partiton Size (512KBytes)"
+config	UBOOT_UPDATE
+	bool "Put UBOOT into FIRMWARE.bin"
+	default n
+config	UBOOT_UPDATE_F
+	bool "Put UBOOT into FIRMWARE_F.bin"
+	default y
+endmenu
+
+menuconfig NVRAM_PART
+	bool "NVRAM Partition"
+	default y
+if NVRAM_PART
+menuconfig NVRAM_FACTORY_SIZE
+	bool "NVRAM Factory Partition"
+	default y
+if NVRAM_FACTORY_SIZE
+config	FACTORY_UPDATE
+	bool "Put Factory into FIRMWARE.bin"
+	default y
+config	FACTORY_UPDATE_F
+	bool "Put Factory into FIRMWARE_F.bin"
+	default y
+endif
+menuconfig NVRAM_USER_SIZE
+	bool "NVRAM User Partition"
+	default y
+if NVRAM_USER_SIZE
+config	USER_UPDATE
+	bool "Put user into FIRMWARE.bin"
+	default n
+config	USER_UPDATE_F
+	bool "Put user into FIRMWARE_F.bin"
+	default y
+endif
+config	NVRAM_PART_SIZE
+	int "NVRAM partition size (2 => 64KB, 8 => 256KB)"
+	range 1 96
+	default 8
+	help
+	The set value range is 1 to 96, the unit is 32KB
+endif
+
+menu "Kernel Partition"
+config	KERNEL_UPDATE
+	bool "Put Kernel into FIRMWARE.bin"
+	default y
+config	KERNEL_UPDATE_F
+	bool "Put Kernel into FIRMWARE_F.bin"
+	default y
+config	KERNEL_PART_SIZE
+	int "Kernel Partition Size (2 => 64KB, 96 => 3M)"
+	range 1 200
+	default 96
+	help
+	The set value range is 1 to 96, the unit is 32KB
+endmenu
+
+menu "Root File System Partition"
+config	ROOTFS_UPDATE
+	bool "Put Rootfs into FIRMWARE.bin"
+	default y
+config	ROOTFS_UPDATE_F
+	bool "Put Rootfs into FIRMWARE_F.bin"
+	default y
+config	ROOTFS_PART_SIZE
+	int "Root File System Partition Size (2 => 64KB, 3 => 96KB 224=>7M 208=>6.5M)"
+	range 1 300
+	default 224
+	help
+	The set value range is 1 to 96, the unit is 32KB
+endmenu
+
+menuconfig RESCUE_SYSTEM_PART
+	bool "Rescue System Partition"
+	default y
+if RESCUE_SYSTEM_PART
+config	RESCUE_UPDATE
+	bool "Put Rescue into FIRMWARE.bin"
+	default n
+config	RESCUE_UPDATE_F
+	bool "Put Rescue into FIRMWARE_F.bin"
+	default y
+config	RESCUE_SYSTEM
+	bool "Rescue System Partition image Compile"
+	default y
+config	RESCUE_PART_SIZE
+	int "RESCUE Partiton Size (2 => 64KB, 128 => 4M)"
+	range 1 150
+	default 128
+	help
+	The set value range is 1 to 96, the unit is 32KB
+endif
+
+menuconfig JFFS2_PART
+	bool "Jffs2 App Partition"
+if JFFS2_PART
+config	JFFS2_UPDATE
+	bool "Put Jffs2 app Parttition into FIRMWARE.bin"
+	default y
+config	JFFS2_UPDATE_F
+	bool "Put Jffs2 app Parttition into FIRMWARE_F.bin"
+	default y
+config	JFFS2_PART_SIZE
+	int "Update Partition size (2 => 64KB, 16 => 512KB)"
+	range 5 96
+	default 16
+	help
+	The set value range is 1 to 96, the unit is 32KB
+config	JFFS2_PART_MOUNT
+	string "Update Partition mount direction"
+	default "/app"
+endif
+
+menu "Configure File Partition"
+config	ETC_UPDATE
+	bool "erase etc when update FIRMWARE.bin"
+	default y
+config	ETC_UPDATE_F
+	bool "erase etc when update FIRMWARE_F.bin"
+	default y
+config	ETC_PART_SIZE
+	int "Configure File Partition Size (2 => 64KB, 32 => 1M)"
+	range 1 96
+	default 32
+	help
+	The set value range is 1 to 96, the unit is 32KB
+endmenu
+
+menuconfig CUSTOM1_PARTITION
+	bool "Custom1 Partition"
+if CUSTOM1_PARTITION
+config	CUSTOM1_UPDATE
+	bool "Put Custom1 into FIRMWARE.bin"
+	default y
+config	CUSTOM1_UPDATE_F
+	bool "Put Custom1 into FIRMWARE_F.bin"
+	default y
+config	CUSTOM1_PART_SIZE
+	int "Custom1 partition size (2 => 64KB, 3 => 96KB)"
+	range 1 96
+	default 0
+	help
+	The set value range is 1 to 96, the unit is 32KB
+config CUSTOM1_IMAGE
+	string "Custom1 image name"
+	default "CUSTOM1.bin"
+menuconfig CUSTOM1_MOUNT
+	bool "Custom1 mount"
+if CUSTOM1_MOUNT
+choice
+	prompt "Custom1 mount type"
+	default CUSTOM1_MOUNT_JFFS2
+config CUSTOM1_MOUNT_EXT2
+	bool "Ext2 filesystem" 
+config CUSTOM1_MOUNT_JFFS2
+	bool "Jffs2 filesystem"
+endchoice
+config	CUSTOM1_PART_MOUNT
+	string "Custom1 Partition mount direction"
+	default "/custom1"
+endif
+endif
+
+menuconfig CUSTOM2_PARTITION
+	bool "Custom2 Partition"
+if CUSTOM2_PARTITION
+config	CUSTOM2_UPDATE
+	bool "Put Custom2 into FIRMWARE.bin"
+	default y
+config	CUSTOM2_UPDATE_F
+	bool "Put Custom2 into FIRMWARE_F.bin"
+	default y
+config	CUSTOM2_PART_SIZE
+	int "Custom2 partition size (2 => 64KB, 3 => 96KB)"
+	range 1 96
+	default 0
+	help
+	The set value range is 1 to 96, the unit is 32KB
+config CUSTOM2_IMAGE
+	string "Custom2 image name"
+	default "CUSTOM2.bin"
+menuconfig CUSTOM2_MOUNT
+	bool "Custom2 mount"
+if CUSTOM2_MOUNT
+choice
+	prompt "Custom2 mount type"
+	default CUSTOM2_MOUNT_JFFS2
+config CUSTOM2_MOUNT_EXT2
+	bool "Ext2 filesystem" 
+config CUSTOM2_MOUNT_JFFS2
+	bool "Jffs2 filesystem"
+endchoice
+config	CUSTOM2_PART_MOUNT
+	string "Custom2 Partition mount direction"
+	default "/custom2"
+endif
+endif
+
+endmenu
+

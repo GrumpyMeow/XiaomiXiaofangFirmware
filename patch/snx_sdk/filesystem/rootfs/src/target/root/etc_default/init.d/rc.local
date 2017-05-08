@@ -1,0 +1,100 @@
+#!/bin/sh
+
+# Set serial number (MAC address) as default hostname
+echo "Set hostname ..."
+if [ ! -f /etc/hostname ]; then
+        MACADDR=`ifconfig wlan0 | grep HWaddr | tr -d " " | tr -d ":"`
+        MACADDR=sonix-${MACADDR#*HWaddr}
+        echo $MACADDR > /etc/hostname
+fi
+/bin/hostname -F /etc/hostname
+echo
+
+# To see whether the DHCP was successful
+#if (( grep -q "wlan0" /etc/network/interfaces && ! ifconfig wlan0 | grep -q 'inet addr' )); then
+#        echo "Use default IP (DHCP)..."
+#        ifconfig wlan0 192.168.0.100 netmask 255.255.255.0
+#        route add default gw 192.168.0.1
+#fi
+
+# To see whether the PPPoE was successful
+#if (( grep -q "ppp0" /etc/network/interfaces && ! ifconfig ppp0 | grep -q 'inet addr' )); then
+#        echo "Use default IP (PPPoE)..."
+#        ifconfig wlan0 192.168.0.100 netmask 255.255.255.0
+#        route add default gw 192.168.0.1
+#fi
+
+# Set DNS when static IP was used
+#DNSSERVER=61.139.2.69
+#if (( grep -q "iface wlan0 inet static" /etc/network/interfaces )); then
+#        echo "nameserver $DNSSERVER" > /etc/resolv.conf
+#fi
+
+echo "Start telnetd ..."
+telnetd
+echo
+
+echo "Start boa ..."
+boa -f /etc/boa/boa.conf
+echo
+
+#echo "Start vsftpd ..."
+#vsftpd /etc/vsftpd/vsftpd.conf &
+#echo
+
+echo "Start inetd ..."
+/usr/sbin/inetd
+echo
+
+echo "Start wsdd ..."
+/bin/wsdd &
+echo 
+
+echo "Start http-tunneling-serv ..."
+/bin/http-tunneling-serv &
+echo 
+
+echo "Start sonix-proj ..."
+/bin/sonix-proj &
+echo
+
+echo "Start Two Way Audio ..."
+/bin/twowayaudio &
+
+echo "Start user-configured modules ..."
+start_module
+echo 
+
+echo "Start net_detect ..."
+net_detect &
+echo
+
+if [ -f /usr/bin/SnOnvif ]; then
+    echo "Start Onvif ..."
+    /usr/bin/SnOnvif &
+    echo 
+fi
+
+echo "Start cron sevice..."
+mkdir -p /var/spool/cron/crontabs 
+cp /etc/web/cron.hourly /var/spool/cron/crontabs/root > /dev/null 2>&1
+crond
+echo 
+
+if [ -f /usr/bin/IspService ]; then
+	echo "Start isp tuning tool ..."
+	/usr/bin/IspService &
+	echo
+fi
+
+
+# insert sonix UDC driver, use gpio6 falling edge trigger detect USB plug-out
+# gpio_num: use gpio number(0~31).
+# gpio_edge_mode: 0: rising edge trigger USB plug-out, 1: falling edge trigger USB plug-out
+modprobe snx_udc gpio_num=6 gpio_edge_mode=1
+
+# Default USB Device class
+cat /etc/usbd.txt > /proc/usbd/class_mode
+
+# QR code scan
+snx_scan &

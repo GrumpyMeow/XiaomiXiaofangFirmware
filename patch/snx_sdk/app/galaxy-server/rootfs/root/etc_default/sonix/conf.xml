@@ -1,0 +1,49 @@
+<config>
+	<!-- Basics Device -->
+	<device id="uuid:4fe963b6-e06a-409b-8000-276900005c05">
+		<firmware-version>2.3</firmware-version>
+		<serial>3487457jduy3s927</serial>
+		<model>TestModel</model>
+		<manufacturer>Test Manufacturer</manufacturer>
+		<hw-id>hwid:94727439293ldkjd</hw-id>
+	</device>
+	<!-- WSDD Service-specific configuration -->
+	<wsdd src="./wsdd.xml" />
+	<!--Network Configuration-->
+	<network src="./network.xml" />
+	<onvif>
+		<!--Device discovery server configuration-->
+		<serv>
+			<multicast>239.255.255.250</multicast>
+			<port>3702</port>
+		</serv>
+		<!-- ONVIF Service address configuration-->
+		<service>
+			<protocol>http</protocol>
+			<path>/onvif/device_service</path>
+		</service>
+		<!--Device discovery common configuration-->
+		<discovery src="./discovery.xml" />
+		<!--User Configuration-->
+		<users src="./users.xml" />
+	</onvif>
+	<!-- Stream: is related to streaming media configuration
+                 The type parameter controls the streaming media server address generation policy.
+                 When it is 0, ONVIF will query the streaming media server when it gets the video address (the media server that we can implement).
+                 When 1, ONVIF directly reads the specific mapping address in profiles.xml when acquiring the video address.
+such as:
+<mapped-url>/99.3gp</mapped-url>
+	-->
+	<stream type="0">
+		<!--Media server basic configuration-->
+		<serv src="./stream-serv.xml" />
+		<!-- Device configuration, video source, audio source, encoding/decoder, PTZ device, IO device -->
+		<fpga_sources src="./fpga_sources.xml" />
+		<asic_sources src="./asic_sources.xml" />
+		<!--Streaming media configuration -->
+		<profiles src="./profiles.xml" />
+		<!-- snapshot Switch configuration -->
+		<snapshots src="./snapshots.xml" />
+	</stream>
+	<log src="./log.xml" />
+</config>

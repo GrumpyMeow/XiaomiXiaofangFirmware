@@ -1,0 +1,32 @@
+<profile id="uuid:96FC89FB-2438-4E17-866F-3C454936FA42" fixed="1">
+	<name>media/stream1</name>
+	<mapped-url>/99.3gp</mapped-url>
+	<source id="uuid:38BDB80C-9662-49AE-B53D-A046097950B4"/>
+	<source id="uuid:E2C4CF08-4BD2-48C8-9EDB-B390BAF5C893"/>
+<source id="uuid:64AE95B8-B380-45A0-8736-B0F4B67D27AA"/>
+</profile>
+
+<profile id="uuid:358C293A-2CE2-D854-3A9A-EAB54E36D346" fixed="1">
+	<name>media/stream2</name>
+	<mapped-url>/99.3gp</mapped-url>
+	<source id="uuid:B93E7FB4-D37B-404F-9333-7F4E75919F29"/>
+	<source id="uuid:E2C4CF08-4BD2-48C8-9EDB-B390BAF5C895"/>
+</profile>
+
+<profile id="uuid:358C293A-2CE2-D854-3A9A-EAB54E36D346" fixed="1">
+	<name>media/stream3</name>
+	<mapped-url>/99.3gp</mapped-url>
+	<source id="uuid:B93E7FB4-D37B-404F-9333-7F4E75919F31"/>
+	<source id="uuid:E2C4CF08-4BD2-48C8-9EDB-B390BAF5C897"/>
+</profile>
+
+<!--
+<profile id="uuid:1234567" fixed="1" >
+	<name>9.avi</name>
+	<source id="uuid:56789"></source>
+</profile>
+<profile id="uuid:567890" fixed="1" >
+	<name>9.flv</name>
+	<source id="uuid:12345"></source>
+</profile>
+	-->

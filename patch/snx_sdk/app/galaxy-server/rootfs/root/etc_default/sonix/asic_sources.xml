@@ -1,0 +1,90 @@
+<!--
+Device source information
+         The parameters of the different device sources are different
+         Name: is the name of the device
+         Type: for the type of equipment, the specific type of video, vcodec, audio, acodec, ptz, relay
+         Format: is the data type of the device
+         Dev: is the device file path
+         Src: is the device object name, used only in sonix-proj
+	-->
+
+<source id="uuid:38BDB80C-9662-49AE-B53D-A046097950B4" disabled="0">
+	<name>video1</name>
+	<type>video</type>
+	<format>h264</format>
+	<dev>/dev/video0</dev>
+	<src>v4l2 video</src>
+	<res>1280x720</res>
+	<fps>25</fps>
+	<borq>bitrate</borq>
+	<bitrate>3145728</bitrate>
+	<qp>25</qp>
+	<gop>30</gop>
+	<buf_cnt>2</buf_cnt>
+	<usecount>1</usecount>
+</source>
+<source id="uuid:B93E7FB4-D37B-404F-9333-7F4E75919F29" disabled="0">
+	<name>video2</name>
+	<type>video</type>
+	<format>h264</format>
+	<dev>/dev/video0</dev>
+	<src>v4l2 video</src>
+	<res>640x480</res>
+	<fps>25</fps>
+	<borq>bitrate</borq>
+	<bitrate>614400</bitrate>
+	<qp>25</qp>
+	<gop>30</gop>
+	<buf_cnt>2</buf_cnt>
+	<usecount>1</usecount>
+</source>
+
+<source id="uuid:B93E7FB4-D37B-404F-9333-7F4E75919F31" disabled="0">
+	<name>video3</name>
+	<type>video</type>
+	<format>mjpeg</format>
+	<dev>/dev/video0</dev>
+	<src>v4l2 video</src>
+	<res>640x480</res>
+	<fps>25</fps>
+
+	<borq>qp</borq>
+	<bitrate>-1</bitrate>
+	<qp>60</qp>
+	<gop>-1</gop>
+	<buf_cnt>2</buf_cnt>
+	<usecount>1</usecount>
+	<quality>-1</quality>
+</source>
+
+<source id="uuid:E2C4CF08-4BD2-48C8-9EDB-B390BAF5C893" disabled="0">
+	<name>audio1</name>
+	<type>audio</type>
+	<format>mulaw</format>
+	<dev>snx_audio_mulaw</dev>
+	<src>alsa audio</src>
+	<samplerate>8000</samplerate>
+	<bitrate>64000</bitrate>
+	<usecount>2</usecount>
+</source>
+
+<source id="uuid:E2C4CF08-4BD2-48C8-9EDB-B390BAF5C895" disabled="0">
+	<name>audio2</name>
+	<type>audio</type>
+	<format>alaw</format>
+	<dev>snx_audio_alaw</dev>
+	<src>alsa audio</src>
+	<samplerate>8000</samplerate>
+	<bitrate>64000</bitrate>
+	<usecount>2</usecount>
+</source>
+<source id="uuid:E2C4CF08-4BD2-48C8-9EDB-B390BAF5C897" disabled="0">
+	<name>audio3</name>
+	<type>audio</type>
+	<format>g726</format>
+	<dev>snx_audio_g726</dev>
+	<src>alsa audio</src>
+	<samplerate>8000</samplerate>
+	<bitrate>16000</bitrate>
+	<usecount>2</usecount>
+</source>
