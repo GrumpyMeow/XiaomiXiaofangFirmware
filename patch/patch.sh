@@ -39,7 +39,7 @@ then
     echo onvif app is already present in Makefile.mod
 else 
   echo adding onvif app to Makefile.mod
-  sed -i -- '/iperf-2.0.4:/i onvif:\n	if [ -d $(PRJ_DIR)/app/onvif/rootfs ]; then \\n		cp -av $(PRJ_DIR)/app/onvif/rootfs/* $(FS_DIR); \\n	fi\n onvif-clean:\n' ../snx_sdk/buildscript/Makefile.mod
+  sed -i -- '/iperf-2.0.4:/i onvif:\n	if [ -d $(PRJ_DIR)\/app\/onvif\/rootfs ]; then \\n		cp -av $(PRJ_DIR)\/app\/onvif\/rootfs\/* $(FS_DIR); \\n	fi\n onvif-clean:\n' ../snx_sdk/buildscript/Makefile.mod
 fi
 
 if grep -q 'config VIDEO_SENSOR_SC2135' ../snx_sdk/buildscript/driver_Kconfig
@@ -49,3 +49,134 @@ else
    echo adding sc2035 and sc2135 
    sed -i -- '/config VIDEO_SENSOR_OV2740/i config VIDEO_SENSOR_SC2035\n bool "SC2035"\n default n\n\n config VIDEO_SENSOR_SC2135\n bool "SC2135"\n default y\n\n' ../snx_sdk/buildscript/driver_Kconfig
 fi
+
+if grep -q '#modprobe 8188eu' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+then
+   echo enable 8188eu driver
+   sed -i -- 's/#modprobe 8188eu/modprobe 8188eu/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+else 
+   echo 8188eu driver is already enabled 
+fi
+
+
+if grep -q '#insmod isp driver' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+then
+   echo enable sc2135 sensor driver
+   sed -i -- 's/#insmod isp driver/modprobe sc2135/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+else 
+   echo sc2135 sensor driver is already enabled 
+fi
+
+if grep -q '#modprobe snx_vb2' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+then
+   echo enable snx_vb2 module
+   sed -i -- 's/#modprobe snx_vb2/modprobe snx_vb2/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+else 
+   echo snx_vb2 module is already enabled 
+fi
+
+if grep -q '#modprobe snx_vc snx_vb2=1 snx_percent=0' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+then
+   echo enable snx_vc module
+   sed -i -- 's/#modprobe snx_vc snx_vb2=1 snx_percent=0/modprobe snx_vc snx_vb2=1 snx_percent=0/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+else 
+   echo snx_vc module is already enabled 
+fi
+
+if grep -q '#modprobe snx_vo' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+then
+   echo enable snx_vo module
+   sed -i -- 's/#modprobe snx_vo/modprobe snx_vo/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rcS
+else 
+   echo snx_vo module is already enabled 
+fi
+
+if grep -q 'eth0' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo replace eth0 with wlan0
+   sed -i -- 's/eth0/wlan0/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo eth0 is already replaced with wlan0 
+fi
+
+if grep -q '#telnetd' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable telnetd
+   sed -i -- 's/#telnetd/telnetd/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo telnetd is already enabled
+fi
+
+if grep -q '#boa -f /etc/boa/boa.conf' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable boa
+   sed -i -- 's/#boa -f \/etc\/boa\/boa.conf/boa -f \/etc\/boa\/boa.conf/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo boa is already enabled
+fi
+
+if grep -q '#/usr/sbin/inetd' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable inetd
+   sed -i -- 's/#\/usr\/sbin\/inetd/\/usr\/sbin\/inetd/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo inetd is already enabled
+fi
+
+
+if grep -q '#/bin/wsdd &' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable wsdd
+   sed -i -- 's/#\/bin\/wsdd &/\/bin\/wsdd &/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo wsdd is already enabled
+fi
+
+if grep -q '#/bin/http-tunneling-serv &' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable http-tunneling-serv
+   sed -i -- 's/#\/bin\/http-tunneling-serv &/\/bin\/http-tunneling-serv &/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo http-tunneling-serv is already enabled
+fi
+
+if grep -q '#/bin/sonix-proj &' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable sonix-proj
+   sed -i -- 's/#/bin/sonix-proj &/\/bin\/sonix-proj &/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo sonix-proj is already enabled
+fi
+
+if grep -q '#/bin/twowayaudio &' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable twowayaudio
+   sed -i -- 's/#\/bin\/twowayaudio &/\/bin\/twowayaudio &/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo twowayaudio is already enabled
+fi
+
+if grep -q '#if [ -f /usr/bin/SnOnvif ]; then' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable SnOnvif
+   sed -i -- 's/#if [ -f \/usr\/bin\/SnOnvif ]; then\n#    echo "Start Onvif ..."\n#    \/usr\/bin\/SnOnvif &\n#    echo \n#fi/if [ -f \/usr\/bin\/SnOnvif ]; then\n    echo "Start Onvif ..."\n    \/usr\/bin\/SnOnvif &\n    echo \nfi/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo SnOnvif is already enabled
+fi
+
+if grep -q '#echo "Start cron sevice..."' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable Cron
+   sed -i -- 's/#echo "Start cron sevice..."\n#mkdir -p \/var\/spool\/cron\/crontabs \n#cp \/etc\/web\/cron.hourly \/var\/spool\/cron\/crontabs\/root > \/dev\/null 2>&1\n#crond/echo "Start cron sevice..."\nmkdir -p \/var\/spool\/cron\/crontabs \ncp \/etc\/web\/cron.hourly \/var\/spool\/cron\/crontabs\/root > \/dev\/null 2>&1\ncrond/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo Cron is already enabled
+fi
+
+if grep -q '#if [ -f /usr/bin/IspService ]; then' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+then
+   echo enable IspService isp tuning tool
+   sed -i -- 's/#if [ -f \/usr\/bin\/IspService ]; then\n#	echo "Start isp tuning tool ..."\n#	\/usr\/bin\/IspService &\n#	echo\n#fi/if [ -f \/usr\/bin\/IspService ]; then\n	echo "Start isp tuning tool ..."\n	\/usr\/bin\/IspService &\n	echo\nfi/g' ../snx_sdk/filesystem/rootfs/src/target/root/etc_default/init.d/rc.local
+else 
+   echo IspService is already enabled (isp tuning tool)
+fi
+
