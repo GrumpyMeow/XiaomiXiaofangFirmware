@@ -29,3 +29,8 @@ This repository will host files to build a custom firmware for the Xiaomi Xiaofa
 * WebUI/Galaxy Server> Increase resolution to FullHD support. Now 1280x720 is the highest.
 * Modify Galaxy Server Log.xml to log to a file and not to the console.
 * Add app SnOnvif, error: Create Key Error for /var/mq/cgi.mq : No such file or directoryMsg To Server Init Fail~
+* SnOnvif requires ./web-admin/rootfs/var/mq
+./web-admin/rootfs/var/mq/ffserver.mq
+./web-admin/rootfs/var/mq/cgi.mq
+./web-admin/rootfs/var/mq/mntrd.mq
+./web-admin/rootfs/var/mq/motiond.mq
