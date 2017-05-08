@@ -27,3 +27,5 @@ This repository will host files to build a custom firmware for the Xiaomi Xiaofa
 * WebUI> System> Date & Time  same sort error as above
 * WebUI certificate is only valid for: 172.21.2.134
 * WebUI/Galaxy Server> Increase resolution to FullHD support. Now 1280x720 is the highest.
+* Modify Galaxy Server Log.xml to log to a file and not to the console.
+* Add app SnOnvif, error: Create Key Error for /var/mq/cgi.mq : No such file or directoryMsg To Server Init Fail~
