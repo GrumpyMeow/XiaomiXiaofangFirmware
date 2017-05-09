@@ -1199,12 +1199,6 @@ galaxy-server-clean:
 else
 galaxy-server-clean: middleware_audio-clean middleware_video-clean middleware_rate_ctl-clean middleware_snx-cap-lib-clean middleware_openssl-clean 
 endif
-onvif:
-	if [ -d $(PRJ_DIR)/app/onvif/rootfs ]; then \
-		cp -av $(PRJ_DIR)/app/onvif/rootfs/* $(FS_DIR); \
-	fi
-onvif-clean:
-
 
 iperf-2.0.4:
 	if [ -d $(PRJ_DIR)/app/iperf-2.0.4/rootfs ]; then \
