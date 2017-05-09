@@ -5,6 +5,7 @@ Files for building your own custom firmware for the Xiaomi Xiaofang IP Camera.
 This repository will host files to build a custom firmware for the Xiaomi Xiaofang IP Camera. This repository will extend the generic Sonix SDK version 1.60.
 
 # HowTo use
+!! At the moment not all files are present in this repository !!
 1. Download the Sonix VirtualBox Appliance file
 1. Download the Sonix SN986 SDK 1.60
 1. Download the files from this repository. Place them in the folder next to (!not in!) snx_sdk. 
