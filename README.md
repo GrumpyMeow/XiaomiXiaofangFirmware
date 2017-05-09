@@ -11,8 +11,12 @@ This repository will host files to build a custom firmware for the Xiaomi Xiaofa
 1. Navigate to the "patch" directory
 1. Execute "patch.sh"
 
-# HowTo flash
-1. 
+# HowTo flash and use a prebuilt firmware
+1. After connecting to the SNIP AP. You can access the WebAdmin interface by browsing to: https://10.42.0.1
+You can login using "root", pw: ismart12
+
+
+
 
 # FAQ
 
