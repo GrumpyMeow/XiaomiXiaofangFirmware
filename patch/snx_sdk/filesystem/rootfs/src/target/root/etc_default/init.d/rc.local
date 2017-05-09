@@ -54,6 +54,7 @@ echo "Start http-tunneling-serv ..."
 /bin/http-tunneling-serv &
 echo 
 
+/bin/cp -f /etc/sonix/* /tmp/
 echo "Start sonix-proj ..."
 /bin/sonix-proj &
 echo

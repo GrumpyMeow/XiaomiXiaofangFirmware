@@ -56,7 +56,7 @@ fi
 
 modprobe snx_vb2
 modprobe snx_vc snx_vb2=1 snx_percent=0
-modprobe snx_vo
+#modprobe snx_vo   # Sonix TV/Video Out 
 modprobe snx_sd
 modprobe snx_wdt
 #modprobe snx_dhid
