@@ -248,12 +248,12 @@ config MODULE_SDC_SUPPORT
 
 config MODULE_NVRAM_SUPPORT
 	bool "NVRAM support"
-	default n
+	default y
 
 config MODULE_TV_SUPPORT
 	bool "TV out support"
 	depends on ! (SYSTEM_PLATFORM_ST58660FPGA || SYSTEM_PLATFORM_SN98660)
-	default y
+	default n
 
 config MODULE_UVC_SUPPORT
 	bool "UVC cam support"

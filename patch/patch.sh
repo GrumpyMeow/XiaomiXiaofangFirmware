@@ -17,4 +17,4 @@ echo Executing make install
 make install
 
 cd ../../patch/
-tar -cvzf xiaofang_0.001.tgz ../snx_sdk/image/
+tar -cvzf xiaofang_0.002.tgz ../snx_sdk/image/

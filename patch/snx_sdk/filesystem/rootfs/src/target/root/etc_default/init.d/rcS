@@ -13,6 +13,7 @@ modprobe 8188eu
 modprobe snx_aud_core
 modprobe snx_aud_sigma
 modprobe snx_aud_r2r
+modprobe snx_nvram
 
 modprobe sc2135
 if [ -r /etc/firmware/sensor.list ]

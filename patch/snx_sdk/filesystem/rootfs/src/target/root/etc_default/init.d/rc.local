@@ -46,9 +46,9 @@ echo "Start inetd ..."
 /usr/sbin/inetd
 echo
 
-echo "Start wsdd ..."
-/bin/wsdd &
-echo 
+#echo "Start wsdd ..."
+#/bin/wsdd &
+#echo 
 
 echo "Start http-tunneling-serv ..."
 /bin/http-tunneling-serv &
@@ -66,9 +66,9 @@ echo "Start user-configured modules ..."
 start_module
 echo 
 
-echo "Start net_detect ..."
-net_detect &
-echo
+#echo "Start net_detect ..."
+#net_detect &
+#echo
 
 if [ -f /usr/bin/SnOnvif ]; then
     echo "Start Onvif ..."
