@@ -26,4 +26,5 @@ First test release.
 You can flash this version with placing the firmware (FIRMWARE660R.bin) in the root of your SDCard and powering-on the device holding the setup button for a few seconds.
 
 
-
+Notes:
+* make kernelmenuconfig: deselect: "Device Drivers" > "Network Drivers" > "10/100 mbit" > SNX MAC Ethernet. This device hangs during boot.
