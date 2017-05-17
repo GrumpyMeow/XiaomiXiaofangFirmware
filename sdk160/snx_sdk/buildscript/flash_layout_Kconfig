@@ -139,7 +139,7 @@ endif
 menu "Configure File Partition"
 config	ETC_UPDATE
 	bool "erase etc when update FIRMWARE.bin"
-	default y
+	default n
 config	ETC_UPDATE_F
 	bool "erase etc when update FIRMWARE_F.bin"
 	default y

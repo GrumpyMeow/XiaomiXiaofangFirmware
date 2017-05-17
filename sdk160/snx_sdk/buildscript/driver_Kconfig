@@ -13,7 +13,7 @@ config MODULE_USB_WIFI_SUPPORT
 
 choice
 	prompt "USB WiFi Drivers" if MODULE_USB_WIFI_SUPPORT
-	default MODULE_USB_WIFI_RTL8188EUS_4_3_0_3
+	default MODULE_USB_WIFI_RT5370
  
 config MODULE_USB_WIFI_RT3070AP
     bool "RT3070 AP Driver"
@@ -112,7 +112,7 @@ config VIDEO_SENSOR_SNX111
 
 config VIDEO_SENSOR_OV9715
 	bool "OV9715"
-	default n
+	default y
 
 config VIDEO_SENSOR_OV2715
 	bool "OV2715"
@@ -209,14 +209,6 @@ config VIDEO_SENSOR_GC1024
 config VIDEO_SENSOR_OV2740
         bool "OV2740"
         default n
-        
-config VIDEO_SENSOR_SC2035
-        bool "SC2035"
-        default n        
-
-config VIDEO_SENSOR_SC2135
-        bool "SC2135"
-        default y        
 
 endmenu
 
@@ -248,12 +240,12 @@ config MODULE_SDC_SUPPORT
 
 config MODULE_NVRAM_SUPPORT
 	bool "NVRAM support"
-	default y
+	default n
 
 config MODULE_TV_SUPPORT
 	bool "TV out support"
 	depends on ! (SYSTEM_PLATFORM_ST58660FPGA || SYSTEM_PLATFORM_SN98660)
-	default n
+	default y
 
 config MODULE_UVC_SUPPORT
 	bool "UVC cam support"

@@ -12,7 +12,7 @@ mainmenu "SONiX SDK Configuration"
 ####################################################
 choice
 	prompt "Platform"
-	default SYSTEM_PLATFORM_SN98660
+	default SYSTEM_PLATFORM_SN98600
 
 config SYSTEM_PLATFORM_SN98600
 	bool "SN98600"
@@ -151,7 +151,7 @@ endif
 ####################################################
 choice
 	prompt "DDR Freq"
-	default SYSTEM_DDR402MHZ
+	default SYSTEM_DDR336MHZ
 
 config	SYSTEM_DDR25MHZ
 	bool "25MHz" if SYSTEM_PLATFORM_ST58600FPGA || SYSTEM_PLATFORM_ST58660FPGA

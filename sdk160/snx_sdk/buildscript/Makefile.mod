@@ -654,7 +654,6 @@ endif
 ###those are app modules######
 ##############################
 
-
 ifeq ($(MODULE_ONLY), yes)
 example:
 else
@@ -1305,7 +1304,6 @@ endif
 	if [ -d $(PRJ_DIR)/app/web-admin/rootfs ]; then \
 		cp -av $(PRJ_DIR)/app/web-admin/rootfs/* $(FS_DIR); \
 	fi
-	
 ifeq ($(MODULE_ONLY), yes)
 web-admin-clean:
 else
@@ -1428,5 +1426,5 @@ ifeq ($(CONFIG_RESCUE_SYSTEM), y)
 	rm -rf $(PRJ_DIR)/app/mcu_ctrl/rootfs-rescue
 endif
 
-snx_modules :=crosstool-4.5.2 image-tool board-info u-boot-2011-09 linux-2.6.35.12 busybox-1.22.1 rootfs rootfs-rescue ahbdma audio bus-mon spi crypto gpio pwm rtc timer tv usb-wifi usb-storage usb-3g video iq wdt sdc nvram_driver example dashcam ez-setup usbd-class gadget-udc uvc vcm middleware_common middleware_audio middleware_video middleware_snxconf middleware_rate_ctl middleware_nvram middleware_gpio middleware_libusb middleware_openssl middleware_zbar-0.10 middleware_json-c-0.9 middleware_libevent-2.0.21 middleware_curl-7.36.0 middleware_exfat middleware_snx-ez middleware_snx-cap-lib middleware_sdrecord middleware_aec bcmdl boa-0.94.14rc17 ez-ipupdate-3.0.10 galaxy-server iperf-2.0.4 iptables-1.4.1 mDNSResponder-333.10 miniupnpc-20071003 miniupnpd-20090605 net-snmp-5.7.1 ntp-4.2.6p5 ppp-2.4.1 rp-pppoe-3.8 samba-2.2.7a tsocks-1.8 two-way-audio web-admin wireless_tools.29 wpa_supplicant-0.7.3 smtpc-1.0.0 onvif isp-tuning-tool hostapd-0.8 fwupdate tcpdump-4.5.1 mcu_ctrl 
+snx_modules :=crosstool-4.5.2 image-tool board-info u-boot-2011-09 linux-2.6.35.12 busybox-1.22.1 rootfs rootfs-rescue ahbdma audio bus-mon spi crypto gpio pwm rtc timer tv usb-wifi usb-storage usb-3g video iq wdt sdc nvram_driver example dashcam ez-setup usbd-class gadget-udc uvc vcm middleware_common middleware_audio middleware_video middleware_snxconf middleware_rate_ctl middleware_nvram middleware_gpio middleware_libusb middleware_openssl middleware_zbar-0.10 middleware_json-c-0.9 middleware_libevent-2.0.21 middleware_curl-7.36.0 middleware_exfat middleware_snx-ez middleware_snx-cap-lib middleware_sdrecord middleware_aec bcmdl boa-0.94.14rc17 ez-ipupdate-3.0.10 galaxy-server iperf-2.0.4 iptables-1.4.1 mDNSResponder-333.10 miniupnpc-20071003 miniupnpd-20090605 net-snmp-5.7.1 ntp-4.2.6p5 ppp-2.4.1 rp-pppoe-3.8 samba-2.2.7a tsocks-1.8 two-way-audio web-admin wireless_tools.29 wpa_supplicant-0.7.3 smtpc-1.0.0 onvif isp-tuning-tool hostapd-0.8 fwupdate tcpdump-4.5.1 mcu_ctrl
 

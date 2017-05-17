@@ -69,7 +69,7 @@ if APP_EXAMPLE
 	default	n
 	config APP_EXAMPLE_RTSP_SERVER
 	bool "rtsp server"
-	default	y
+	default	n
 	config APP_EXAMPLE_SNAPSHOT
 	bool "snapshot"
 	default	n
@@ -101,10 +101,6 @@ config APP_EZIPUPDATE
 
 config APP_GALAXYSERVER
 	bool "galaxy-server"
-	default	y
-
-config APP_ONVIF
-	bool "onvif"
 	default	y
 
 config APP_IPERF
@@ -214,7 +210,7 @@ config APP_FWUPDATE
 	
 config APP_EZSETUP
 	bool "ez-setup"
-	default	y
+	default	n
 
 config APP_EZ_DIR
 	string "ez-setup default directory"
