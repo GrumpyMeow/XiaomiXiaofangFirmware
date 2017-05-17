@@ -1,0 +1,308 @@
+####################################################
+#
+# SONiX Module Configurartion
+#
+####################################################
+
+menu "Sonix Driver"
+
+config MODULE_USB_WIFI_SUPPORT
+    bool "USB WiFi Support"
+    default y
+	help
+
+choice
+	prompt "USB WiFi Drivers" if MODULE_USB_WIFI_SUPPORT
+	default MODULE_USB_WIFI_RTL8188EUS_4_3_0_3
+ 
+config MODULE_USB_WIFI_RT3070AP
+    bool "RT3070 AP Driver"
+    help
+
+config MODULE_USB_WIFI_RT5370
+    bool "RT5370 Driver"
+    help
+
+config MODULE_USB_WIFI_RTL8188EUS_4_3_0_3
+    bool "RTL8188EUS/ETV Driver v4.3.0.3"
+    help
+
+config MODULE_USB_WIFI_RTL8188EUS_4_3_0_9
+    bool "RTL8188EUS/ETV Driver v4.3.0.9"
+    help
+
+config MODULE_USB_WIFI_RTL8188EUS_4_3_15
+    bool "RTL8188EUS/ETV Driver v4.3.15 simple config"
+    help
+
+config MODULE_USB_WIFI_RTL8191SU
+    bool "RTL8191SU Driver"
+    help
+
+config MODULE_USB_WIFI_MT7601U
+    bool "MT7601U STA Driver"
+    help
+
+config MODULE_USB_WIFI_MT7601U_STA_SMCT
+    bool "MT7601U STA smart connection Driver"
+    help
+
+config MODULE_USB_WIFI_MT7601U_AP
+    bool "MT7601U AP Driver"
+    help
+    Version 3.0.0.1
+
+config MODULE_USB_WIFI_BCM43143B0
+    bool "BCM43143B0 WUBB-738GN Driver"
+    help
+
+config MODULE_USB_WIFI_RTL8188C_8192C
+    bool "RTL8188CU 8192CU"
+    help
+
+endchoice
+
+
+
+if SYSTEM_PLATFORM_ST58660FPGA || SYSTEM_PLATFORM_SN98660
+config MODULE_GADGET_UDC_SUPPORT
+	bool "usb device control"
+	default y
+
+if MODULE_GADGET_UDC_SUPPORT
+
+config MODULE_USBD_CLASS_SUPPORT
+	bool "usb device class"
+	default y
+
+if MODULE_USBD_CLASS_SUPPORT
+
+#config  USB_GADGET_VBUS_DRAW
+ #       int "GADGET VBUS DRAW"
+  #      range 2 500
+   #     default 2
+
+config MODULE_SNX_USB_GADGET_MSC
+	bool "gadget msc"
+	default n
+
+config MODULE_SNX_USB_GADGET_UVC
+	bool "gadget uvc"
+	default y
+
+config MODULE_SNX_USB_GADGET_HID
+	bool "gadget hid"
+	default y
+endif
+endif
+endif
+
+#menu "Video Driver"
+
+config MODULE_VIDEO_SUPPORT
+	bool "Video Support"
+	default y
+
+if MODULE_VIDEO_SUPPORT
+menu "Sensor driver"
+
+config VIDEO_SENSOR_SNX111
+	bool "Dummy Sensor"
+	default n
+
+config VIDEO_SENSOR_OV9715
+	bool "OV9715"
+	default n
+
+config VIDEO_SENSOR_OV2715
+	bool "OV2715"
+	depends on ! (SYSTEM_PLATFORM_SN98605)
+	default n
+
+config VIDEO_SENSOR_AR0130
+	bool "AR0130"
+	default n
+
+config VIDEO_SENSOR_IMX132
+	bool "IMX132"
+	depends on ! (SYSTEM_PLATFORM_SN98605)
+	default n
+
+config VIDEO_SENSOR_IMX188
+	bool "IMX188"
+	default n
+
+config VIDEO_SENSOR_OV2659
+	bool "OV2659"
+	default n
+
+config VIDEO_SENSOR_OV9772
+	bool "OV9772"
+	default n
+
+config VIDEO_SENSOR_OV9750
+        bool "OV9750"
+	default n
+
+config VIDEO_SENSOR_OV2643
+        bool "OV2643"
+	default n
+
+config VIDEO_SENSOR_TW9912
+        bool "TW9912"
+	default n
+
+config VIDEO_SENSOR_IMX238
+	bool "IMX238"
+	default n
+
+config VIDEO_SENSOR_AR0330
+	bool "AR0330"
+	depends on ! (SYSTEM_PLATFORM_SN98605)
+	default n
+
+config VIDEO_SENSOR_MT9V139
+	bool "MT9V139"
+	default n
+
+config VIDEO_SENSOR_H22
+        bool "H22"
+	default n
+
+config VIDEO_SENSOR_H42
+        bool "H42"
+        default n
+
+config VIDEO_SENSOR_CS4101K
+	bool "CS4101K"
+	default n
+
+config VIDEO_SENSOR_CS1211K
+	bool "CS1211K"
+	default n
+
+config VIDEO_SENSOR_OV7675
+	bool "OV7675"
+	default n
+
+config VIDEO_SENSOR_IMX225
+	bool "IMX225"
+	default n
+
+config VIDEO_SENSOR_IMX322
+	bool "IMX322"
+	depends on ! (SYSTEM_PLATFORM_SN98605)
+	default n
+
+config VIDEO_SENSOR_OV9732
+	bool "OV9732"
+	default n
+
+config VIDEO_SENSOR_OV7725
+	bool "OV7725"
+	default n
+
+config VIDEO_SENSOR_GC1024
+	bool "GC1024"
+	default n
+
+config VIDEO_SENSOR_OV2740
+        bool "OV2740"
+        default n
+        
+config VIDEO_SENSOR_SC2035
+        bool "SC2035"
+        default n        
+
+config VIDEO_SENSOR_SC2135
+        bool "SC2135"
+        default y        
+
+endmenu
+
+config ISP_AE
+	bool "Use Isp Auto Exposure"
+	default y
+
+config ISP_AWB
+	bool "Use Isp Auto White Balance"
+	default y
+
+config ISP_AF
+	bool "Use Isp Auto Focus"
+	default y	
+
+config MODULE_IQ_SUPPORT
+	bool "IQ.bin"
+	default y
+endif
+
+config MODULE_AUDIO_SUPPORT
+	bool "Audio Support"
+	default y
+
+
+config MODULE_SDC_SUPPORT
+    	bool "SD Card Support"
+	default y
+
+config MODULE_NVRAM_SUPPORT
+	bool "NVRAM support"
+	default y
+
+config MODULE_TV_SUPPORT
+	bool "TV out support"
+	depends on ! (SYSTEM_PLATFORM_ST58660FPGA || SYSTEM_PLATFORM_SN98660)
+	default n
+
+config MODULE_UVC_SUPPORT
+	bool "UVC cam support"
+	default n
+
+config MODULE_GPIO_SUPPORT
+	bool "GPIO Support"
+	default y
+
+config MODULE_PWM_SUPPORT
+	bool "PWM Support"
+	default y
+
+config MODULE_RTC_SUPPORT
+	bool "RTC Support"
+	default y
+
+config MODULE_SPI_SUPPORT
+	bool "SPI Support"
+	default y
+
+config MODULE_WDT_SUPPORT
+	bool "Watch Dog Timer Support"
+	default y
+
+config MODULE_TIMER_SUPPORT
+	bool
+	default y
+
+config MODULE_USB_3G_SUPPORT
+	bool
+	default n
+
+config MODULE_USB_STORAGE_SUPPORT
+	bool 
+	default n
+
+config MODULE_AHBDMA_SUPPORT 
+	bool "AHB DMA Support"
+	default n
+
+config MODULE_BUS_MON_SUPPORT
+	bool "Bus monitor Support"
+	depends on ! (SYSTEM_PLATFORM_ST58660FPGA || SYSTEM_PLATFORM_SN98660)
+	default n
+
+config MODULE_CRYPTO_SUPPORT
+	bool
+	default n
+
+endmenu
+

@@ -1,0 +1,496 @@
+####################################################
+#
+# The Topest Menu
+#
+####################################################
+mainmenu "SONiX SDK Configuration"
+
+####################################################
+#
+# System Configuration
+#
+####################################################
+choice
+	prompt "Platform"
+	default SYSTEM_PLATFORM_SN98660
+
+config SYSTEM_PLATFORM_SN98600
+	bool "SN98600"
+
+config SYSTEM_PLATFORM_SN98601
+	bool "SN98601"
+
+config SYSTEM_PLATFORM_SN98605
+	bool "SN98605"
+
+config SYSTEM_PLATFORM_SN98606
+	bool "SN98606"  
+
+config SYSTEM_PLATFORM_SN98610
+	bool "SN98610"
+
+config SYSTEM_PLATFORM_SN98660
+	bool "SN98660"
+
+config SYSTEM_PLATFORM_ST58600FPGA
+	bool "ST58600 FPGA"
+
+config SYSTEM_PLATFORM_ST58660FPGA
+	bool "ST58660 FPGA"
+
+endchoice
+
+config SYSTEM_PREVIOUS_PLATFORM
+	bool "Previous Platform"
+	depends on !SYSTEM_PLATFORM_ST58600FPGA && !SYSTEM_PLATFORM_ST58660FPGA
+	default n
+
+if SYSTEM_PREVIOUS_PLATFORM
+choice
+	prompt "Previous Platform Version"
+	default SYSTEM_E1
+
+config SYSTEM_E1
+	bool "E1"
+endchoice
+
+config SYSTEM_PREVIOUS_VERSION
+	string
+	default "e1"  if SYSTEM_E1
+endif
+
+config SYSTEM_PLATFORM
+	string
+	default "sn98600" if SYSTEM_PLATFORM_SN98600 || SYSTEM_PLATFORM_ST58600FPGA
+	default "sn98610" if SYSTEM_PLATFORM_SN98610
+	default "sn98601" if SYSTEM_PLATFORM_SN98601
+	default "sn98605" if SYSTEM_PLATFORM_SN98605
+  default "sn98606" if SYSTEM_PLATFORM_SN98606
+	default "sn98660" if SYSTEM_PLATFORM_SN98660
+	default "st58660" if SYSTEM_PLATFORM_ST58660FPGA
+
+config SYSTEM_SERIES
+	string
+	default "sn986xx" if SYSTEM_PLATFORM_ST58600FPGA \
+			|| SYSTEM_PLATFORM_SN98600 \
+			|| SYSTEM_PLATFORM_SN98610 \
+			|| SYSTEM_PLATFORM_SN98601 \
+			|| SYSTEM_PLATFORM_SN98605 \
+      || SYSTEM_PLATFORM_SN98606  
+
+	default "sn9866x" if SYSTEM_PLATFORM_ST58660FPGA \
+			|| SYSTEM_PLATFORM_SN98660
+
+####################################################
+#
+# DDR
+#
+####################################################
+if	! SYSTEM_PLATFORM_SN98660 && ! SYSTEM_PLATFORM_ST58660FPGA
+choice
+	prompt "DDR"
+	default SYSTEM_DDR_W9751G6KB_32Mx16
+
+
+config SYSTEM_DDR_W9751G6KB_32Mx16
+	 bool "Winbond W9751G6KB 32Mx16" 
+	 
+config SYSTEM_DDR_W9751G6KB_32Mx32
+	 bool "Winbond W9751G6KB 32Mx32" if SYSTEM_PLATFORM_ST58600FPGA
+
+if SYSTEM_PLATFORM_SN98610
+config SYSTEM_DDR_W9751G6KB_32Mx32
+	 bool "Winbond W9751G6KB 32Mx32"
+  	 
+config SYSTEM_DDR_W971GG6KB_64Mx16
+	 bool "Winbond W971GG6KB 64Mx16"
+	 
+config SYSTEM_DDR_W971GG6KB_64Mx32
+	 bool "Winbond W971GG6KB 64Mx32"
+
+endif 
+endchoice
+
+
+config DDR_PROJECT
+	string
+	default "w9751g6kb_32x16bit" if SYSTEM_DDR_W9751G6KB_32Mx16
+    default "w9751g6kb_32x32bit" if SYSTEM_DDR_W9751G6KB_32Mx32
+    default "w971gg6kb_64x16bit" if SYSTEM_DDR_W971GG6KB_64Mx16
+    default "w971gg6kb_64x32bit" if SYSTEM_DDR_W971GG6KB_64Mx32
+endif
+
+if SYSTEM_PLATFORM_ST58660FPGA || SYSTEM_PLATFORM_SN98660
+menu "DDR"
+config MAIN_SETTING
+	string "Main hw setting file string"
+	default "m14d5121632akrb1"
+
+config FIRST_DDR_STRING
+	string "first hw setting file string"
+	default ""
+
+config SECOND_DDR_STRING
+	string "second hw setting file string"
+	default ""
+
+config THIRD_DDR_STRING
+	string "third hw setting file string"
+	default ""
+
+config MEM_SIZE_STRING
+	string "describe memory size"
+	default "64x16bit"
+
+endmenu
+endif
+####################################################
+#
+# System PLL
+#
+####################################################
+choice
+	prompt "DDR Freq"
+	default SYSTEM_DDR402MHZ
+
+config	SYSTEM_DDR25MHZ
+	bool "25MHz" if SYSTEM_PLATFORM_ST58600FPGA || SYSTEM_PLATFORM_ST58660FPGA
+
+if	! SYSTEM_PLATFORM_ST58600FPGA && ! SYSTEM_PLATFORM_ST58660FPGA
+if	SYSTEM_PLATFORM_SN98660
+config SYSTEM_DDR33MHZ
+	 bool "33MHz"
+
+config SYSTEM_DDR102MHZ
+	 bool "102MHz"
+
+config SYSTEM_DDR126MHZ
+	 bool "126MHz"
+endif
+
+config SYSTEM_DDR150MHZ
+	 bool "150MHz"
+
+if	SYSTEM_PLATFORM_SN98660
+config SYSTEM_DDR174MHZ
+	 bool "174MHz"
+endif
+
+config SYSTEM_DDR198MHZ
+	 bool "198MHz"
+
+if	! SYSTEM_PLATFORM_SN98660
+config SYSTEM_DDR201MHZ
+	 bool "201MHz"	
+
+config SYSTEM_DDR216MHZ
+	 bool "216MHz"	
+
+config SYSTEM_DDR228MHZ
+	 bool "228MHz"	
+
+config SYSTEM_DDR240MHZ
+	 bool "240MHz"	
+
+config SYSTEM_DDR252MHZ
+	 bool "252MHz"	
+
+config SYSTEM_DDR264MHZ
+	 bool "264MHz"	
+
+config SYSTEM_DDR276MHZ
+	 bool "276MHz"	
+
+config SYSTEM_DDR288MHZ
+	 bool "288MHz"	
+
+config SYSTEM_DDR300MHZ
+	 bool "300MHz"	
+endif
+
+if	SYSTEM_PLATFORM_SN98660
+config SYSTEM_DDR306MHZ
+	 bool "306MHz"	
+endif
+
+if	! SYSTEM_PLATFORM_SN98660
+config SYSTEM_DDR312MHZ
+	 bool "312MHz"	
+
+config SYSTEM_DDR324MHZ
+	 bool "324MHz"	
+endif
+
+config SYSTEM_DDR336MHZ
+	 bool "336MHz"	
+
+if	! SYSTEM_PLATFORM_SN98660
+config SYSTEM_DDR348MHZ
+	 bool "348MHz"
+endif
+
+config SYSTEM_DDR360MHZ
+	 bool "360MHz"	 
+
+config SYSTEM_DDR372MHZ
+	 bool "372MHz"
+
+config SYSTEM_DDR384MHZ
+	 bool "384MHz"
+
+if	SYSTEM_PLATFORM_SN98660
+config SYSTEM_DDR390MHZ
+	 bool "390MHz"
+endif
+
+config SYSTEM_DDR396MHZ
+	 bool "396MHz"
+
+config SYSTEM_DDR402MHZ
+	 bool "402MHz"
+endif
+
+if	SYSTEM_PLATFORM_SN98660
+config SYSTEM_DDR408MHZ
+	 bool "408MHz"
+
+config SYSTEM_DDR414MHZ
+	 bool "414MHz"
+
+config SYSTEM_DDR420MHZ
+	 bool "420MHz"
+
+config SYSTEM_DDR426MHZ
+	 bool "426MHz"
+endif
+endchoice
+
+
+
+config DDR_FREQ
+	string
+	default "25" if SYSTEM_DDR25MHZ
+	default "33" if SYSTEM_DDR33MHZ
+	default "102" if SYSTEM_DDR102MHZ
+	default "126" if SYSTEM_DDR126MHZ
+	default "150" if SYSTEM_DDR150MHZ
+	default "174" if SYSTEM_DDR174MHZ
+	default "198" if SYSTEM_DDR198MHZ
+	default "201" if SYSTEM_DDR201MHZ
+	default "216" if SYSTEM_DDR216MHZ
+	default "228" if SYSTEM_DDR228MHZ
+	default "240" if SYSTEM_DDR240MHZ
+	default "252" if SYSTEM_DDR252MHZ
+	default "264" if SYSTEM_DDR264MHZ
+	default "272" if SYSTEM_DDR272MHZ
+	default "288" if SYSTEM_DDR288MHZ
+	default "300" if SYSTEM_DDR300MHZ
+	default "306" if SYSTEM_DDR306MHZ
+	default "312" if SYSTEM_DDR312MHZ
+	default "324" if SYSTEM_DDR324MHZ
+	default "336" if SYSTEM_DDR336MHZ
+	default "348" if SYSTEM_DDR348MHZ
+	default "360" if SYSTEM_DDR360MHZ
+	default "372" if SYSTEM_DDR372MHZ
+	default "384" if SYSTEM_DDR384MHZ
+	default "390" if SYSTEM_DDR390MHZ
+	default "396" if SYSTEM_DDR396MHZ
+	default "402" if SYSTEM_DDR402MHZ
+	default "408" if SYSTEM_DDR408MHZ
+	default "414" if SYSTEM_DDR414MHZ
+	default "420" if SYSTEM_DDR420MHZ
+	default "426" if SYSTEM_DDR426MHZ
+####################################################
+#
+# System PLL SETTING
+#
+####################################################
+if	SYSTEM_PLATFORM_SN98660
+config SYSTEM_PERFORMANCE_CLK
+	int	
+	default 100000000 if SYSTEM_DDR25MHZ
+	default 528000000 if SYSTEM_DDR33MHZ
+	default 612000000 if SYSTEM_DDR102MHZ
+	default 630000000 if SYSTEM_DDR126MHZ
+	default 600000000 if SYSTEM_DDR150MHZ
+	default 696000000 if SYSTEM_DDR174MHZ
+	default 594000000 if SYSTEM_DDR198MHZ
+	default 612000000 if SYSTEM_DDR306MHZ
+	default 672000000 if SYSTEM_DDR336MHZ
+	default 720000000 if SYSTEM_DDR360MHZ
+	default 744000000 if SYSTEM_DDR372MHZ
+	default 768000000 if SYSTEM_DDR384MHZ
+	default 780000000 if SYSTEM_DDR390MHZ
+	default 792000000 if SYSTEM_DDR396MHZ
+	default 804000000 if SYSTEM_DDR402MHZ
+	default 816000000 if SYSTEM_DDR408MHZ
+	default 828000000 if SYSTEM_DDR414MHZ
+	default 840000000 if SYSTEM_DDR420MHZ
+	default 852000000 if SYSTEM_DDR426MHZ
+
+config SYSTEM_APB_CLOCK_RATIO
+	int	
+	default 4  if SYSTEM_DDR25MHZ
+	default 32 if SYSTEM_DDR33MHZ
+	default 24 if SYSTEM_DDR102MHZ
+	default 30 if SYSTEM_DDR126MHZ
+	default 24 if SYSTEM_DDR150MHZ
+	default 24 if SYSTEM_DDR174MHZ
+	default 27 if SYSTEM_DDR198MHZ
+	default 24 if SYSTEM_DDR306MHZ
+	default 32 if SYSTEM_DDR336MHZ
+	default 32 if SYSTEM_DDR360MHZ
+	default 32 if SYSTEM_DDR372MHZ
+	default 32 if SYSTEM_DDR384MHZ
+	default 32 if SYSTEM_DDR390MHZ
+	default 32 if SYSTEM_DDR396MHZ
+	default 32 if SYSTEM_DDR402MHZ
+	default 32 if SYSTEM_DDR408MHZ
+	default 32 if SYSTEM_DDR414MHZ
+	default 32 if SYSTEM_DDR420MHZ
+	default 32 if SYSTEM_DDR426MHZ
+
+endif
+
+if	! SYSTEM_PLATFORM_SN98660
+config SYSTEM_PERFORMANCE_CLK
+	int	
+	default 100000000 if SYSTEM_DDR25MHZ
+	default 600000000 if SYSTEM_DDR150MHZ
+	default 792000000 if SYSTEM_DDR198MHZ
+	default 804000000 if SYSTEM_DDR201MHZ
+	default 648000000 if SYSTEM_DDR216MHZ
+	default 684000000 if SYSTEM_DDR228MHZ
+	default 720000000 if SYSTEM_DDR240MHZ
+	default 756000000 if SYSTEM_DDR252MHZ
+	default 528000000 if SYSTEM_DDR264MHZ
+	default 552000000 if SYSTEM_DDR276MHZ
+	default 576000000 if SYSTEM_DDR288MHZ
+	default 600000000 if SYSTEM_DDR300MHZ
+	default 624000000 if SYSTEM_DDR312MHZ
+	default 648000000 if SYSTEM_DDR324MHZ
+	default 672000000 if SYSTEM_DDR336MHZ
+	default 696000000 if SYSTEM_DDR348MHZ
+	default 720000000 if SYSTEM_DDR360MHZ
+	default 744000000 if SYSTEM_DDR372MHZ
+	default 768000000 if SYSTEM_DDR384MHZ
+	default 792000000 if SYSTEM_DDR396MHZ
+	default 804000000 if SYSTEM_DDR402MHZ
+
+config SYSTEM_APB_CLOCK_RATIO
+	int	
+	default 4  if SYSTEM_DDR25MHZ
+	default 24 if SYSTEM_DDR150MHZ
+	default 32 if SYSTEM_DDR198MHZ
+	default 32 if SYSTEM_DDR201MHZ
+	default 30 if SYSTEM_DDR216MHZ
+	default 30 if SYSTEM_DDR228MHZ
+	default 30 if SYSTEM_DDR240MHZ
+	default 30 if SYSTEM_DDR252MHZ
+	default 32 if SYSTEM_DDR264MHZ
+	default 32 if SYSTEM_DDR276MHZ
+	default 32 if SYSTEM_DDR288MHZ
+	default 32 if SYSTEM_DDR300MHZ
+	default 32 if SYSTEM_DDR312MHZ
+	default 32 if SYSTEM_DDR324MHZ
+	default 32 if SYSTEM_DDR336MHZ
+	default 32 if SYSTEM_DDR348MHZ
+	default 32 if SYSTEM_DDR360MHZ
+	default 32 if SYSTEM_DDR372MHZ
+	default 32 if SYSTEM_DDR384MHZ
+	default 32 if SYSTEM_DDR396MHZ
+	default 32 if SYSTEM_DDR402MHZ
+endif
+####################################################
+#
+# Flash Configuration
+#
+####################################################
+choice
+	prompt "Flash Configuration"
+	default SYSTEM_SERIAL_FLASH_SUPPORT
+
+config SYSTEM_NAND_FLASH_SUPPORT
+	bool "NAND Flash" if	! SYSTEM_PLATFORM_ST58660FPGA && ! SYSTEM_PLATFORM_SN98660
+
+config SYSTEM_SERIAL_FLASH_SUPPORT
+	bool "Serial Flash"
+    
+endchoice
+
+source "flash_layout_Kconfig"
+####################################################
+#
+# Source Other Kconfig
+#
+####################################################
+source "app_Kconfig"
+source "driver_Kconfig"
+
+menu "encrypt key setting"
+config  FW_ENCRYPT_KEY
+	hex "firmware md5 encrypt key value(hex)"
+        default 0x63245709
+        help
+        the key support 64bit value
+endmenu
+
+menu "Sub system Setting"
+menu "Linux kernel"
+config KERNEL_NORMAL_DEF_CONFIG
+	string "Normal model default config file"
+	default "sn98600_sf_defconfig"
+	help
+	Linux kernel normal model default config file
+
+config KERNEL_RESCUE_DEF_CONFIG
+	string "Rescue model default config file"
+	default "sn986xx_rescue_defconfig"
+	help
+	Linux kernel rescue model default config file
+endmenu
+menu "Busybox"
+config BUSYBOX_NORMAL_DEF_CONFIG
+	string "Normal model default config file"
+	default "sn986xx_defconfig"
+	help
+	busybox normal model default config file
+
+config BUSYBOX_RESCUE_DEF_CONFIG
+	string "Rescue model default config file"
+	default "sn986xx_rescue_defconfig"
+	help
+	busybox rescue model default config file
+endmenu
+endmenu
+
+#config ACTIVE_KERNEL_SETTING
+#	bool "customize kernel setting"
+#	default n
+#if ACTIVE_KERNEL_SETTING
+#choice
+#	prompt "setting"
+#	default CUSTOM_KERNEL_SETTING
+#config CUSTOM_KERNEL_SETTING
+#	bool "customize kernel normal setting"
+
+#config CUSTOM_KERNEL_RESCUE_SETTING
+#	bool "customize kernel rescue setting"
+#endchoice
+#endif
+
+#config ACTIVE_BUSYBOX_SETTING
+#	bool "customize busybox setting"
+#	default n
+#if ACTIVE_BUSYBOX_SETTING
+#choice
+#	prompt "setting"
+#	default CUSTOM_BUSYBOX_SETTING
+#config CUSTOM_BUSYBOX_SETTING
+#	bool "customize busybox normal setting"
+
+#config CUSTOM_BUSYBOX_RESCUE_SETTING
+#	bool "customize busybox rescue setting"
+#endchoice
+#endif
+

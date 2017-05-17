@@ -1,0 +1,26 @@
+#MaxResolution:	PathNumber:	Owner:	ISPChannel:	ISPResolution:	CaptureResolution:	CaptureFormat:				Exclusive
+1920x1080:			1:					avail:	1:					1920x1080:			1920x1080:					V4L2_PIX_FMT_H264:	
+1920x1080:			2:					avail:	1:					1920x1080:			1920x1080:					V4L2_PIX_FMT_MJPEG:
+1920x1080:			3:					avail:	1:					1920x1080:			1920x1080:					V4L2_PIX_FMT_SNX420:	3,4,5
+1920x1080:			4:					avail:	1:					1920x1080:			960x540:						V4L2_PIX_FMT_SNX420:	3,4,5
+1920x1080:			5:					avail:	1:					1920x1080:			480x270:						V4L2_PIX_FMT_SNX420:	3,4,5
+1920x1080:			6:					avail:	1:					720x480:				720x480:						V4L2_PIX_FMT_H264:	
+1920x1080:			7:					avail:	1:					720x480:				720x480:						V4L2_PIX_FMT_MJPEG:
+1920x1080:			8:					avail:	1:					640x480:				640x480:						V4L2_PIX_FMT_H264:	
+1920x1080:			9:					avail:	1:					640x480:				640x480:						V4L2_PIX_FMT_MJPEG:
+1920x1080:			10:					avail:	1:					640x480:				320x240:						V4L2_PIX_FMT_H264:
+1920x1080:			11:					avail:	1:					640x480:				320x240:						V4L2_PIX_FMT_MJPEG:
+1920x1080:			12:					avail:	1:					640x480:				320x240:						V4L2_PIX_FMT_SNX420:
+1280x720:				1:					avail:	1:					1280x720:				1280x720:						V4L2_PIX_FMT_H264:
+1280x720:				2:					avail:	1:					1280x720:				1280x720:						V4L2_PIX_FMT_MJPEG:
+1280x720:				3:					avail:	1:					1280x720:				1280x720:						V4L2_PIX_FMT_SNX420:	3,4,5
+1280x720:				4:					avail:	1:					1280x720:				640x360:						V4L2_PIX_FMT_SNX420:	3,4,5
+1280x720:				5:					avail:	1:					1280x720:				320x180:						V4L2_PIX_FMT_SNX420:	3,4,5
+1280x720:				6:					avail:	1:					720x480:				720x480:						V4L2_PIX_FMT_H264:	
+1280x720:				7:					avail:	1:					720x480:				720x480:						V4L2_PIX_FMT_MJPEG:
+1280x720:				8:					avail:	1:					640x480:				640x480:						V4L2_PIX_FMT_H264:
+1280x720:				9:					avail:	1:					640x480:				640x480:						V4L2_PIX_FMT_MJPEG:
+1280x720:				10:					avail:	1:					640x480:				320x240:						V4L2_PIX_FMT_H264:
+1280x720:				11:					avail:	1:					640x480:				320x240:						V4L2_PIX_FMT_MJPEG:
+1280x720:				12:					avail:	1:					640x480:				320x240:						V4L2_PIX_FMT_SNX420:
+

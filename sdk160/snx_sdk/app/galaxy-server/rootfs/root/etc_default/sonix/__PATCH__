@@ -1,0 +1,3 @@
+* Translated the chinese xml comment to english
+* Removed the DOS newline characters
+* Set the logging to a file instead of the console
