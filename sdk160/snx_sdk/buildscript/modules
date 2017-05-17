@@ -143,11 +143,6 @@ path=app/example
 depend_module=linux-2.6.35.12, middleware_video, middleware_rate_ctl, middleware_audio, middleware_gpio, middleware_common, middleware_zbar-0.10, middleware_sdrecord 
 type=app|source 
 
-[fftw3] 
-path=app/fftw3 
-depend_module=
-type=app|source 
-
 [dashcam] 
 path=app/dashcam
 depend_module=linux-2.6.35.12, middleware_video, middleware_rate_ctl, middleware_audio, middleware_gpio, middleware_sdrecord 

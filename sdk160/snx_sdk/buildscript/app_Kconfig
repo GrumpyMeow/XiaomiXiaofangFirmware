@@ -87,10 +87,6 @@ endif
 
 endmenu	   
 
-config APP_FFTW3
-	bool "fftw3"
-	default	y
-
 config APP_BOA
 	bool "boa-0.94.14rc17"
 	default	y
