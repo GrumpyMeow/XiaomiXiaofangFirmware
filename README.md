@@ -28,3 +28,4 @@ You can flash this version with placing the firmware (FIRMWARE660R.bin) in the r
 
 Notes:
 * make kernelmenuconfig: deselect: "Device Drivers" > "Network device support" > "Ethernet (10/100 mbit)". The SNX MAC Ethernet device hangs during boot.
+*
