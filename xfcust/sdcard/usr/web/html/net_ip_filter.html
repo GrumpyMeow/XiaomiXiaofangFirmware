@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>ip filter</title>
+    <meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Expires" content="now" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="../bootstrap-3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="../bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../bootstrap-3.2.0/js/html5shiv.min.js"></script>
+    <script type="text/javascript" src="../bootstrap-3.2.0/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="../js/common.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //Initial parameters will instead of this magic string by cgi.
+        /*0947d68302f319a6b19d18cf06e8b9d0*/
+        load_res("../js/" + language + ".js");
+        load_res("../css/common.css");
+        load_res("../js/net_ip_filter.js");
+        load_res("../css/net_ip_filter.css");
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <form name="ip_addr_filter_add_form" method="post" action="/cgi-bin/ip_addr_filter.cgi">
+        <input type="hidden" name="op" value="apply" />
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 height30">
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+                <div class="row">
+                    <div id="ip-filter-page-title" class="col-xs-12 col-sm-12 col-md-12 title-font">
+                        <!--Title-->
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 height20">
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 small-title-font" id="general_text">
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 height20">
+                                <input type="checkbox" id="enable_filter" name="filter_enable" value="yes" />
+                                <label id="enable_text" for="enable_filter">
+                                </label>
+                            </div>
+                            <div class="col-xs-9 col-sm-9 col-md-9 ">
+                                <select name="filter_method" id="filter_method">
+                                    <option id="filter_allow" value="allow">Allow</option>
+                                    <option id="filter_deny" value="deny">Deny</option>
+                                </select>
+                                <div class="div-inline" id="allow_deny_ip_text">
+                                </div>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 ">
+                                <input type="submit" value="apply" id="apply_btn" /></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 height20">
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 small-title-font" id="filter_ip_address_text">
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 height20">
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <select size="10" class="level-full" id="filter_ip_addresses">
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 ">
+                                <input type="button" id="add_btn" value="add" />
+                                <input type="button" id="remove_btn" value="remove" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1">
+            </div>
+        </div>
+        </form>
+        <form name="ip_addr_filter_remove_form" id="ip_addr_filter_remove_form" method="post"
+        action="/cgi-bin/ip_addr_filter.cgi">
+        <input type="hidden" name="op" value="remove" />
+        <input type="hidden" name="ip_addr" value="" />
+        </form>
+    </div>
+</body>
+</html>

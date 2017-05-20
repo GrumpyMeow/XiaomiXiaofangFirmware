@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>smtp settings</title>
+    <meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Expires" content="now" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="../bootstrap-3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="../bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../bootstrap-3.2.0/js/html5shiv.min.js"></script>
+    <script type="text/javascript" src="../bootstrap-3.2.0/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="../js/common.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //Initial parameters will instead of this magic string by cgi.
+        /*0947d68302f319a6b19d18cf06e8b9d0*/
+        load_res("../js/" + language + ".js");
+        load_res("../css/common.css");
+        load_res("../js/smtp_settings.js");
+        load_res("../css/smtp_settings.css");
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <form name="smtp_form" method="post" action="/cgi-bin/smtp_settings.cgi">
+        <input type="hidden" name="action" value="smtp_save" />
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+                <div class="row">
+                    <div id="smtp-settings-page-title" class="col-xs-12 col-sm-12 col-md-12 title-font">
+                        <!--Title-->
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 height20">
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 small-title-font align-left" id="smtp-settings_text">
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="MailServer_text">
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <input type="text" name="MailServer" id="MailServer" class="width-80" />
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="MailServerPort_text">
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <input type="number" name="MailServerPort" id="MailServerPort" class="width-80" />
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="MailUser_text">
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <input type="text" name="MailUser" id="MailUser" class="width-80" />
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="MailPassword_text">
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <input type="password" name="MailPassword" id="MailPassword" class="width-80" />
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="MailSender_text">
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <input type="text" name="MailSender" id="MailSender" class="width-80" />
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="MailRecipients_text">
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <input type="text" name="MailRecipients" id="MailRecipients" class="width-80" />
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="MailSubject_text">
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <input type="text" name="MailSubject" id="MailSubject" class="width-80" />
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="MailContent_text">
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <textarea name="MailContent" id="MailContent" rows="4" class="width-80">Sonix's motion detection files.</textarea>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 small-title-font align-left" id="smtp_test_text">
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4">
+                                <label id="smtp_test_to_text">
+                                </label>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <input type="text" name="test_mail_addr" class="width-80" />
+                                <input type="button" id="test_btn" class="float-right" />
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 align-center">
+                                <input type="submit" id="btnSave" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1">
+            </div>
+        </div>
+        </form>
+        <iframe id="test_hiddenframe" width="0" height="0" src=""></iframe>
+    </div>
+</body>
+</html>

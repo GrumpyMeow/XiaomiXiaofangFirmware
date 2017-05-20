@@ -1,0 +1,13 @@
+﻿body {
+}
+
+.download_img
+{
+    width:18px;
+    height:18px;
+}
+
+.download_img:hover
+{
+    cursor:pointer;
+}

@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>information</title>
+        <meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Expires" content="now" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="../js/jquery-1.10.2.min.js" type="text/javascript">
+        </script>
+        <script src="../bootstrap-3.2.0/js/bootstrap.min.js" type="text/javascript">
+        </script>
+        <link href="../bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="../bootstrap-3.2.0/js/html5shiv.min.js"></script>
+            <script type="text/javascript" src="../bootstrap-3.2.0/js/respond.min.js"></script>
+        <![endif]-->
+        <script src="../js/common.js" type="text/javascript">
+        </script>
+        <script type="text/javascript">
+            //Initial parameters will instead of this magic string by cgi.
+            /*0947d68302f319a6b19d18cf06e8b9d0*/
+        </script>
+        <script type="text/javascript">
+            load_res("../js/" + language + ".js");
+            load_res("../css/common.css");
+            load_res("../js/colpick.js");
+            load_res("../js/osd_setting.js");
+            load_res("../js/VLCcontrols.js");
+            load_res("../js/whereisaxvlc.js");
+            load_res("../css/colpick.css");
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 height30">
+                </div>
+                <div class="col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+                    <div class="row">
+                        <div id="header" class="col-xs-12 col-sm-12 col-md-12 title-font">
+                            header<!--Title-->
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 height20">
+                        </div>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 center">
+                                    <div id="player" style="text-align: center; margin: auto;">
+                                        <object id="mymovie" codebase="ftp://inftp_sa3:sa3@inftp.sonix.com.tw/axvlc.cab#version=2,0,2,0" classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" width="400" height="300">
+                                            <embed pluginspage="ftp://inftp_sa3:sa3@inftp.sonix.com.tw/axvlc.cab" type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2" toolbar="false" width="400" height="300" id="mymovie">
+                                            </embed>
+                                        </object>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 sm-title-font" style="text-align: left">
+                                    <span class="enable_text">enable</span>
+                                    <input type="checkbox" id="enable">
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="col-xs-5 col-sm-5 col-md-5">
+                                        <span class="text_text">text</span>
+                                        <input type="text" id="text" name="text" maxlength="16">
+                                    </div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7">
+                                        <span class="timestamp_text">timestamp</span>
+                                        <input type="checkbox" id="timestamp" name="timestamp">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="col-xs-5 col-sm-5 col-md-5">
+                                        <span class="textcolor_text">textcolor</span>
+                                        <input type="button" id="txt_color" name="txt_color" class="button_color" value="" style="width:20px;height:20px;margin:auto;"><input type="button" class="color-box-txt" style="visibility: hidden; width: 1px;
+ height: 1px;  padding: 0px;  margin: 0px">
+                                    </div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7">
+                                        <span class="transp_text">transp</span>
+                                        <input type="checkbox" id="txt_transp" name="txt_transp">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="col-xs-5 col-sm-5 col-md-5">
+                                        <span class="bg_color_text">bg_color</span>
+                                        <input type="button" id="bg_color" name="bg_color" class="button_color" value="" style="width:20px;height:20px;margin:auto;"><input type="button" class="color-box-bg" style="visibility: hidden; width: 1px;
+ height: 1px;  padding: 0px;  margin: 0px">
+                                    </div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7">
+                                        <span class="transp_text">transp</span>
+                                        <input type="checkbox" id="bg_transp" name="bg_transp">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="col-xs-5 col-sm-5 col-md-5">
+                                        <span class="location_text">location</span>
+                                        <select id="location" name="location" style="width: 80px;">
+                                            <option id="lefttop" value="lefttop">Left Top</option>
+                                            <option id="righttop" value="righttop">Right Top</option>
+                                            <option id="leftbottom" value="leftbottom">Left Bottom</option>
+                                            <option id="rightbottom" value="rightbottom">Right Bottom</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7">
+                                        <span class="gain_text">gain</span>
+                                        <select id="gain" name="gain" style="width: 80px;">
+                                            <option id="big" value="big">Big</option>
+                                            <option id="small" value="small">Small</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="col-xs-5 col-sm-5 col-md-5">
+                                        <span class="finetune_text">finetune</span>
+                                        <span class="hidden">(</span>
+                                        <span id="startX" class="hidden">0</span>
+                                        <span class="hidden">/1280</span>
+                                        <span class="hidden">,</span>
+                                        <span id="startY" class="hidden">0</span>
+                                        <span class="hidden">/720</span>
+                                        <span class="hidden">)</span>
+                                        <img src="/images/osd_direction.gif" border="0" usemap="#osd_direction"/>
+                                        <map name="osd_direction" id="osd_direction">
+                                            <area class="mouse_move" shape="rect" coords="30,5,49,30" onclick="finetune_change('up',1,1);" alt="up" title="up"/><area class="mouse_move" shape="rect" coords="30,49,50,74" onclick="finetune_change('down',1,1);" alt="down" title="down"/><area class="mouse_move" shape="rect" coords="5,30,29,48" onclick="finetune_change('left',1,1);" alt="left" title="left"/><area class="mouse_move" shape="rect" coords="51,31,93,49" onclick="finetune_change('right',1,1);" alt="right" title="right"/>
+                                        </map>
+                                    </div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 center">
+                                    <div class="col-xs-5 col-sm-5 col-md-5">
+                                        <input id="submit" type="submit" value="Save" />
+                                    </div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7">
+                                        <input id="reset" type="button" style="width: 70px" value="Reset" />
+                                    </div>
+                                </div>
+                                <div class="hidden">
+                                    <iframe id="hiddenframe_image" width="0" height="0" src="" style="display: none;">
+                                    </iframe>
+                                    <object id="dlgHelper" classid="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px">
+                                    </object>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-1">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

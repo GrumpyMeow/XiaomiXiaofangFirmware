@@ -1,0 +1,6 @@
+<!-- discovery config -->
+
+<!--Whether to disable the Device Discovery service-->
+<disabled>0</disabled>
+<!-- Equipment discovery service scope -->
+<scopes>onvif://www.onvif.org/type/video_encoder onvif://www.onvif.org/type/ptz onvif://www.onvif.org/type/audio_encoder onvif://www.onvif.org/hardware/M1054 onvif://www.onvif.org/name/AXIS%20M1054 onvif://www.onvif.org/location/</scopes>

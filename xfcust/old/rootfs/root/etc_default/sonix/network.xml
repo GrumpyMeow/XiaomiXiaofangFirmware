@@ -1,0 +1,25 @@
+<!-- network config -->
+<hostname>
+<dhcp>0</dhcp>
+<name>sonix</name>
+</hostname>
+<iface id="eth0" >
+<zeroconfig>0</zeroconfig>
+<dhcp>1</dhcp>
+<ip>192.168.1.104</ip>
+<mask>255.255.255.0</mask>
+<gw>192.168.1.1</gw>
+</iface>
+<dns>
+<dhcp>1</dhcp>
+<domain>domain.name</domain>
+<ns>192.168.1.1</ns>
+</dns>
+<ntp>
+<manual>0</manual>
+<dhcp>0</dhcp>
+<tz>GMT0</tz>
+<daylight-savings>0</daylight-savings>
+<addr>time.windows.com</addr>
+</ntp>
+

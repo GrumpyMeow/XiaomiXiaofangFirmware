@@ -1,0 +1,14 @@
+﻿body {
+}
+
+.float-right
+{
+    float:right;
+}
+
+.small-title-font
+{
+    font-weight: bold;
+    background-color: Lightgray;
+    font-size: 100%;
+}

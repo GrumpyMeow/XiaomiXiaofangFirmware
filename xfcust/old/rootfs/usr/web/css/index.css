@@ -1,0 +1,101 @@
+﻿body {
+    min-width: 992px;
+}
+
+ .main-div
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #16367a;
+    height:auto;
+}
+ .second-main-div
+{
+    border-style: none solid solid solid;
+    border-width: 1px;
+    border-color: #16367a;
+    height:auto;
+}
+.left-border
+{
+    border-left:1px solid #16367a ;
+}
+#navigate div
+{
+    height: 60px;
+}
+        
+.container-height
+{
+    height: 100%;
+}
+.caret-right
+{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    margin-right: 0px;
+    vertical-align: middle;
+    border-left: 4px solid;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+}
+.caret-down
+{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    margin-right: 0px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.title-font
+{
+    font-weight: bold;
+    background-color:Lightgray;
+}
+iframe
+{
+    border-width:0px;
+    margin:0px,0px,0px,0px;
+    width:100%;
+    height:100%;
+}
+.panel-heading
+{
+    cursor: pointer;
+    font-size:120%;
+    font-weight:bold;
+}
+.panel-body
+{
+    margin-left:14px;
+}
+div.panel-heading:hover,div.panel-body:hover
+{
+    font-weight:bold;
+    font-style:italic;
+    cursor: pointer;
+    background-color:#ffd;
+}
+
+#menu
+{
+    overflow: auto;
+}
+
+.topTitle 
+{
+    color: #003399;
+    font-size: 200%;
+    font-weight: bold;
+    background-color: #ffffff;
+}
+.navigate-button-group div
+{
+    padding:0px 0px 0px 0px;
+}

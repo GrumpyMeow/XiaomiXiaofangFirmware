@@ -1,0 +1,18 @@
+﻿body {
+}
+
+.align-right
+{
+    text-align:right !important;
+}
+.float-right
+{
+    float:right !important;
+}
+
+.small-title-font
+{
+    font-weight: bold;
+    background-color: Lightgray;
+    font-size: 100%;
+}
