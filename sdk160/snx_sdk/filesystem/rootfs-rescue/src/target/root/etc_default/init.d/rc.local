@@ -1,0 +1,81 @@
+#!/bin/sh
+
+# Set serial number (MAC address) as default hostname
+#echo "Set hostname ..."
+#if [ ! -f /etc/hostname ]; then
+#        MACADDR=`ifconfig wlan0 | grep HWaddr | tr -d " " | tr -d ":"`
+#        MACADDR=sonix-${MACADDR#*HWaddr}
+#        echo $MACADDR > /etc/hostname
+#fi
+/bin/hostname -F /etc/hostname
+#echo
+
+# To see whether the DHCP was successful
+#if (( grep -q "wlan0" /etc/network/interfaces && ! ifconfig wlan0 | grep -q 'inet addr' )); then
+#        echo "Use default IP (DHCP)..."
+#        ifconfig wlan0 192.168.0.100 netmask 255.255.255.0
+#        route add default gw 192.168.0.1
+#fi
+
+# To see whether the PPPoE was successful
+#if (( grep -q "ppp0" /etc/network/interfaces && ! ifconfig ppp0 | grep -q 'inet addr' )); then
+#        echo "Use default IP (PPPoE)..."
+#        ifconfig wlan0 192.168.0.100 netmask 255.255.255.0
+#        route add default gw 192.168.0.1
+#fi
+
+# Set DNS when static IP was used
+#DNSSERVER=61.139.2.69
+#if (( grep -q "iface wlan0 inet static" /etc/network/interfaces )); then
+#        echo "nameserver $DNSSERVER" > /etc/resolv.conf
+#fi
+
+echo "Start telnetd ..."
+telnetd
+echo
+
+echo "Start P2P server...."
+apsta -p 6 &
+echo
+
+#let green led blink
+/bin/gpio_led -n 3 -m 1 -v 0
+
+
+#if [ -f /usr/bin/mcu_ctrl/snx_mcu2511_ctrl ]; then
+#    echo "Start to communicate with 2511"
+#    /usr/bin/mcu_ctrl/snx_mcu2511_ctrl &
+#    echo
+#fi
+
+#echo 45 > /proc/sys/net/ipv4/tcp_keepalive_time
+#echo 3 > /proc/sys/net/ipv4/tcp_keepalive_probes
+#echo 5 > /proc/sys/net/ipv4/tcp_keepalive_intvl
+
+if [ -f /usr/bin/IspService ]; then
+    echo "Start isp tuning tool ..."
+    /usr/bin/IspService &
+fi
+
+#set sensor mirror and flip
+#echo 0x1 > /proc/isp/sensor/mirror
+#echo 0x1 > /proc/isp/sensor/flip
+
+#----------------------------QR_Scan ---------------------#
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
+# insert sonix UDC driver, use gpio6 falling edge trigger detect USB plug-out
+# gpio_num: use gpio number(0~31).
+# gpio_edge_mode: 0: rising edge trigger USB plug-out, 1: falling edge trigger USB plug-out
+modprobe snx_udc gpio_num=6 gpio_edge_mode=1
+
+# Default USB Device class
+cat /etc/usbd.txt > /proc/usbd/class_mode
+
+#start detect Fw && update fw 
+/usr/bin/fwupdate_usbd_ddr /media/upgfw/FIRMWARE_660R.bin &
+
+#start msc mode
+echo "msc" > /proc/usbd/class_mode
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++#

@@ -1,0 +1,65 @@
+	#tip{
+		position:relative;
+		width:20px;
+		height:20px;
+		background-color:#FF0000;
+		float:left;
+		border:solid 1px #000000		
+	}
+	#d0.hour{
+		position:relative;
+		width:20px;
+		height:20px;
+		background-color:#FF0000;
+		float:left;
+		clear:left;
+		border:solid 1px #000000
+	}	
+	.hour{
+		position:relative;
+		width:20px;
+		height:20px;
+		background-color:#FF0000;
+		float:left;
+		border-top:solid 1px #000000;
+		border-right:solid 1px #000000;
+		border-bottom:solid 1px #000000;
+	}
+	.time-scale{
+		margin:0px 0px 0px 0px;
+	}	
+	.hours-select{
+		margin:0px 0px 5px 0px;
+	}	
+	#left.time{
+		position:relative;
+		width:160px;
+		height:20px;
+		float:left;
+		left:-11px;
+	}
+	#center.time{
+		position:relative;
+		width:160px;
+		height:20px;
+		float:left;
+		text-align:center;
+	}	
+	#right.time{
+		position:relative;
+		width:160px;
+		height:20px;
+		float:left;
+		clear:right;
+		text-align:right;
+		right:-20px;
+	}
+	.sliderstyle
+	{
+		width:160px;
+		float:left;
+	}
+	.text_style
+	{
+		width:44px;
+	}			

@@ -1,0 +1,26 @@
+<http>
+	<enable>1</enable>
+	<host>0</host>
+	<!-- sonix-proj Server http port-->
+	<port>8080</port>
+	<!-- http-tunneling Server http port !! can not be changed !! -->
+	<tunneling-port>80</tunneling-port>
+</http>
+<https>
+	<enable>1</enable>
+	<host>0</host>
+	<port>443</port>
+</https>
+<rtsp>
+	<enable>1</enable>
+	<host>0</host>
+	<port>554</port>
+</rtsp>
+<rtp>
+	<enable>1</enable>
+	<host>0</host>
+	<port>
+		<rtp>4500</rtp>
+		<rtcp>4501</rtcp>
+	</port>
+</rtp>

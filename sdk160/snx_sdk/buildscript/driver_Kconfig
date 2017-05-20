@@ -112,7 +112,7 @@ config VIDEO_SENSOR_SNX111
 
 config VIDEO_SENSOR_OV9715
 	bool "OV9715"
-	default y
+	default n
 
 config VIDEO_SENSOR_OV2715
 	bool "OV2715"
@@ -208,6 +208,10 @@ config VIDEO_SENSOR_GC1024
 
 config VIDEO_SENSOR_OV2740
         bool "OV2740"
+        default n
+
+config VIDEO_SENSOR_SC2135
+        bool "SC2135"
         default n
 
 endmenu

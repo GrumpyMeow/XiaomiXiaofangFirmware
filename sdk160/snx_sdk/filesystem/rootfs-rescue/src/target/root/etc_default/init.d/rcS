@@ -1,0 +1,90 @@
+#!/bin/sh
+
+echo "Load drivers..."
+
+/usr/bin/timing_cali &
+
+modprobe snx_pwm
+modprobe snx_gpio
+#modprobe snx_rtc
+#add green led blink (pwm1 blink)
+#/bin/snx_pwm_period 0 500 1000
+#power on sensor ms1_io6
+#/bin/gpio_ms1 -n 6 -m 1 -v 1
+
+#modprobe rt5370sta
+modprobe 8188eu
+modprobe snx_aud_core
+modprobe snx_aud_sigma
+modprobe snx_aud_r2r
+modprobe sc2135
+if [ -r /etc/firmware/sensor.list ]
+then
+	cur_sensor=unknown
+	sensor_list=`cat /etc/firmware/sensor.list`
+	sensor_list=`echo $sensor_list | sed 'N;s/\n/ /g'`
+	sensor_list=`echo $sensor_list | sed 's/[ ]/@/g'`
+	sensor_list=$sensor_list"@"
+	modprobe snx_isp sensor=$sensor_list 1>/dev/null 2>/dev/null
+	if [ -r /proc/isp/sensor/name ]
+	then 
+		cur_sensor=`cat /proc/isp/sensor/name`
+		if [ $cur_sensor != "unknown" ]
+		then
+			first_sensor=`echo ${sensor_list%%@*}`
+			sensor_list=`echo ${sensor_list#*@}`
+			if [ "$first_sensor" != "$cur_sensor" ]
+			then
+				result=`echo $cur_sensor > /etc/firmware/sensor.list`
+				result=`echo $first_sensor >> /etc/firmware/sensor.list`
+				while [ $sensor_list != "" -a "$sensor_list" != "\n" ]
+				do
+					first_sensor=`echo ${sensor_list%%@*}`
+					sensor_list=`echo ${sensor_list#*@}`
+					if [ "$first_sensor" != "$cur_sensor" ]
+                                        then
+						result=`echo $first_sensor >> /etc/firmware/sensor.list`
+                                        fi
+				done
+			fi	
+		else
+			echo "ERROR: modprobe isp driver fail, unkonwn sensor. sensor_list=$sensor_list\n"			
+		fi
+	else
+		echo "ERROR: modprobe isp driver fail, no /proc/isp/sensor/name. sensor_list=$sensor_list\n"
+	fi
+else
+	echo "ERROR: modprobe isp driver fail, not found sensor.list file!!!\n"
+fi
+modprobe snx_vb2
+modprobe snx_vc snx_vb2=1 snx_percent=0
+modprobe snx_sd
+#hwclock -s
+
+# Start all init scripts in /etc/init.d
+# executing them in numerical order.
+#
+for i in /etc/init.d/S??* ;do
+
+     # Ignore dangling symlinks (if any).
+     [ ! -f "$i" ] && continue
+
+     case "$i" in
+	*.sh)
+	    # Source shell script for speed.
+	    (
+		trap - INT QUIT TSTP
+		set start
+		. $i
+	    )
+	    ;;
+	*)
+	    # No sh extension, so fork subprocess.
+	    $i start
+	    ;;
+    esac
+done
+
+# Here start our services
+/etc/init.d/rc.local
+

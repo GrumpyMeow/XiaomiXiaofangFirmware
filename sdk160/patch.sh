@@ -3,17 +3,16 @@
 echo -e "Setting defconfig"
 cd ../../snx_sdk/buildscript/
 
-make sn98660_QR_Scan_402mhz_sf_defconfig
+make clean
+
+make sn98660_402mhz_sf_defconfig
 
 echo -e "Applying patch"
-cd ../../sdk160/patch/
+cd ../../XiaomiXiaofangFirmware/sdk160/
 /bin/cp -v -f -R snx_sdk/* ../../snx_sdk/
 
-echo -e "Executing make"
-cd ../../snx_sdk/buildscript/
+echo -e "execute: make menuconfig kernelmenuconfig make make install"
 
-make
-
-echo -e "Executing make install"
-make install
-
+#in kernelmenuconfig: System Type not correctly visible in 
+#mapping drivers for chip access
+#support non lineair , mtd_physmap_len uitzoeken

@@ -1,0 +1,2 @@
+0 * * * *  /usr/web/cgi-bin/imagesetting.cgi init > /dev/null 2>&1
+0 * * * *  sh /sbin/check_boa_size.sh > /dev/null 
