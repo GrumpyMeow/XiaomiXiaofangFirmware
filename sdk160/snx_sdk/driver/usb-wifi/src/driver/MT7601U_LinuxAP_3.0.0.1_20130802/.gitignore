@@ -1,0 +1,10 @@
+*.o
+*.o.cmd
+os/linux/.mt7601Uap.ko.cmd
+os/linux/.tmp_versions/
+os/linux/Makefile
+os/linux/Module.symvers
+os/linux/modules.order
+os/linux/mt7601Uap.ko
+os/linux/mt7601Uap.mod.c
+tools/bin2h

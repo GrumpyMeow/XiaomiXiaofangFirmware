@@ -1,0 +1,4 @@
+config MT7601_STA
+        tristate "MT7601 STA support"
+        default m
+#       depends on NET_RADIO

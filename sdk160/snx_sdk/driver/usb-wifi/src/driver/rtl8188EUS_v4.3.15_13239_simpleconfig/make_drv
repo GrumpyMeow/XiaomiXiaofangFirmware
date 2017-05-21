@@ -1,0 +1,451 @@
+#!/bin/bash
+#========================================
+# Common functions
+#========================================
+intf_resetAll()
+{
+	sed -i '/CONFIG_USB_HCI = /c\CONFIG_USB_HCI = n' Makefile
+	sed -i '/CONFIG_PCI_HCI = /c\CONFIG_PCI_HCI = n' Makefile
+	sed -i '/CONFIG_SDIO_HCI = /c\CONFIG_SDIO_HCI = n' Makefile
+	sed -i '/CONFIG_GSPI_HCI = /c\CONFIG_GSPI_HCI = n' Makefile
+}
+intf_usb()
+{
+	intf_resetAll
+	sed -i '/CONFIG_USB_HCI = /c\CONFIG_USB_HCI = y' Makefile
+}
+intf_pcie()
+{
+	intf_resetAll
+	sed -i '/CONFIG_PCI_HCI = /c\CONFIG_PCI_HCI = y' Makefile
+}
+intf_sdio()
+{
+	intf_resetAll
+	sed -i '/CONFIG_SDIO_HCI = /c\CONFIG_SDIO_HCI = y' Makefile
+}
+intf_gspi()
+{
+	intf_resetAll
+	sed -i '/CONFIG_GSPI_HCI = /c\CONFIG_GSPI_HCI = y' Makefile
+}
+
+nic_resetAll()
+{
+	sed -i '/CONFIG_RTL8192C = /c\CONFIG_RTL8192C = n' Makefile
+	sed -i '/CONFIG_RTL8192D = /c\CONFIG_RTL8192D = n' Makefile
+	sed -i '/CONFIG_RTL8723A = /c\CONFIG_RTL8723A = n' Makefile
+	sed -i '/CONFIG_RTL8188E = /c\CONFIG_RTL8188E = n' Makefile
+	sed -i '/CONFIG_RTL8812A = /c\CONFIG_RTL8812A = n' Makefile
+	sed -i '/CONFIG_RTL8821A = /c\CONFIG_RTL8821A = n' Makefile
+	sed -i '/CONFIG_RTL8192E = /c\CONFIG_RTL8192E = n' Makefile
+	sed -i '/CONFIG_RTL8723B = /c\CONFIG_RTL8723B = n' Makefile
+	sed -i '/CONFIG_RTL8814A = /c\CONFIG_RTL8814A = n' Makefile
+}
+nic_8192c()
+{
+	nic_resetAll
+	sed -i '/CONFIG_RTL8192C = /c\CONFIG_RTL8192C = y' Makefile
+}
+nic_8192d()
+{
+	nic_resetAll
+	sed -i '/CONFIG_RTL8192D = /c\CONFIG_RTL8192D = y' Makefile
+}
+nic_8723a(){
+	nic_resetAll
+	sed -i '/CONFIG_RTL8723A = /c\CONFIG_RTL8723A = y' Makefile
+}
+nic_8188e(){
+	nic_resetAll
+	sed -i '/CONFIG_RTL8188E = /c\CONFIG_RTL8188E = y' Makefile
+}
+nic_8812a(){
+	nic_resetAll
+	sed -i '/CONFIG_RTL8812A = /c\CONFIG_RTL8812A = y' Makefile
+}
+nic_8821a(){
+	nic_resetAll
+	sed -i '/CONFIG_RTL8821A = /c\CONFIG_RTL8821A = y' Makefile
+}
+nic_8192e(){
+	nic_resetAll
+	sed -i '/CONFIG_RTL8192E = /c\CONFIG_RTL8192E = y' Makefile
+}
+nic_8723b(){
+	nic_resetAll
+	sed -i '/CONFIG_RTL8723B = /c\CONFIG_RTL8723B = y' Makefile
+}
+nic_8814a(){
+	nic_resetAll
+	sed -i '/CONFIG_RTL8814A = /c\CONFIG_RTL8814A = y' Makefile
+}
+ch_obj_cu()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8192CU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8192CU = m' Makefile
+
+	cp -f Kconfig_rtl8192c_usb_linux Kconfig
+}
+
+ch_obj_ce()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8192CE) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8192CE = m' Makefile
+
+	cp -f Kconfig_rtl8192c_pci_linux Kconfig
+}
+
+ch_obj_du()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8192DU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8192DU = m' Makefile
+
+	cp -f Kconfig_rtl8192d_usb_linux Kconfig
+}
+
+ch_obj_de()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8192DE) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8192DE = m' Makefile
+
+	cp -f Kconfig_rtl8192d_pci_linux Kconfig
+}
+
+ch_obj_as()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8723AS) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8723AS = m' Makefile
+
+#	sed -i '/CONFIG_POWER_SAVING = /c\CONFIG_POWER_SAVING = y' Makefile
+
+	cp -f Kconfig_rtl8723a_sdio_linux Kconfig
+}
+
+ch_obj_au()
+{
+	sed -i '/obj-$(CONFIG_RTL/ c obj-$(CONFIG_RTL8723AS-VAU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/ c export CONFIG_RTL8723AS-VAU = m' Makefile
+
+#	sed -i '/CONFIG_POWER_SAVING = /c\CONFIG_POWER_SAVING = n' Makefile
+
+	cp -f Kconfig_rtl8723a_usb_linux Kconfig
+}
+
+ch_obj_es()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8189ES) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8189ES = m' Makefile
+
+	cp -f Kconfig_rtl8189e_sdio_linux Kconfig
+}
+
+ch_obj_eu()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8188EU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8188EU = m' Makefile
+
+	cp -f Kconfig_rtl8188e_usb_linux Kconfig
+}
+
+ch_obj_ee()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8188EE) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8188EE = m' Makefile
+
+	cp -f Kconfig_rtl8188e_pci_linux Kconfig
+}
+
+ch_obj_8812au()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8812AU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8812AU = m' Makefile
+
+	cp -f Kconfig_rtl8812a_usb_linux Kconfig
+}
+
+ch_obj_8812ae()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8812AE) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8812AE = m' Makefile
+
+	cp -f Kconfig_rtl8812a_pci_linux Kconfig
+}
+
+ch_obj_8821au()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8821AU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8821AU = m' Makefile
+
+	cp -f Kconfig_rtl8821a_usb_linux Kconfig
+}
+
+ch_obj_8821as()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8821AS) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8821AS = m' Makefile
+
+	cp -f Kconfig_rtl8821a_sdio_linux Kconfig
+}
+
+ch_obj_8821ae()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8821AE) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8821AE = m' Makefile
+
+	cp -f Kconfig_rtl8821a_pci_linux Kconfig
+}
+
+ch_obj_92es()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8192ES) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8192ES = m' Makefile
+
+	cp -f Kconfig_rtl8192e_sdio_linux Kconfig
+}
+
+ch_obj_92eu()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8192EU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8192EU = m' Makefile
+
+	cp -f Kconfig_rtl8192e_usb_linux Kconfig
+}
+
+ch_obj_92ee()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8192EE) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8192EE = m' Makefile
+
+	cp -f Kconfig_rtl8192e_pci_linux Kconfig
+}
+
+ch_obj_8723bs()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8723BS) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8723BS = m' Makefile
+
+	cp -f Kconfig_rtl8723b_sdio_linux Kconfig
+}
+
+ch_obj_8723bu()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8723BU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8723BU = m' Makefile
+
+	cp -f Kconfig_rtl8723b_usb_linux Kconfig
+}
+
+ch_obj_8723be()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8723BE) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8723BE = m' Makefile
+
+	cp -f Kconfig_rtl8723b_pci_linux Kconfig
+}
+
+ch_obj_8814au()
+{
+	sed -i '/obj-$(CONFIG_RTL/c\obj-$(CONFIG_RTL8814AU) := $(MODULE_NAME).o' Makefile
+	sed -i '/export CONFIG_RTL/c\export CONFIG_RTL8814AU = m' Makefile
+
+	cp -f Kconfig_rtl8814a_usb_linux Kconfig
+}
+
+get_svn_revision()
+{
+	if [ -z "$svn_rev" ] && [ -f .svn/entries ]; then
+		svn_rev=`sed -n '11 s/^\([0-9][0-9]*\)$/\1/p' .svn/entries`
+	fi
+	if [ -z "$svn_rev" ]; then
+		svn_rev="xxxx"
+	fi
+}
+
+#========================================
+# Sub functions
+#========================================
+
+add_version_file()
+{
+	defversion="#define DRIVERVERSION\t\"$postfix\""
+	echo -e $defversion > include/rtw_version.h
+
+	if [ "$btcoex_version" ]; then
+		str_version="#define BTCOEXVERSION\t\"$btcoex_version\""
+		echo -e $str_version >> include/rtw_version.h
+	fi
+}
+
+conf_driver()
+{
+	sed -i '/CONFIG_AUTOCFG_CP = /c\CONFIG_AUTOCFG_CP = y' Makefile
+	if [ -f include/rtw_version.h ]; then
+		echo "rtw_version.h has existed!"
+	else
+		add_version_file
+	fi
+}
+
+#========================================
+# Main Script Start From Here
+#========================================
+
+if [ ! -f include/rtw_version.h ]; then
+	# Make Version string
+	if [ -z "$2" ]; then
+		get_svn_revision
+		version="v4.3.12_"$svn_rev
+		datestr=$(date +%Y%m%d)
+		#please remove the "_beta" at formal release time
+		postfix=$version.$datestr"_beta"
+	else
+		postfix=$2
+	fi
+fi
+
+# Chip options
+declare -a chipsOption
+chipsOption=()
+chipsOption+=(RTL8192cu RTL8192ce)
+chipsOption+=(RTL8192du RTL8192de)
+chipsOption+=(RTL8723as RTL8723as-vau)
+chipsOption+=(RTL8189es RTL8188eus RTL8188ee)
+chipsOption+=(RTL8812au RTL8812ae)
+chipsOption+=(RTL8821au RTL8821as RTL8821ae)
+chipsOption+=(RTL8192es RTL8192eu RTL8192ee)
+chipsOption+=(RTL8723bs)
+chipsOption+=(RTL8723bu)
+chipsOption+=(RTL8723be)
+chipsOption+=(RTL8814au)
+
+if [ $# -eq 1 ]; then
+	card=$1
+	echo "You have selected $card"
+else
+	# Select NIC type
+	echo "Please select card type(1/2):"
+	select card in RTL8188eus RTL8189es;
+	do
+		echo "You have selected $card"
+		break
+	done
+fi
+
+# Make
+case "$card" in
+	[Rr][Tt][Ll]8192[Cc][Uu])
+	conf_driver;
+	nic_8192c;
+	intf_usb;
+	ch_obj_cu;;
+	[Rr][Tt][Ll]8192[Cc][Ee])
+	conf_driver;
+	nic_8192c;
+	intf_pcie;
+	ch_obj_ce;;
+	[Rr][Tt][Ll]8192[Dd][Uu])
+	conf_driver;
+	nic_8192d;
+	intf_usb;
+	ch_obj_du;;
+	[Rr][Tt][Ll]8192[Dd][Ee])
+	conf_driver;
+	nic_8192d;
+	intf_pcie;
+	ch_obj_de;;
+	[Rr][Tt][Ll]8723[Aa][Ss])
+	btcoex_version="BTCOEX20130528_ver3.3"
+	conf_driver;
+	nic_8723a;
+	intf_sdio;
+	ch_obj_as;;
+	[Rr][Tt][Ll]8723[Aa][Ss]-[Vv][Aa][Uu])
+	conf_driver;
+	nic_8723a;
+	intf_usb;
+	ch_obj_au;;
+	[Rr][Tt][Ll]8189[Ee][Ss])
+	conf_driver;
+	nic_8188e;
+	intf_sdio;
+	ch_obj_es;;
+	[Rr][Tt][Ll]8188[Ee][Uu][Ss])
+	conf_driver;
+	nic_8188e;
+	intf_usb;
+	ch_obj_eu;;	
+	[Rr][Tt][Ll]8188[Ee][Ee])
+	conf_driver;
+	nic_8188e;
+	intf_pcie;
+	ch_obj_ee;;
+	[Rr][Tt][Ll]8812[Aa][Uu])
+	conf_driver;
+	nic_8812a;
+	intf_usb;
+	ch_obj_8812au;;
+	[Rr][Tt][Ll]8812[Aa][Ee])
+	conf_driver;
+	nic_8812a;
+	intf_pcie;
+	ch_obj_8812ae;;
+	[Rr][Tt][Ll]8821[Aa][Uu])
+	btcoex_version="BTCOEX20140903-4b50"
+	conf_driver;
+	nic_8821a;
+	intf_usb;
+	ch_obj_8821au;;
+	[Rr][Tt][Ll]8821[Aa][Ss])
+	btcoex_version="BTCOEX20140903-4b50"
+	conf_driver;
+	nic_8821a;
+	intf_sdio;
+	ch_obj_8821as;;
+	[Rr][Tt][Ll]8821[Aa][Ee])
+	btcoex_version="BTCOEX20140903-4b50"
+	conf_driver;
+	nic_8821a;
+	intf_pcie;
+	ch_obj_8821ae;;
+	[Rr][Tt][Ll]8192[Ee][Ss])
+	conf_driver;
+	nic_8192e;
+	intf_sdio;
+	ch_obj_92es;;
+	[Rr][Tt][Ll]8192[Ee][Uu])
+	conf_driver;
+	nic_8192e;
+	intf_usb;
+	ch_obj_92eu;;
+	[Rr][Tt][Ll]8192[Ee][Ee])
+	conf_driver;
+	nic_8192e;
+	intf_pcie;
+	ch_obj_92ee;;		
+	[Rr][Tt][Ll]8723[Bb][Ss])
+	btcoex_version="BTCOEX20140110-4940"
+	conf_driver;
+	nic_8723b;
+	intf_sdio;
+	ch_obj_8723bs;;
+	[Rr][Tt][Ll]8723[Bb][Uu])
+	btcoex_version="BTCOEX20140110-4940"
+	conf_driver;
+	nic_8723b;
+	intf_usb;
+	ch_obj_8723bu;;
+	[Rr][Tt][Ll]8723[Bb][Ee])
+	conf_driver;
+	nic_8723b;
+	intf_pcie;
+	ch_obj_8723be;;
+	[Rr][Tt][Ll]8814[Aa][Uu])
+	conf_driver;
+	nic_8814a;
+	intf_usb;
+	ch_obj_8814au;;
+	*)
+	echo "Unknown NIC type"
+	;;
+esac

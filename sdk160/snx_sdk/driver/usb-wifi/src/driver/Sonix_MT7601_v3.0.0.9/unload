@@ -1,0 +1,7 @@
+ifconfig p2p0 down
+ifconfig ra0 down
+rmmod mt7601Usta
+rmmod mt7601Uap
+rmmod mt7601Esta
+rmmod mt7601Eap
+rmmod rt5370sta

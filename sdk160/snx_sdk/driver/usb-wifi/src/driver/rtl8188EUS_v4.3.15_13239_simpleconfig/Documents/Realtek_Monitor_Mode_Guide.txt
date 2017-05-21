@@ -1,0 +1,27 @@
+	  Realtek Monitor Mode Using Guide
+	-----------------------------
+
+This document introduce how to trigger monitor mode to sniffer packets in the air by Realtek WiFi sulotion.
+	
+1. Please make sure your driver is supporting monitor mode feature, you can consult with FAE or other contact window of Realtek.
+
+2. please make sure your system support following command. 	
+	A. tcpdump
+	B. ifconfig
+	C. iwconfig.
+
+3. Insmod the Realtek wifi module. (ex insmod 8188eu.ko)
+
+4. Type following command, where "wlanX" means the realtek wifi network interface 
+	4.1. ifconfig wlanX up
+	4.2.	iwconfig wlanX mode monitor				/*support wext sulution.*/
+	   or   iw dev wlanX set type monitor				/*support cfg80211 sulution.*/
+	4.3. echo "<chan> 0 0" > /proc/net/<rtk_module>/wlanX/monitor	/*<rtk_module> is the realtek wifi module name, such like rtl8812au, rtl8188eu ..etc*/
+	4.4. tcpdump -i wlanX -s 0 -w snf_pkts.pcap				/*capture the sniffer packets and save it as a file "snf_pkts.pcap" */
+
+5. Perform a packets analyze tool suck like "wireshark" or "omnipeek" and open "snf_pkts.pcap" file.			
+
+6. Done.
+
+
+Note: the releasing driver may only verify the monitor mode feature, it may NOT guarantee fully WiFi function is OK, please check with Realtek to figure out the capability of the driver.

@@ -1,0 +1,15 @@
+*.o
+*.ko
+*.mod.c
+*.mod *.o
+.*.cmd *.ko
+include/autoconf.h
+*.o.cmd
+*.ko.cmd
+.tmp_versions/
+Module.symvers
+modules.order
+
+.cproject
+.project
+

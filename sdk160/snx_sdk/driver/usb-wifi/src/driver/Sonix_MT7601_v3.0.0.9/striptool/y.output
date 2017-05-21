@@ -1,0 +1,2323 @@
+Terminals unused in grammar
+
+   NL
+   PTR_OP
+   MUL_ASSIGN
+   DIV_ASSIGN
+   MOD_ASSIGN
+   ADD_ASSIGN
+   SUB_ASSIGN
+   LEFT_ASSIGN
+   RIGHT_ASSIGN
+   AND_ASSIGN
+   XOR_ASSIGN
+   OR_ASSIGN
+   TYPE_NAME
+   ELLIPSIS
+   DEFINE
+   UNDEFINE
+   INCLUDE
+   OTHER_WORD
+   MACRO_CONCAT
+
+
+Grammar
+
+    0 $accept: start_point $end
+
+    1 primary_expression: IDENTIFIER
+    2                   | CONSTANT
+    3                   | DEFINED '(' IDENTIFIER ')'
+    4                   | STRING_LITERAL
+    5                   | '(' ')'
+    6                   | '(' expression ')'
+
+    7 postfix_expression: primary_expression
+    8                   | postfix_expression '(' argument_expression_list ')'
+
+    9 argument_expression_list: conditional_expression
+   10                         | argument_expression_list ',' conditional_expression
+
+   11 unary_expression: postfix_expression
+   12                 | INC_OP unary_expression
+   13                 | DEC_OP unary_expression
+   14                 | '&' cast_expression
+   15                 | '*' cast_expression
+   16                 | '+' cast_expression
+   17                 | '-' cast_expression
+   18                 | '~' cast_expression
+   19                 | '!' cast_expression
+   20                 | SIZEOF unary_expression
+
+   21 cast_expression: unary_expression
+
+   22 multiplicative_expression: cast_expression
+   23                          | multiplicative_expression '*' cast_expression
+   24                          | multiplicative_expression '/' cast_expression
+   25                          | multiplicative_expression '%' cast_expression
+
+   26 additive_expression: multiplicative_expression
+   27                    | additive_expression '+' multiplicative_expression
+   28                    | additive_expression '-' multiplicative_expression
+
+   29 shift_expression: additive_expression
+   30                 | shift_expression LEFT_OP additive_expression
+   31                 | shift_expression RIGHT_OP additive_expression
+
+   32 relational_expression: shift_expression
+   33                      | relational_expression '<' shift_expression
+   34                      | relational_expression '>' shift_expression
+   35                      | relational_expression LE_OP shift_expression
+   36                      | relational_expression GE_OP shift_expression
+
+   37 equality_expression: relational_expression
+   38                    | equality_expression EQ_OP relational_expression
+   39                    | equality_expression NE_OP relational_expression
+
+   40 and_expression: equality_expression
+   41               | and_expression '&' equality_expression
+
+   42 exclusive_or_expression: and_expression
+   43                        | exclusive_or_expression '^' and_expression
+
+   44 inclusive_or_expression: exclusive_or_expression
+   45                        | inclusive_or_expression '|' exclusive_or_expression
+
+   46 logical_and_expression: inclusive_or_expression
+   47                       | logical_and_expression AND_OP inclusive_or_expression
+
+   48 logical_or_expression: logical_and_expression
+   49                      | logical_or_expression OR_OP logical_and_expression
+
+   50 conditional_expression: logical_or_expression
+   51                       | logical_or_expression '?' expression ':' conditional_expression
+
+   52 expression: conditional_expression
+
+   53 precompile: ifdef_statement
+   54           | STRING
+
+   55 start_point: /* empty */
+   56            | precompile_list
+
+   57 precompile_list: precompile
+   58                | precompile_list precompile
+
+   59 ifdef_statement: IF2 expression ENDIF
+   60                | IF2 expression precompile_list ENDIF
+   61                | IF2 expression ELSE2 ENDIF
+   62                | IF2 expression precompile_list ELSE2 ENDIF
+   63                | IF2 expression ELSE2 precompile_list ENDIF
+   64                | IF2 expression precompile_list ELSE2 precompile_list ENDIF
+   65                | IFDEF expression ENDIF
+   66                | IFDEF expression precompile_list ENDIF
+   67                | IFDEF expression ELSE2 ENDIF
+   68                | IFDEF expression precompile_list ELSE2 ENDIF
+   69                | IFDEF expression ELSE2 precompile_list ENDIF
+   70                | IFDEF expression precompile_list ELSE2 precompile_list ENDIF
+   71                | IFNDEF expression ENDIF
+   72                | IFNDEF expression precompile_list ENDIF
+   73                | IFNDEF expression ELSE2 ENDIF
+   74                | IFNDEF expression precompile_list ELSE2 ENDIF
+   75                | IFNDEF expression ELSE2 precompile_list ENDIF
+   76                | IFNDEF expression precompile_list ELSE2 precompile_list ENDIF
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'!' (33) 19
+'%' (37) 25
+'&' (38) 14 41
+'(' (40) 3 5 6 8
+')' (41) 3 5 6 8
+'*' (42) 15 23
+'+' (43) 16 27
+',' (44) 10
+'-' (45) 17 28
+'/' (47) 24
+':' (58) 51
+'<' (60) 33
+'>' (62) 34
+'?' (63) 51
+'^' (94) 43
+'|' (124) 45
+'~' (126) 18
+error (256)
+IDENTIFIER (258) 1 3
+STRING_LITERAL (259) 4
+STRING (260) 54
+CONSTANT (261) 2
+NL (262)
+SIZEOF (263) 20
+PTR_OP (264)
+INC_OP (265) 12
+DEC_OP (266) 13
+LEFT_OP (267) 30
+RIGHT_OP (268) 31
+LE_OP (269) 35
+GE_OP (270) 36
+EQ_OP (271) 38
+NE_OP (272) 39
+AND_OP (273) 47
+OR_OP (274) 49
+MUL_ASSIGN (275)
+DIV_ASSIGN (276)
+MOD_ASSIGN (277)
+ADD_ASSIGN (278)
+SUB_ASSIGN (279)
+LEFT_ASSIGN (280)
+RIGHT_ASSIGN (281)
+AND_ASSIGN (282)
+XOR_ASSIGN (283)
+OR_ASSIGN (284)
+TYPE_NAME (285)
+ELLIPSIS (286)
+IFDEF (287) 65 66 67 68 69 70
+IFNDEF (288) 71 72 73 74 75 76
+ENDIF (289) 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76
+DEFINE (290)
+DEFINED (291) 3
+UNDEFINE (292)
+IF2 (293) 59 60 61 62 63 64
+ELSE2 (294) 61 62 63 64 67 68 69 70 73 74 75 76
+INCLUDE (295)
+OTHER_WORD (296)
+MACRO_CONCAT (297)
+
+
+Nonterminals, with rules where they appear
+
+$accept (60)
+    on left: 0
+primary_expression (61)
+    on left: 1 2 3 4 5 6, on right: 7
+postfix_expression (62)
+    on left: 7 8, on right: 8 11
+argument_expression_list (63)
+    on left: 9 10, on right: 8 10
+unary_expression (64)
+    on left: 11 12 13 14 15 16 17 18 19 20, on right: 12 13 20 21
+cast_expression (65)
+    on left: 21, on right: 14 15 16 17 18 19 22 23 24 25
+multiplicative_expression (66)
+    on left: 22 23 24 25, on right: 23 24 25 26 27 28
+additive_expression (67)
+    on left: 26 27 28, on right: 27 28 29 30 31
+shift_expression (68)
+    on left: 29 30 31, on right: 30 31 32 33 34 35 36
+relational_expression (69)
+    on left: 32 33 34 35 36, on right: 33 34 35 36 37 38 39
+equality_expression (70)
+    on left: 37 38 39, on right: 38 39 40 41
+and_expression (71)
+    on left: 40 41, on right: 41 42 43
+exclusive_or_expression (72)
+    on left: 42 43, on right: 43 44 45
+inclusive_or_expression (73)
+    on left: 44 45, on right: 45 46 47
+logical_and_expression (74)
+    on left: 46 47, on right: 47 48 49
+logical_or_expression (75)
+    on left: 48 49, on right: 49 50 51
+conditional_expression (76)
+    on left: 50 51, on right: 9 10 51 52
+expression (77)
+    on left: 52, on right: 6 51 59 60 61 62 63 64 65 66 67 68 69 70
+    71 72 73 74 75 76
+precompile (78)
+    on left: 53 54, on right: 57 58
+start_point (79)
+    on left: 55 56, on right: 0
+precompile_list (80)
+    on left: 57 58, on right: 56 58 60 62 63 64 66 68 69 70 72 74 75
+    76
+ifdef_statement (81)
+    on left: 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76,
+    on right: 53
+
+
+state 0
+
+    0 $accept: . start_point $end
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    IF2     shift, and go to state 4
+
+    $default  reduce using rule 55 (start_point)
+
+    precompile       go to state 5
+    start_point      go to state 6
+    precompile_list  go to state 7
+    ifdef_statement  go to state 8
+
+
+state 1
+
+   54 precompile: STRING .
+
+    $default  reduce using rule 54 (precompile)
+
+
+state 2
+
+   65 ifdef_statement: IFDEF . expression ENDIF
+   66                | IFDEF . expression precompile_list ENDIF
+   67                | IFDEF . expression ELSE2 ENDIF
+   68                | IFDEF . expression precompile_list ELSE2 ENDIF
+   69                | IFDEF . expression ELSE2 precompile_list ENDIF
+   70                | IFDEF . expression precompile_list ELSE2 precompile_list ENDIF
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 35
+    logical_or_expression      go to state 36
+    conditional_expression     go to state 37
+    expression                 go to state 38
+
+
+state 3
+
+   71 ifdef_statement: IFNDEF . expression ENDIF
+   72                | IFNDEF . expression precompile_list ENDIF
+   73                | IFNDEF . expression ELSE2 ENDIF
+   74                | IFNDEF . expression precompile_list ELSE2 ENDIF
+   75                | IFNDEF . expression ELSE2 precompile_list ENDIF
+   76                | IFNDEF . expression precompile_list ELSE2 precompile_list ENDIF
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 35
+    logical_or_expression      go to state 36
+    conditional_expression     go to state 37
+    expression                 go to state 39
+
+
+state 4
+
+   59 ifdef_statement: IF2 . expression ENDIF
+   60                | IF2 . expression precompile_list ENDIF
+   61                | IF2 . expression ELSE2 ENDIF
+   62                | IF2 . expression precompile_list ELSE2 ENDIF
+   63                | IF2 . expression ELSE2 precompile_list ENDIF
+   64                | IF2 . expression precompile_list ELSE2 precompile_list ENDIF
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 35
+    logical_or_expression      go to state 36
+    conditional_expression     go to state 37
+    expression                 go to state 40
+
+
+state 5
+
+   57 precompile_list: precompile .
+
+    $default  reduce using rule 57 (precompile_list)
+
+
+state 6
+
+    0 $accept: start_point . $end
+
+    $end  shift, and go to state 41
+
+
+state 7
+
+   56 start_point: precompile_list .
+   58 precompile_list: precompile_list . precompile
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    IF2     shift, and go to state 4
+
+    $default  reduce using rule 56 (start_point)
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 8
+
+   53 precompile: ifdef_statement .
+
+    $default  reduce using rule 53 (precompile)
+
+
+state 9
+
+    1 primary_expression: IDENTIFIER .
+
+    $default  reduce using rule 1 (primary_expression)
+
+
+state 10
+
+    4 primary_expression: STRING_LITERAL .
+
+    $default  reduce using rule 4 (primary_expression)
+
+
+state 11
+
+    2 primary_expression: CONSTANT .
+
+    $default  reduce using rule 2 (primary_expression)
+
+
+state 12
+
+   20 unary_expression: SIZEOF . unary_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 43
+
+
+state 13
+
+   12 unary_expression: INC_OP . unary_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 44
+
+
+state 14
+
+   13 unary_expression: DEC_OP . unary_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 45
+
+
+state 15
+
+    3 primary_expression: DEFINED . '(' IDENTIFIER ')'
+
+    '('  shift, and go to state 46
+
+
+state 16
+
+    5 primary_expression: '(' . ')'
+    6                   | '(' . expression ')'
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    ')'             shift, and go to state 47
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 35
+    logical_or_expression      go to state 36
+    conditional_expression     go to state 37
+    expression                 go to state 48
+
+
+state 17
+
+   14 unary_expression: '&' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 49
+
+
+state 18
+
+   15 unary_expression: '*' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 50
+
+
+state 19
+
+   16 unary_expression: '+' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 51
+
+
+state 20
+
+   17 unary_expression: '-' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 52
+
+
+state 21
+
+   18 unary_expression: '~' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 53
+
+
+state 22
+
+   19 unary_expression: '!' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 54
+
+
+state 23
+
+    7 postfix_expression: primary_expression .
+
+    $default  reduce using rule 7 (postfix_expression)
+
+
+state 24
+
+    8 postfix_expression: postfix_expression . '(' argument_expression_list ')'
+   11 unary_expression: postfix_expression .
+
+    '('  shift, and go to state 55
+
+    $default  reduce using rule 11 (unary_expression)
+
+
+state 25
+
+   21 cast_expression: unary_expression .
+
+    $default  reduce using rule 21 (cast_expression)
+
+
+state 26
+
+   22 multiplicative_expression: cast_expression .
+
+    $default  reduce using rule 22 (multiplicative_expression)
+
+
+state 27
+
+   23 multiplicative_expression: multiplicative_expression . '*' cast_expression
+   24                          | multiplicative_expression . '/' cast_expression
+   25                          | multiplicative_expression . '%' cast_expression
+   26 additive_expression: multiplicative_expression .
+
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+
+    $default  reduce using rule 26 (additive_expression)
+
+
+state 28
+
+   27 additive_expression: additive_expression . '+' multiplicative_expression
+   28                    | additive_expression . '-' multiplicative_expression
+   29 shift_expression: additive_expression .
+
+    '+'  shift, and go to state 59
+    '-'  shift, and go to state 60
+
+    $default  reduce using rule 29 (shift_expression)
+
+
+state 29
+
+   30 shift_expression: shift_expression . LEFT_OP additive_expression
+   31                 | shift_expression . RIGHT_OP additive_expression
+   32 relational_expression: shift_expression .
+
+    LEFT_OP   shift, and go to state 61
+    RIGHT_OP  shift, and go to state 62
+
+    $default  reduce using rule 32 (relational_expression)
+
+
+state 30
+
+   33 relational_expression: relational_expression . '<' shift_expression
+   34                      | relational_expression . '>' shift_expression
+   35                      | relational_expression . LE_OP shift_expression
+   36                      | relational_expression . GE_OP shift_expression
+   37 equality_expression: relational_expression .
+
+    LE_OP  shift, and go to state 63
+    GE_OP  shift, and go to state 64
+    '<'    shift, and go to state 65
+    '>'    shift, and go to state 66
+
+    $default  reduce using rule 37 (equality_expression)
+
+
+state 31
+
+   38 equality_expression: equality_expression . EQ_OP relational_expression
+   39                    | equality_expression . NE_OP relational_expression
+   40 and_expression: equality_expression .
+
+    EQ_OP  shift, and go to state 67
+    NE_OP  shift, and go to state 68
+
+    $default  reduce using rule 40 (and_expression)
+
+
+state 32
+
+   41 and_expression: and_expression . '&' equality_expression
+   42 exclusive_or_expression: and_expression .
+
+    '&'  shift, and go to state 69
+
+    $default  reduce using rule 42 (exclusive_or_expression)
+
+
+state 33
+
+   43 exclusive_or_expression: exclusive_or_expression . '^' and_expression
+   44 inclusive_or_expression: exclusive_or_expression .
+
+    '^'  shift, and go to state 70
+
+    $default  reduce using rule 44 (inclusive_or_expression)
+
+
+state 34
+
+   45 inclusive_or_expression: inclusive_or_expression . '|' exclusive_or_expression
+   46 logical_and_expression: inclusive_or_expression .
+
+    '|'  shift, and go to state 71
+
+    $default  reduce using rule 46 (logical_and_expression)
+
+
+state 35
+
+   47 logical_and_expression: logical_and_expression . AND_OP inclusive_or_expression
+   48 logical_or_expression: logical_and_expression .
+
+    AND_OP  shift, and go to state 72
+
+    $default  reduce using rule 48 (logical_or_expression)
+
+
+state 36
+
+   49 logical_or_expression: logical_or_expression . OR_OP logical_and_expression
+   50 conditional_expression: logical_or_expression .
+   51                       | logical_or_expression . '?' expression ':' conditional_expression
+
+    OR_OP  shift, and go to state 73
+    '?'    shift, and go to state 74
+
+    $default  reduce using rule 50 (conditional_expression)
+
+
+state 37
+
+   52 expression: conditional_expression .
+
+    $default  reduce using rule 52 (expression)
+
+
+state 38
+
+   65 ifdef_statement: IFDEF expression . ENDIF
+   66                | IFDEF expression . precompile_list ENDIF
+   67                | IFDEF expression . ELSE2 ENDIF
+   68                | IFDEF expression . precompile_list ELSE2 ENDIF
+   69                | IFDEF expression . ELSE2 precompile_list ENDIF
+   70                | IFDEF expression . precompile_list ELSE2 precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 75
+    IF2     shift, and go to state 4
+    ELSE2   shift, and go to state 76
+
+    precompile       go to state 5
+    precompile_list  go to state 77
+    ifdef_statement  go to state 8
+
+
+state 39
+
+   71 ifdef_statement: IFNDEF expression . ENDIF
+   72                | IFNDEF expression . precompile_list ENDIF
+   73                | IFNDEF expression . ELSE2 ENDIF
+   74                | IFNDEF expression . precompile_list ELSE2 ENDIF
+   75                | IFNDEF expression . ELSE2 precompile_list ENDIF
+   76                | IFNDEF expression . precompile_list ELSE2 precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 78
+    IF2     shift, and go to state 4
+    ELSE2   shift, and go to state 79
+
+    precompile       go to state 5
+    precompile_list  go to state 80
+    ifdef_statement  go to state 8
+
+
+state 40
+
+   59 ifdef_statement: IF2 expression . ENDIF
+   60                | IF2 expression . precompile_list ENDIF
+   61                | IF2 expression . ELSE2 ENDIF
+   62                | IF2 expression . precompile_list ELSE2 ENDIF
+   63                | IF2 expression . ELSE2 precompile_list ENDIF
+   64                | IF2 expression . precompile_list ELSE2 precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 81
+    IF2     shift, and go to state 4
+    ELSE2   shift, and go to state 82
+
+    precompile       go to state 5
+    precompile_list  go to state 83
+    ifdef_statement  go to state 8
+
+
+state 41
+
+    0 $accept: start_point $end .
+
+    $default  accept
+
+
+state 42
+
+   58 precompile_list: precompile_list precompile .
+
+    $default  reduce using rule 58 (precompile_list)
+
+
+state 43
+
+   20 unary_expression: SIZEOF unary_expression .
+
+    $default  reduce using rule 20 (unary_expression)
+
+
+state 44
+
+   12 unary_expression: INC_OP unary_expression .
+
+    $default  reduce using rule 12 (unary_expression)
+
+
+state 45
+
+   13 unary_expression: DEC_OP unary_expression .
+
+    $default  reduce using rule 13 (unary_expression)
+
+
+state 46
+
+    3 primary_expression: DEFINED '(' . IDENTIFIER ')'
+
+    IDENTIFIER  shift, and go to state 84
+
+
+state 47
+
+    5 primary_expression: '(' ')' .
+
+    $default  reduce using rule 5 (primary_expression)
+
+
+state 48
+
+    6 primary_expression: '(' expression . ')'
+
+    ')'  shift, and go to state 85
+
+
+state 49
+
+   14 unary_expression: '&' cast_expression .
+
+    $default  reduce using rule 14 (unary_expression)
+
+
+state 50
+
+   15 unary_expression: '*' cast_expression .
+
+    $default  reduce using rule 15 (unary_expression)
+
+
+state 51
+
+   16 unary_expression: '+' cast_expression .
+
+    $default  reduce using rule 16 (unary_expression)
+
+
+state 52
+
+   17 unary_expression: '-' cast_expression .
+
+    $default  reduce using rule 17 (unary_expression)
+
+
+state 53
+
+   18 unary_expression: '~' cast_expression .
+
+    $default  reduce using rule 18 (unary_expression)
+
+
+state 54
+
+   19 unary_expression: '!' cast_expression .
+
+    $default  reduce using rule 19 (unary_expression)
+
+
+state 55
+
+    8 postfix_expression: postfix_expression '(' . argument_expression_list ')'
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    argument_expression_list   go to state 86
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 35
+    logical_or_expression      go to state 36
+    conditional_expression     go to state 87
+
+
+state 56
+
+   23 multiplicative_expression: multiplicative_expression '*' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 88
+
+
+state 57
+
+   24 multiplicative_expression: multiplicative_expression '/' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 89
+
+
+state 58
+
+   25 multiplicative_expression: multiplicative_expression '%' . cast_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression  go to state 23
+    postfix_expression  go to state 24
+    unary_expression    go to state 25
+    cast_expression     go to state 90
+
+
+state 59
+
+   27 additive_expression: additive_expression '+' . multiplicative_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 91
+
+
+state 60
+
+   28 additive_expression: additive_expression '-' . multiplicative_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 92
+
+
+state 61
+
+   30 shift_expression: shift_expression LEFT_OP . additive_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 93
+
+
+state 62
+
+   31 shift_expression: shift_expression RIGHT_OP . additive_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 94
+
+
+state 63
+
+   35 relational_expression: relational_expression LE_OP . shift_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 95
+
+
+state 64
+
+   36 relational_expression: relational_expression GE_OP . shift_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 96
+
+
+state 65
+
+   33 relational_expression: relational_expression '<' . shift_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 97
+
+
+state 66
+
+   34 relational_expression: relational_expression '>' . shift_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 98
+
+
+state 67
+
+   38 equality_expression: equality_expression EQ_OP . relational_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 99
+
+
+state 68
+
+   39 equality_expression: equality_expression NE_OP . relational_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 100
+
+
+state 69
+
+   41 and_expression: and_expression '&' . equality_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 101
+
+
+state 70
+
+   43 exclusive_or_expression: exclusive_or_expression '^' . and_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 102
+
+
+state 71
+
+   45 inclusive_or_expression: inclusive_or_expression '|' . exclusive_or_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 103
+
+
+state 72
+
+   47 logical_and_expression: logical_and_expression AND_OP . inclusive_or_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 104
+
+
+state 73
+
+   49 logical_or_expression: logical_or_expression OR_OP . logical_and_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 105
+
+
+state 74
+
+   51 conditional_expression: logical_or_expression '?' . expression ':' conditional_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 35
+    logical_or_expression      go to state 36
+    conditional_expression     go to state 37
+    expression                 go to state 106
+
+
+state 75
+
+   65 ifdef_statement: IFDEF expression ENDIF .
+
+    $default  reduce using rule 65 (ifdef_statement)
+
+
+state 76
+
+   67 ifdef_statement: IFDEF expression ELSE2 . ENDIF
+   69                | IFDEF expression ELSE2 . precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 107
+    IF2     shift, and go to state 4
+
+    precompile       go to state 5
+    precompile_list  go to state 108
+    ifdef_statement  go to state 8
+
+
+state 77
+
+   58 precompile_list: precompile_list . precompile
+   66 ifdef_statement: IFDEF expression precompile_list . ENDIF
+   68                | IFDEF expression precompile_list . ELSE2 ENDIF
+   70                | IFDEF expression precompile_list . ELSE2 precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 109
+    IF2     shift, and go to state 4
+    ELSE2   shift, and go to state 110
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 78
+
+   71 ifdef_statement: IFNDEF expression ENDIF .
+
+    $default  reduce using rule 71 (ifdef_statement)
+
+
+state 79
+
+   73 ifdef_statement: IFNDEF expression ELSE2 . ENDIF
+   75                | IFNDEF expression ELSE2 . precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 111
+    IF2     shift, and go to state 4
+
+    precompile       go to state 5
+    precompile_list  go to state 112
+    ifdef_statement  go to state 8
+
+
+state 80
+
+   58 precompile_list: precompile_list . precompile
+   72 ifdef_statement: IFNDEF expression precompile_list . ENDIF
+   74                | IFNDEF expression precompile_list . ELSE2 ENDIF
+   76                | IFNDEF expression precompile_list . ELSE2 precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 113
+    IF2     shift, and go to state 4
+    ELSE2   shift, and go to state 114
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 81
+
+   59 ifdef_statement: IF2 expression ENDIF .
+
+    $default  reduce using rule 59 (ifdef_statement)
+
+
+state 82
+
+   61 ifdef_statement: IF2 expression ELSE2 . ENDIF
+   63                | IF2 expression ELSE2 . precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 115
+    IF2     shift, and go to state 4
+
+    precompile       go to state 5
+    precompile_list  go to state 116
+    ifdef_statement  go to state 8
+
+
+state 83
+
+   58 precompile_list: precompile_list . precompile
+   60 ifdef_statement: IF2 expression precompile_list . ENDIF
+   62                | IF2 expression precompile_list . ELSE2 ENDIF
+   64                | IF2 expression precompile_list . ELSE2 precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 117
+    IF2     shift, and go to state 4
+    ELSE2   shift, and go to state 118
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 84
+
+    3 primary_expression: DEFINED '(' IDENTIFIER . ')'
+
+    ')'  shift, and go to state 119
+
+
+state 85
+
+    6 primary_expression: '(' expression ')' .
+
+    $default  reduce using rule 6 (primary_expression)
+
+
+state 86
+
+    8 postfix_expression: postfix_expression '(' argument_expression_list . ')'
+   10 argument_expression_list: argument_expression_list . ',' conditional_expression
+
+    ')'  shift, and go to state 120
+    ','  shift, and go to state 121
+
+
+state 87
+
+    9 argument_expression_list: conditional_expression .
+
+    $default  reduce using rule 9 (argument_expression_list)
+
+
+state 88
+
+   23 multiplicative_expression: multiplicative_expression '*' cast_expression .
+
+    $default  reduce using rule 23 (multiplicative_expression)
+
+
+state 89
+
+   24 multiplicative_expression: multiplicative_expression '/' cast_expression .
+
+    $default  reduce using rule 24 (multiplicative_expression)
+
+
+state 90
+
+   25 multiplicative_expression: multiplicative_expression '%' cast_expression .
+
+    $default  reduce using rule 25 (multiplicative_expression)
+
+
+state 91
+
+   23 multiplicative_expression: multiplicative_expression . '*' cast_expression
+   24                          | multiplicative_expression . '/' cast_expression
+   25                          | multiplicative_expression . '%' cast_expression
+   27 additive_expression: additive_expression '+' multiplicative_expression .
+
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+
+    $default  reduce using rule 27 (additive_expression)
+
+
+state 92
+
+   23 multiplicative_expression: multiplicative_expression . '*' cast_expression
+   24                          | multiplicative_expression . '/' cast_expression
+   25                          | multiplicative_expression . '%' cast_expression
+   28 additive_expression: additive_expression '-' multiplicative_expression .
+
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+
+    $default  reduce using rule 28 (additive_expression)
+
+
+state 93
+
+   27 additive_expression: additive_expression . '+' multiplicative_expression
+   28                    | additive_expression . '-' multiplicative_expression
+   30 shift_expression: shift_expression LEFT_OP additive_expression .
+
+    '+'  shift, and go to state 59
+    '-'  shift, and go to state 60
+
+    $default  reduce using rule 30 (shift_expression)
+
+
+state 94
+
+   27 additive_expression: additive_expression . '+' multiplicative_expression
+   28                    | additive_expression . '-' multiplicative_expression
+   31 shift_expression: shift_expression RIGHT_OP additive_expression .
+
+    '+'  shift, and go to state 59
+    '-'  shift, and go to state 60
+
+    $default  reduce using rule 31 (shift_expression)
+
+
+state 95
+
+   30 shift_expression: shift_expression . LEFT_OP additive_expression
+   31                 | shift_expression . RIGHT_OP additive_expression
+   35 relational_expression: relational_expression LE_OP shift_expression .
+
+    LEFT_OP   shift, and go to state 61
+    RIGHT_OP  shift, and go to state 62
+
+    $default  reduce using rule 35 (relational_expression)
+
+
+state 96
+
+   30 shift_expression: shift_expression . LEFT_OP additive_expression
+   31                 | shift_expression . RIGHT_OP additive_expression
+   36 relational_expression: relational_expression GE_OP shift_expression .
+
+    LEFT_OP   shift, and go to state 61
+    RIGHT_OP  shift, and go to state 62
+
+    $default  reduce using rule 36 (relational_expression)
+
+
+state 97
+
+   30 shift_expression: shift_expression . LEFT_OP additive_expression
+   31                 | shift_expression . RIGHT_OP additive_expression
+   33 relational_expression: relational_expression '<' shift_expression .
+
+    LEFT_OP   shift, and go to state 61
+    RIGHT_OP  shift, and go to state 62
+
+    $default  reduce using rule 33 (relational_expression)
+
+
+state 98
+
+   30 shift_expression: shift_expression . LEFT_OP additive_expression
+   31                 | shift_expression . RIGHT_OP additive_expression
+   34 relational_expression: relational_expression '>' shift_expression .
+
+    LEFT_OP   shift, and go to state 61
+    RIGHT_OP  shift, and go to state 62
+
+    $default  reduce using rule 34 (relational_expression)
+
+
+state 99
+
+   33 relational_expression: relational_expression . '<' shift_expression
+   34                      | relational_expression . '>' shift_expression
+   35                      | relational_expression . LE_OP shift_expression
+   36                      | relational_expression . GE_OP shift_expression
+   38 equality_expression: equality_expression EQ_OP relational_expression .
+
+    LE_OP  shift, and go to state 63
+    GE_OP  shift, and go to state 64
+    '<'    shift, and go to state 65
+    '>'    shift, and go to state 66
+
+    $default  reduce using rule 38 (equality_expression)
+
+
+state 100
+
+   33 relational_expression: relational_expression . '<' shift_expression
+   34                      | relational_expression . '>' shift_expression
+   35                      | relational_expression . LE_OP shift_expression
+   36                      | relational_expression . GE_OP shift_expression
+   39 equality_expression: equality_expression NE_OP relational_expression .
+
+    LE_OP  shift, and go to state 63
+    GE_OP  shift, and go to state 64
+    '<'    shift, and go to state 65
+    '>'    shift, and go to state 66
+
+    $default  reduce using rule 39 (equality_expression)
+
+
+state 101
+
+   38 equality_expression: equality_expression . EQ_OP relational_expression
+   39                    | equality_expression . NE_OP relational_expression
+   41 and_expression: and_expression '&' equality_expression .
+
+    EQ_OP  shift, and go to state 67
+    NE_OP  shift, and go to state 68
+
+    $default  reduce using rule 41 (and_expression)
+
+
+state 102
+
+   41 and_expression: and_expression . '&' equality_expression
+   43 exclusive_or_expression: exclusive_or_expression '^' and_expression .
+
+    '&'  shift, and go to state 69
+
+    $default  reduce using rule 43 (exclusive_or_expression)
+
+
+state 103
+
+   43 exclusive_or_expression: exclusive_or_expression . '^' and_expression
+   45 inclusive_or_expression: inclusive_or_expression '|' exclusive_or_expression .
+
+    '^'  shift, and go to state 70
+
+    $default  reduce using rule 45 (inclusive_or_expression)
+
+
+state 104
+
+   45 inclusive_or_expression: inclusive_or_expression . '|' exclusive_or_expression
+   47 logical_and_expression: logical_and_expression AND_OP inclusive_or_expression .
+
+    '|'  shift, and go to state 71
+
+    $default  reduce using rule 47 (logical_and_expression)
+
+
+state 105
+
+   47 logical_and_expression: logical_and_expression . AND_OP inclusive_or_expression
+   49 logical_or_expression: logical_or_expression OR_OP logical_and_expression .
+
+    AND_OP  shift, and go to state 72
+
+    $default  reduce using rule 49 (logical_or_expression)
+
+
+state 106
+
+   51 conditional_expression: logical_or_expression '?' expression . ':' conditional_expression
+
+    ':'  shift, and go to state 122
+
+
+state 107
+
+   67 ifdef_statement: IFDEF expression ELSE2 ENDIF .
+
+    $default  reduce using rule 67 (ifdef_statement)
+
+
+state 108
+
+   58 precompile_list: precompile_list . precompile
+   69 ifdef_statement: IFDEF expression ELSE2 precompile_list . ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 123
+    IF2     shift, and go to state 4
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 109
+
+   66 ifdef_statement: IFDEF expression precompile_list ENDIF .
+
+    $default  reduce using rule 66 (ifdef_statement)
+
+
+state 110
+
+   68 ifdef_statement: IFDEF expression precompile_list ELSE2 . ENDIF
+   70                | IFDEF expression precompile_list ELSE2 . precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 124
+    IF2     shift, and go to state 4
+
+    precompile       go to state 5
+    precompile_list  go to state 125
+    ifdef_statement  go to state 8
+
+
+state 111
+
+   73 ifdef_statement: IFNDEF expression ELSE2 ENDIF .
+
+    $default  reduce using rule 73 (ifdef_statement)
+
+
+state 112
+
+   58 precompile_list: precompile_list . precompile
+   75 ifdef_statement: IFNDEF expression ELSE2 precompile_list . ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 126
+    IF2     shift, and go to state 4
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 113
+
+   72 ifdef_statement: IFNDEF expression precompile_list ENDIF .
+
+    $default  reduce using rule 72 (ifdef_statement)
+
+
+state 114
+
+   74 ifdef_statement: IFNDEF expression precompile_list ELSE2 . ENDIF
+   76                | IFNDEF expression precompile_list ELSE2 . precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 127
+    IF2     shift, and go to state 4
+
+    precompile       go to state 5
+    precompile_list  go to state 128
+    ifdef_statement  go to state 8
+
+
+state 115
+
+   61 ifdef_statement: IF2 expression ELSE2 ENDIF .
+
+    $default  reduce using rule 61 (ifdef_statement)
+
+
+state 116
+
+   58 precompile_list: precompile_list . precompile
+   63 ifdef_statement: IF2 expression ELSE2 precompile_list . ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 129
+    IF2     shift, and go to state 4
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 117
+
+   60 ifdef_statement: IF2 expression precompile_list ENDIF .
+
+    $default  reduce using rule 60 (ifdef_statement)
+
+
+state 118
+
+   62 ifdef_statement: IF2 expression precompile_list ELSE2 . ENDIF
+   64                | IF2 expression precompile_list ELSE2 . precompile_list ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 130
+    IF2     shift, and go to state 4
+
+    precompile       go to state 5
+    precompile_list  go to state 131
+    ifdef_statement  go to state 8
+
+
+state 119
+
+    3 primary_expression: DEFINED '(' IDENTIFIER ')' .
+
+    $default  reduce using rule 3 (primary_expression)
+
+
+state 120
+
+    8 postfix_expression: postfix_expression '(' argument_expression_list ')' .
+
+    $default  reduce using rule 8 (postfix_expression)
+
+
+state 121
+
+   10 argument_expression_list: argument_expression_list ',' . conditional_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 35
+    logical_or_expression      go to state 36
+    conditional_expression     go to state 132
+
+
+state 122
+
+   51 conditional_expression: logical_or_expression '?' expression ':' . conditional_expression
+
+    IDENTIFIER      shift, and go to state 9
+    STRING_LITERAL  shift, and go to state 10
+    CONSTANT        shift, and go to state 11
+    SIZEOF          shift, and go to state 12
+    INC_OP          shift, and go to state 13
+    DEC_OP          shift, and go to state 14
+    DEFINED         shift, and go to state 15
+    '('             shift, and go to state 16
+    '&'             shift, and go to state 17
+    '*'             shift, and go to state 18
+    '+'             shift, and go to state 19
+    '-'             shift, and go to state 20
+    '~'             shift, and go to state 21
+    '!'             shift, and go to state 22
+
+    primary_expression         go to state 23
+    postfix_expression         go to state 24
+    unary_expression           go to state 25
+    cast_expression            go to state 26
+    multiplicative_expression  go to state 27
+    additive_expression        go to state 28
+    shift_expression           go to state 29
+    relational_expression      go to state 30
+    equality_expression        go to state 31
+    and_expression             go to state 32
+    exclusive_or_expression    go to state 33
+    inclusive_or_expression    go to state 34
+    logical_and_expression     go to state 35
+    logical_or_expression      go to state 36
+    conditional_expression     go to state 133
+
+
+state 123
+
+   69 ifdef_statement: IFDEF expression ELSE2 precompile_list ENDIF .
+
+    $default  reduce using rule 69 (ifdef_statement)
+
+
+state 124
+
+   68 ifdef_statement: IFDEF expression precompile_list ELSE2 ENDIF .
+
+    $default  reduce using rule 68 (ifdef_statement)
+
+
+state 125
+
+   58 precompile_list: precompile_list . precompile
+   70 ifdef_statement: IFDEF expression precompile_list ELSE2 precompile_list . ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 134
+    IF2     shift, and go to state 4
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 126
+
+   75 ifdef_statement: IFNDEF expression ELSE2 precompile_list ENDIF .
+
+    $default  reduce using rule 75 (ifdef_statement)
+
+
+state 127
+
+   74 ifdef_statement: IFNDEF expression precompile_list ELSE2 ENDIF .
+
+    $default  reduce using rule 74 (ifdef_statement)
+
+
+state 128
+
+   58 precompile_list: precompile_list . precompile
+   76 ifdef_statement: IFNDEF expression precompile_list ELSE2 precompile_list . ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 135
+    IF2     shift, and go to state 4
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 129
+
+   63 ifdef_statement: IF2 expression ELSE2 precompile_list ENDIF .
+
+    $default  reduce using rule 63 (ifdef_statement)
+
+
+state 130
+
+   62 ifdef_statement: IF2 expression precompile_list ELSE2 ENDIF .
+
+    $default  reduce using rule 62 (ifdef_statement)
+
+
+state 131
+
+   58 precompile_list: precompile_list . precompile
+   64 ifdef_statement: IF2 expression precompile_list ELSE2 precompile_list . ENDIF
+
+    STRING  shift, and go to state 1
+    IFDEF   shift, and go to state 2
+    IFNDEF  shift, and go to state 3
+    ENDIF   shift, and go to state 136
+    IF2     shift, and go to state 4
+
+    precompile       go to state 42
+    ifdef_statement  go to state 8
+
+
+state 132
+
+   10 argument_expression_list: argument_expression_list ',' conditional_expression .
+
+    $default  reduce using rule 10 (argument_expression_list)
+
+
+state 133
+
+   51 conditional_expression: logical_or_expression '?' expression ':' conditional_expression .
+
+    $default  reduce using rule 51 (conditional_expression)
+
+
+state 134
+
+   70 ifdef_statement: IFDEF expression precompile_list ELSE2 precompile_list ENDIF .
+
+    $default  reduce using rule 70 (ifdef_statement)
+
+
+state 135
+
+   76 ifdef_statement: IFNDEF expression precompile_list ELSE2 precompile_list ENDIF .
+
+    $default  reduce using rule 76 (ifdef_statement)
+
+
+state 136
+
+   64 ifdef_statement: IF2 expression precompile_list ELSE2 precompile_list ENDIF .
+
+    $default  reduce using rule 64 (ifdef_statement)

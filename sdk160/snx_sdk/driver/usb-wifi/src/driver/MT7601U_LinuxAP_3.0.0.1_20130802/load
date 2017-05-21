@@ -1,0 +1,3 @@
+dmesg -c
+insmod os/linux/mt7601Uap.ko
+ifconfig ra0 10.10.10.100

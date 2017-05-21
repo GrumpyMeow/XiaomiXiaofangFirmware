@@ -1,0 +1,7 @@
+insmod os/linux/mt7601Usta.ko
+insmod os/linux/mt7601Uap.ko
+insmod os/linux/mt7601Esta.ko
+insmod os/linux/mt7601Eap.ko
+insmod os/linux/rt5370sta.ko
+ifconfig ra0 10.0.0.100
+ifconfig p2p0 up

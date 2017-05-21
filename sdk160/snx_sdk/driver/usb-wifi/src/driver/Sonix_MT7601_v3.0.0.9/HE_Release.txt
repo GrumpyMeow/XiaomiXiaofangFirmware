@@ -1,0 +1,55 @@
+[2014-04-16]
+MT7601_v3.0.0.9_140416_96234
+ Pass Mtk inlab EDCCA test(2.4G)by SA
+
+[2013-12-03]
+MT7601_v3.0.0.9_131203_88879
+	Pass SONY BDP MSB9G MP test
+
+[2013-06-26]
+MT7601_v3.0.0.3_130626_68101
+	Pass dongle MP test by HE SQA
+	Pass MT6582 cell phone MP test by WCP SQA 
+
+[2013-05-15]
+MT7601_v3.0.0.3_130515_66855
+	Regression Test
+	CR Verification
+
+[2013-04-10]
+MT7601_v3.0.0.3_130410_65701
+	SQA Sanity Test
+	P2P Function Test
+	WFD Function Test
+
+[2013-03-14]
+Miracast: all pass.
+	6.1.2   : 7601_golden_1 + changelist:65010 (Set "HAS_WOW_IFDOWN_SUPPORT=n" to fix interface down/up will not scan AP issue)
+	6.1.21C : 7601_golden_1 + changelist:65075 (The Marvel testbed sends EAP_FAIL & DE_AUTH with almost no latency.
+						7601 driver failed to handle EAP_FAIL, which results in carry no RSN in in next association request packet.)
+	6.1.17  : Modify Sigma Tool
+	
+[2013-02-20]
+WiFi Direct: all pass.
+	Modify Sigma Tool.
+	Modify RT2870STA.dat: modify MAC table age out from 20 sec to 60 sec. (IdleTimeout=60)
+
+[2013-02-07]
+7601_golden_1
+1. Need to verify following failed test cases:(Maybe not the dirver issues)
+	WiFi Direct: (Update status[2013-02-20]: All pass. Modify Sigma Tool and RT2870STA.dat - IdleTimeout=300)
+		4.2.2
+		5.1.2
+		5.1.21
+		6.1.11
+		6.1.12
+		7.1.2
+		7.1.3
+		7.1.4
+	Miracast:
+		6.1.2
+		6.1.21C
+		6.1.17
+2. Internal IOT issue:
+	Tx/Rx throughput not balance issue (Tx:Rx is about 1:3)
+
