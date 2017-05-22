@@ -22,7 +22,7 @@ This repository will host files to build a custom firmware for the Xiaomi Xiaofa
 1. ./patch.sh
 1. cd ..
 1. cd ..
-1. snx_sdk
+1. cd snx_sdk/buildscript
 1. make menuconfig
 1. make kernelmenuconfig
 1. make
