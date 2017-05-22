@@ -40,7 +40,7 @@ if [ ! -x /etc/init.d/rcS ]; then
 fi
 #Add nvram inode
 modprobe snx_crypto
-modprobe snx_nvram
+#modprobe snx_nvram
 mknod /dev/nvram c 251 0
 #Create mdev
 #/bin/echo /sbin/mdev > /proc/sys/kernel/hotplug

@@ -1,80 +1,52 @@
-diff --git a/src/arch/arm/mach-sn986xx/time.c b/src/arch/arm/mach-sn986xx/time.c
-old mode 100644
-new mode 100755
-index b8eef5c..1b9c03e
---- a/src/arch/arm/mach-sn986xx/time.c
-+++ b/src/arch/arm/mach-sn986xx/time.c
-@@ -676,12 +676,12 @@ static void __init snx_timer_setup (void)
- 	value =  timer_ctl & (TM2ENABLE | TM2OFENABLE | TM2UPDOWN | TM2CLOCK );
- 	
- 	/* disalble timer1/3 */
--	writel (value, TIMER_CTRL);
-+//	writel (value, TIMER_CTRL);
- 	
- 	/* clear timer1/3 */
--	value = (CLR_TM1MATCH1 | CLR_TM1MATCH2 | CLR_TM1OF 
--			| CLR_TM3MATCH1 | CLR_TM3MATCH2 | CLR_TM3OF);
--	writel (value, TIMER_INTRFLAG);
-+//	value = (CLR_TM1MATCH1 | CLR_TM1MATCH2 | CLR_TM1OF 
-+//			| CLR_TM3MATCH1 | CLR_TM3MATCH2 | CLR_TM3OF);
-+//	writel (value, TIMER_INTRFLAG);
- 
- #else
- 	/* disalble timer1/2/3 */
-@@ -690,9 +690,9 @@ static void __init snx_timer_setup (void)
- 	writel (CLR_TM_INT_STS, TIMER_INTRFLAG);
- #endif
- 	/* setup counter value for the first time */
--	writel (LATCH, TIMER1_COUNT);
-+//	writel (LATCH, TIMER1_COUNT);
- 	/* setup load value */
--	writel (LATCH, TIMER1_LOAD);
-+//	writel (LATCH, TIMER1_LOAD);
- 	/* enable timer1 overflow interrupt only */
- 	writel (~TM1OF, TIMER_INTRMASK);
- 
-@@ -728,14 +728,7 @@ static void __init snx_timer_init (void)
- #endif
- 		timer_clock = APB_CLK;
- 	
--#ifdef CONFIG_GENERIC_CLOCKEVENTS
--	clk_event.mult = div_sc(CLOCK_TICK_RATE, NSEC_PER_SEC, clk_event.shift);
--	clk_event.max_delta_ns = clockevent_delta2ns(MAX_DELTA, &clk_event);
--	clk_event.min_delta_ns = clockevent_delta2ns(MIN_DELTA, &clk_event);
--	clk_event.cpumask = cpumask_of(0);
--	clockevents_register_device(&clk_event);
--#endif	
--	
-+
- 	clksrc_ftclock.mult = clocksource_hz2mult((LATCH * HZ), clksrc_ftclock.shift);
- 	/*
-          * We want an even value to automatically clear the top bit
-@@ -747,6 +740,19 @@ static void __init snx_timer_init (void)
- 
- 	snx_clock_init();
- 
-+//////////////////////
-+	writel (LATCH, TIMER1_COUNT);
-+	writel (LATCH, TIMER1_LOAD);
-+//////////////////////
-+
-+#ifdef CONFIG_GENERIC_CLOCKEVENTS
-+	clk_event.mult = div_sc(CLOCK_TICK_RATE, NSEC_PER_SEC, clk_event.shift);
-+	clk_event.max_delta_ns = clockevent_delta2ns(MAX_DELTA, &clk_event);
-+	clk_event.min_delta_ns = clockevent_delta2ns(MIN_DELTA, &clk_event);
-+	clk_event.cpumask = cpumask_of(0);
-+	clockevents_register_device(&clk_event);
-+#endif	
-+
- 	/* setup timer */
- #ifndef CONFIG_GENERIC_CLOCKEVENTS
- 	snx_timer_setup ();
-@@ -821,7 +827,7 @@ static int snx_timer_set_next_event(unsigned long delta,
- //	next = timer_read() + delta;
- //	__raw_writel(next, TIMERS_VIRT_BASE + TMR_TN_MM(0, 0));
- 
--	next = readl(TIMER3_COUNT) + delta;
-+//	next = readl(TIMER3_COUNT) + delta;
- 	snx_timer_setup ();
- 
- 	local_irq_restore(flags);
+diff -rcNP a/src/arch/arm/configs/sn98660_QR_Scan_rescue_defconfig b/src/arch/arm/configs/sn98660_QR_Scan_rescue_defconfig
+*** a/src/arch/arm/configs/sn98660_QR_Scan_rescue_defconfig	2016-06-05 21:53:08.000000000 -0400
+--- b/src/arch/arm/configs/sn98660_QR_Scan_rescue_defconfig	2017-05-22 13:36:28.282106814 -0400
+***************
+*** 751,760 ****
+  # CONFIG_TUN is not set
+  # CONFIG_VETH is not set
+  # CONFIG_PHYLIB is not set
+! CONFIG_NET_ETHERNET=y
+! CONFIG_MII=y
+! CONFIG_SNX_MAC=y
+! CONFIG_SNX_MAC_ZERO_COPY=y
+  # CONFIG_AX88796 is not set
+  # CONFIG_SMC91X is not set
+  # CONFIG_DM9000 is not set
+--- 751,760 ----
+  # CONFIG_TUN is not set
+  # CONFIG_VETH is not set
+  # CONFIG_PHYLIB is not set
+! # CONFIG_NET_ETHERNET=y
+! # CONFIG_MII=y
+! # CONFIG_SNX_MAC=y
+! # CONFIG_SNX_MAC_ZERO_COPY=y
+  # CONFIG_AX88796 is not set
+  # CONFIG_SMC91X is not set
+  # CONFIG_DM9000 is not set
+diff -rcNP a/src/arch/arm/configs/sn98660_sf_defconfig b/src/arch/arm/configs/sn98660_sf_defconfig
+*** a/src/arch/arm/configs/sn98660_sf_defconfig	2017-05-22 12:52:19.199514000 -0400
+--- b/src/arch/arm/configs/sn98660_sf_defconfig	2017-05-22 13:36:29.370117759 -0400
+***************
+*** 813,822 ****
+  # CONFIG_TUN is not set
+  # CONFIG_VETH is not set
+  # CONFIG_PHYLIB is not set
+! CONFIG_NET_ETHERNET=y
+! CONFIG_MII=y
+! CONFIG_SNX_MAC=y
+! CONFIG_SNX_MAC_ZERO_COPY=y
+  # CONFIG_AX88796 is not set
+  # CONFIG_SMC91X is not set
+  # CONFIG_DM9000 is not set
+--- 813,822 ----
+  # CONFIG_TUN is not set
+  # CONFIG_VETH is not set
+  # CONFIG_PHYLIB is not set
+! # CONFIG_NET_ETHERNET=y
+! # CONFIG_MII=y
+! # CONFIG_SNX_MAC=y
+! # CONFIG_SNX_MAC_ZERO_COPY=y
+  # CONFIG_AX88796 is not set
+  # CONFIG_SMC91X is not set
+  # CONFIG_DM9000 is not set
