@@ -415,6 +415,8 @@ usb-wifi:
 else
 usb-wifi: linux-2.6.35.12
 endif
+	$(MAKE) -C $(PRJ_DIR)/driver/usb-wifi all KERNEL_DIR=$(NORMAL_KERNEL_DIR) COMPILE_RESCUE=no
+	$(MAKE) -C $(PRJ_DIR)/driver/usb-wifi install INSTALL_DIR=$(PRJ_DIR)/driver/usb-wifi/rootfs KERNEL_DIR=$(NORMAL_KERNEL_DIR) COMPILE_RESCUE=no
 	if [ -f $(PRJ_DIR)/driver/usb-wifi/custom_install ]; then \
 		$(PRJ_DIR)/driver/usb-wifi/custom_install install $(PRJ_DIR)/driver/usb-wifi/rootfs $(AUTOCONF_DIR) normal; \
 	fi

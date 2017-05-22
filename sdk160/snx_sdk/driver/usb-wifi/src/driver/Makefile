@@ -23,6 +23,7 @@ SUB_DIRS-$(CONFIG_MODULE_USB_WIFI_RT5370) += rt5370
 SUB_DIRS-$(CONFIG_MODULE_USB_WIFI_RTL8188EUS) += rtl8188eus
 SUB_DIRS-$(CONFIG_MODULE_USB_WIFI_RTL8188EUS_4_1_8_9449) += rtl8188EUS_v4.1.8_9499
 SUB_DIRS-$(CONFIG_MODULE_USB_WIFI_RTL8188EUS_4_3_0_3_10997) += rtl8188EUS_v4.3.0.3_10997
+SUB_DIRS-$(CONFIG_MODULE_USB_WIFI_RTL8188EUS_4_3_0_8) += rtl8188EUS_linux_v4.3.0.8_13968.20150417
 SUB_DIRS-$(CONFIG_MODULE_USB_WIFI_RTL8188EUS_4_3_15_13239) += rtl8188EUS_v4.3.15_13239_simpleconfig
 SUB_DIRS-$(CONFIG_MODULE_USB_WIFI_RTL8191SU) += rtl8191su
 #SUB_DIRS-$(CONFIG_MODULE_USB_WIFI_MT7601U) += mt7601u
@@ -54,12 +55,17 @@ all: precheck
 		echo "Error! Please set kernel directory by 'KERNEL_DIR' variable"; \
 		exit 1; \
 	fi;
+	@ for dir in $(SUB_DIRS-n); do echo "yes: " $$dir; done
+	@ for dir in $(SUB_DIRS-y); do echo "no: " $$dir; done
+	@ for dir in $(SUB_DIRS-); do echo "unset: " $$dir; done
+	
 	@ for dir in $(SUB_DIRS-y); do $(MAKE) -C $$dir KERNELDIR=$(abspath $(KERNEL_DIR)/src) INSTALLDIR=$(abspath $(DRIVER_INS_DIR)) || exit 1; done
 
 clean:
 	@ for dir in $(SUB_DIRS-y) $(SUB_DIRS-n) $(SUB_DIRS-); do $(MAKE) -C $$dir $@ || exit 1; done
 
 install: precheck
+	@echo "############################# 3";
 	@ for dir in $(SUB_DIRS-y); do $(MAKE) -C $$dir $@ INSTALLDIR=$(abspath $(DRIVER_INS_DIR)) DAT_DIR=$(abspath $(DAT_DIR)) || exit 1; done
 
 #	$(STRIP) -d $(DRIVER_INS_DIR)/8188eu.ko

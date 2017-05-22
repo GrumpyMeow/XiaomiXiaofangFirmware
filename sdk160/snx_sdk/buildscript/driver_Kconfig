@@ -23,15 +23,23 @@ config MODULE_USB_WIFI_RT5370
     bool "RT5370 Driver"
     help
 
-config MODULE_USB_WIFI_RTL8188EUS_4_3_0_3
+config MODULE_USB_WIFI_RTL8188EUS
+    bool "RTL8188EUS"
+    help
+
+config MODULE_USB_WIFI_RTL8188EUS_4_1_8_9449
+    bool "RTL8188EUS v4.1.8"
+    help
+    
+config MODULE_USB_WIFI_RTL8188EUS_4_3_0_3_10997
     bool "RTL8188EUS/ETV Driver v4.3.0.3"
     help
 
-config MODULE_USB_WIFI_RTL8188EUS_4_3_0_9
-    bool "RTL8188EUS/ETV Driver v4.3.0.9"
+config MODULE_USB_WIFI_RTL8188EUS_4_3_0_8
+    bool "RTL8188EUS/ETV Driver v4.3.0.8"
     help
 
-config MODULE_USB_WIFI_RTL8188EUS_4_3_15
+config MODULE_USB_WIFI_RTL8188EUS_4_3_15_13239
     bool "RTL8188EUS/ETV Driver v4.3.15 simple config"
     help
 
@@ -112,7 +120,7 @@ config VIDEO_SENSOR_SNX111
 
 config VIDEO_SENSOR_OV9715
 	bool "OV9715"
-	default n
+	default y
 
 config VIDEO_SENSOR_OV2715
 	bool "OV2715"
@@ -208,10 +216,6 @@ config VIDEO_SENSOR_GC1024
 
 config VIDEO_SENSOR_OV2740
         bool "OV2740"
-        default n
-
-config VIDEO_SENSOR_SC2135
-        bool "SC2135"
         default n
 
 endmenu
