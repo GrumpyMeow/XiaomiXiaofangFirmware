@@ -1,6 +1,6 @@
 ####################################################
 #
-# SONiX Module Configurartion
+# SONiX Module Configuration
 #
 ####################################################
 
@@ -13,7 +13,7 @@ config MODULE_USB_WIFI_SUPPORT
 
 choice
 	prompt "USB WiFi Drivers" if MODULE_USB_WIFI_SUPPORT
-	default MODULE_USB_WIFI_RT5370
+	default MODULE_USB_WIFI_RTL8188EUS_4_3_15_13239
  
 config MODULE_USB_WIFI_RT3070AP
     bool "RT3070 AP Driver"
@@ -217,6 +217,9 @@ config VIDEO_SENSOR_GC1024
 config VIDEO_SENSOR_OV2740
         bool "OV2740"
         default n
+config VIDEO_SENSOR_SC2135
+        bool "SC2135"
+        default y
 
 endmenu
 

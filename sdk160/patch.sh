@@ -7,10 +7,9 @@ make clean
 
 make sn98660_QR_Scan_402mhz_sf_defconfig
 
-
+cd ../../XiaomiXiaofangFirmware/sdk160/
 echo -e "Applying patch"
 /bin/cp -v -f -R snx_sdk/* ../../snx_sdk/
-
 
 
 echo -e "execute: make menuconfig"
