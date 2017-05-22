@@ -1,5 +1,0 @@
-The files in this folder provide a basic configuration of the firmware.
-The configuration can be changed with:
-* make menuconfig
-* modified makefile with -Os (optimize for size)
-* modified makefile -fno-rtti and -fno-exceptions

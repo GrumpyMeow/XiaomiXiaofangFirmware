@@ -1,8 +1,0 @@
-alias  := a
-prefix          := master
-date  := 20160606
-time  := 0951
-number          := 1
-revision  := 019
-build  := 10
-sdk_version     := $(prefix)_$(revision)$(alias)_$(date)_$(time)
