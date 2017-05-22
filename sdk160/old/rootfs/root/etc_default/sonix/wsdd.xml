@@ -1,5 +1,0 @@
-<!--
-WSDD service-specific configuration
-         Only save the server instance ID to be compatible with the WSDD protocol
--->
-<instance-id>27</instance-id>
