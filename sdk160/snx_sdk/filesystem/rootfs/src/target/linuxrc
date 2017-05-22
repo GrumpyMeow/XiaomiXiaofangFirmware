@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# This is the first script run in the system.
+#
+# Create device file
+echo "Create device file"
+/bin/mount -t proc none /proc
+/bin/mount -t sysfs none /sys
+/bin/mount -t usbfs none /proc/bus/usb
+/bin/mount -t tmpfs -o size=512k,mode=0755 dev /dev
+/bin/mkdir /dev/pts
+/bin/mkdir /dev/shm
+/bin/mount -t devpts devpts  /dev/pts
+
+ln -s /dev/rtc0 /dev/rtc
+/bin/mknod /dev/lirc c 61 0
+
+# If the system run for the first time,
+# then initialize the configuration.
+#add for mount /dev/mtdblock4
+/bin/echo /sbin/mdev > /proc/sys/kernel/hotplug
+/sbin/mdev -s
+
+#add for mount /dev/mtdblock4
+/bin/mount -t jffs2 /dev/mtdblock4 /etc
+if [ $? -ne 0 ]; then
+	echo "Clean up the old data in the 'etc' partition."
+	/usr/sbin/flash_eraseall -j -q /dev/mtd4
+	/bin/mount -t jffs2 /dev/mtdblock4 /etc
+fi
+if [ ! -x /etc/init.d/rcS ]; then
+	echo "The system run for the first time."
+	echo "Please wait for initialization..."
+#	/sbin/mke2fs /dev/mtdblock4
+#	/usr/sbin/flash_eraseall -j -q /dev/mtd4
+	/bin/rm -rf /etc/*
+	cp -a /root/etc_default/* /etc
+	cp /root/etc_default/rc/* /etc/rc
+	/bin/fsync
+fi
+#Add nvram inode
+modprobe snx_crypto
+modprobe snx_nvram
+mknod /dev/nvram c 251 0
+#Create mdev
+#/bin/echo /sbin/mdev > /proc/sys/kernel/hotplug
+#/sbin/mdev -s
+
+#Modify for openssh
+chmod 777 /dev/null
+
+exec /sbin/init
