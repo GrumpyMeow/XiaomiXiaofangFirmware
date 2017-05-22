@@ -65,10 +65,9 @@ clean:
 	@ for dir in $(SUB_DIRS-y) $(SUB_DIRS-n) $(SUB_DIRS-); do $(MAKE) -C $$dir $@ || exit 1; done
 
 install: precheck
-	@echo "############################# 3";
 	@ for dir in $(SUB_DIRS-y); do $(MAKE) -C $$dir $@ INSTALLDIR=$(abspath $(DRIVER_INS_DIR)) DAT_DIR=$(abspath $(DAT_DIR)) || exit 1; done
 
-#	$(STRIP) -d $(DRIVER_INS_DIR)/8188eu.ko
+	$(STRIP) -d $(DRIVER_INS_DIR)/8188eu.ko
 #	$(STRIP) -d $(DRIVER_INS_DIR)/8712u.ko
 #	$(STRIP) -d $(DRIVER_INS_DIR)/rt5370sta.ko
 
