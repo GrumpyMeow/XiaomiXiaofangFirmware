@@ -13,7 +13,7 @@ config MODULE_USB_WIFI_SUPPORT
 
 choice
 	prompt "USB WiFi Drivers" if MODULE_USB_WIFI_SUPPORT
-	default MODULE_USB_WIFI_RTL8188EUS_4_3_15_13239
+	default MODULE_USB_WIFI_RTL8188EUS_4_3_15
  
 config MODULE_USB_WIFI_RT3070AP
     bool "RT3070 AP Driver"
@@ -27,11 +27,11 @@ config MODULE_USB_WIFI_RTL8188EUS
     bool "RTL8188EUS"
     help
 
-config MODULE_USB_WIFI_RTL8188EUS_4_1_8_9449
+config MODULE_USB_WIFI_RTL8188EUS_4_1_8
     bool "RTL8188EUS v4.1.8"
     help
     
-config MODULE_USB_WIFI_RTL8188EUS_4_3_0_3_10997
+config MODULE_USB_WIFI_RTL8188EUS_4_3_0_3
     bool "RTL8188EUS/ETV Driver v4.3.0.3"
     help
 
@@ -39,7 +39,7 @@ config MODULE_USB_WIFI_RTL8188EUS_4_3_0_8
     bool "RTL8188EUS/ETV Driver v4.3.0.8"
     help
 
-config MODULE_USB_WIFI_RTL8188EUS_4_3_15_13239
+config MODULE_USB_WIFI_RTL8188EUS_4_3_15
     bool "RTL8188EUS/ETV Driver v4.3.15 simple config"
     help
 
@@ -120,7 +120,7 @@ config VIDEO_SENSOR_SNX111
 
 config VIDEO_SENSOR_OV9715
 	bool "OV9715"
-	default y
+	default n
 
 config VIDEO_SENSOR_OV2715
 	bool "OV2715"
@@ -251,16 +251,16 @@ config MODULE_SDC_SUPPORT
 
 config MODULE_NVRAM_SUPPORT
 	bool "NVRAM support"
-	default n
+	default y
 
 config MODULE_TV_SUPPORT
 	bool "TV out support"
 	depends on ! (SYSTEM_PLATFORM_ST58660FPGA || SYSTEM_PLATFORM_SN98660)
-	default y
+	default n
 
 config MODULE_UVC_SUPPORT
 	bool "UVC cam support"
-	default n
+	default y
 
 config MODULE_GPIO_SUPPORT
 	bool "GPIO Support"
@@ -292,11 +292,11 @@ config MODULE_USB_3G_SUPPORT
 
 config MODULE_USB_STORAGE_SUPPORT
 	bool 
-	default n
+	default y
 
 config MODULE_AHBDMA_SUPPORT 
 	bool "AHB DMA Support"
-	default n
+	default y
 
 config MODULE_BUS_MON_SUPPORT
 	bool "Bus monitor Support"
@@ -305,7 +305,7 @@ config MODULE_BUS_MON_SUPPORT
 
 config MODULE_CRYPTO_SUPPORT
 	bool
-	default n
+	default y
 
 endmenu
 
