@@ -1,0 +1,112 @@
+--- a/src/arch/arm/configs/sn98660_QR_Scan_rescue_defconfig	2017-05-23 16:43:35.560747000 -0400
++++ b/src/arch/arm/configs/sn98660_QR_Scan_rescue_defconfig	2017-05-23 17:05:02.793257965 -0400
+@@ -249,7 +249,7 @@
+ # SONiX SN986XX Implementations
+ #
+ # CONFIG_MACH_SN98600 is not set
+-CONFIG_MACH_SN98601=y
++CONFIG_MACH_SN98660=y
+ # CONFIG_MACH_SN98610 is not set
+ 
+ #
+@@ -692,9 +692,9 @@
+ #
+ # CONFIG_BLK_DEV_NBD is not set
+ # CONFIG_BLK_DEV_UB is not set
+-CONFIG_BLK_DEV_RAM=y
+-CONFIG_BLK_DEV_RAM_COUNT=1
+-CONFIG_BLK_DEV_RAM_SIZE=16384
++# CONFIG_BLK_DEV_RAM=y
++# CONFIG_BLK_DEV_RAM_COUNT=1
++# CONFIG_BLK_DEV_RAM_SIZE=16384
+ # CONFIG_BLK_DEV_XIP is not set
+ # CONFIG_CDROM_PKTCDVD is not set
+ # CONFIG_ATA_OVER_ETH is not set
+@@ -786,7 +786,7 @@
+ # CONFIG_ATH_COMMON is not set
+ # CONFIG_B43 is not set
+ # CONFIG_B43LEGACY is not set
+-CONFIG_HOSTAP=y
++# CONFIG_HOSTAP=y
+ # CONFIG_HOSTAP_FIRMWARE is not set
+ # CONFIG_IWM is not set
+ # CONFIG_LIBERTAS is not set
+@@ -1632,7 +1632,7 @@
+ # on-CPU RTC drivers
+ #
+ CONFIG_DMADEVICES=y
+-# CONFIG_DMADEVICES_DEBUG is not set
++CONFIG_DMADEVICES_DEBUG is not set
+ 
+ #
+ # DMA Devices
+--- a/src/arch/arm/configs/sn98660_sf_defconfig	2017-05-23 16:43:35.560747000 -0400
++++ b/src/arch/arm/configs/sn98660_sf_defconfig	2017-05-23 17:04:53.921212056 -0400
+@@ -40,8 +40,8 @@
+ CONFIG_HAVE_KERNEL_LZO=y
+ # CONFIG_KERNEL_GZIP is not set
+ # CONFIG_KERNEL_BZIP2 is not set
+-# CONFIG_KERNEL_LZMA is not set
+-CONFIG_KERNEL_LZO=y
++CONFIG_KERNEL_LZMA=y
++# CONFIG_KERNEL_LZO is not set
+ CONFIG_SWAP=y
+ CONFIG_SYSVIPC=y
+ CONFIG_SYSVIPC_SYSCTL=y
+@@ -72,7 +72,7 @@
+ # CONFIG_PID_NS is not set
+ # CONFIG_NET_NS is not set
+ # CONFIG_BLK_DEV_INITRD is not set
+-# CONFIG_CC_OPTIMIZE_FOR_SIZE is not set
++CONFIG_CC_OPTIMIZE_FOR_SIZE=y
+ CONFIG_SYSCTL=y
+ CONFIG_ANON_INODES=y
+ # CONFIG_EMBEDDED is not set
+@@ -236,7 +236,7 @@
+ #
+ # SONiX SN986XX Implementations
+ #
+-CONFIG_MACH_SN98600=y
++CONFIG_MACH_SN98660=y
+ # CONFIG_MACH_SN98601 is not set
+ # CONFIG_MACH_SN98610 is not set
+ 
+@@ -754,9 +754,9 @@
+ #
+ # CONFIG_BLK_DEV_NBD is not set
+ # CONFIG_BLK_DEV_UB is not set
+-CONFIG_BLK_DEV_RAM=y
+-CONFIG_BLK_DEV_RAM_COUNT=1
+-CONFIG_BLK_DEV_RAM_SIZE=16384
++# CONFIG_BLK_DEV_RAM=y
++# CONFIG_BLK_DEV_RAM_COUNT=1
++# CONFIG_BLK_DEV_RAM_SIZE=16384
+ # CONFIG_BLK_DEV_XIP is not set
+ # CONFIG_CDROM_PKTCDVD is not set
+ # CONFIG_ATA_OVER_ETH is not set
+@@ -848,14 +848,14 @@
+ # CONFIG_ATH_COMMON is not set
+ # CONFIG_B43 is not set
+ # CONFIG_B43LEGACY is not set
+-CONFIG_HOSTAP=y
++# CONFIG_HOSTAP=y
+ # CONFIG_HOSTAP_FIRMWARE is not set
+ # CONFIG_IWM is not set
+ # CONFIG_LIBERTAS is not set
+ # CONFIG_P54_COMMON is not set
+ # CONFIG_RT2X00 is not set
+ # CONFIG_WL12XX is not set
+-CONFIG_ZD1211RW=y
++# CONFIG_ZD1211RW=y
+ # CONFIG_ZD1211RW_DEBUG is not set
+ 
+ #
+@@ -1690,7 +1690,7 @@
+ # on-CPU RTC drivers
+ #
+ CONFIG_DMADEVICES=y
+-# CONFIG_DMADEVICES_DEBUG is not set
++CONFIG_DMADEVICES_DEBUG is not set
+ 
+ #
+ # DMA Devices

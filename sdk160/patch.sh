@@ -1,25 +1,19 @@
 #!/bin/bash
 
-echo -e "Setting defconfig"
+echo -e "Make clean"
 cd ../../snx_sdk/buildscript/
-
 make clean
 
-make sn98660_QR_Scan_402mhz_sf_defconfig
-
+echo -e "Applying patch"
 cd ../../XiaomiXiaofangFirmware/sdk160/
 echo -e "Applying patch"
 /bin/cp -v -f -R snx_sdk/* ../../snx_sdk/
 
+echo -e "Setting defconfig"
+cd ../../snx_sdk/buildscript/
+make sn98660_QR_Scan_402mhz_sf_defconfig
 
 echo -e "execute: make menuconfig"
-echo -e "\tselect: 'Flash Layout and firmware/_f setting' > Configure file partition > Erase etc when update FIRMWARE.bin'"
-echo -e "\tselect: 'User / Vendor Setting > [select what you want, memory size is limited ]'"
-echo -e "\tselect: 'Sonix Driver > USB WiFi Support'"
-echo -e "\tselect: 'Sonix Driver > USB WiFi Support > RTL8188EUS/ETV driver v4.3.0.3'"
-echo -e "\tdeselect: 'Sonix Driver > Sensor driver > Deselect all'"
-echo -e "\tselect: 'Sonix Driver > Sensor driver > SC2135'"
-echo -e "\tselect: 'Sonix Driver > NVRAM support'"
 
 echo -e "execute: make kernelmenuconfig"
 echo -e "\tselect: 'General setup > Kernel compression mode > LZMA'"

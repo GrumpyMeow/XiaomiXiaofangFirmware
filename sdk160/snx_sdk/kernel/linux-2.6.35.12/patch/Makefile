@@ -15,12 +15,14 @@ SRC_DIR		?= $(PATCH_DIR)/../src
 	  0019_net_usb_rtl8152 \
 	  0020_Fullspeed_Lock \
 	  0021_timer_latency \
-	  0022_no_snxmac
+	  0022_no_snxmac \
+	  0023_sn98660_opt \
 	$(Q)if [ ! -e $(PATCH_DIR)/.patched ]; then \
 		touch $(PATCH_DIR)/.patched; \
 	fi
 
-clean: 0022_no_snxmac_clean \
+clean: 0023_sn98660_opt \ 
+	0022_no_snxmac_clean \
 	0021_timer_latency_clean \
 	0020_Fullspeed_Lock_clean \
 	0019_net_usb_rtl8152_clean \
@@ -165,4 +167,14 @@ clean: 0022_no_snxmac_clean \
 0022_no_snxmac_clean:
 	$(Q)if [ -e $(PATCH_DIR)/.patched ]; then \
 		patch -R -d $(SRC_DIR) -p2 < $(PATCH_DIR)/0022_no_snxmac.patch; \
+	fi
+
+0023_sn98660_opt:
+	$(Q)if [ ! -e $(PATCH_DIR)/.patched ]; then \
+		patch -d $(SRC_DIR) -p2 < $(PATCH_DIR)/0023_sn98660_opt.patch; \
+	fi
+
+0023_sn98660_opt_clean:
+	$(Q)if [ -e $(PATCH_DIR)/.patched ]; then \
+		patch -R -d $(SRC_DIR) -p2 < $(PATCH_DIR)/0023_sn98660_opt.patch; \
 	fi
