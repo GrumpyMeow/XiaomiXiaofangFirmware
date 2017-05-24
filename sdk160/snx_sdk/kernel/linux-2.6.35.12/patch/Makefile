@@ -16,7 +16,7 @@ SRC_DIR		?= $(PATCH_DIR)/../src
 	  0020_Fullspeed_Lock \
 	  0021_timer_latency \
 	  0022_no_snxmac \
-	  0023_sn98660_opt \
+	  0023_sn98660_opt 
 	$(Q)if [ ! -e $(PATCH_DIR)/.patched ]; then \
 		touch $(PATCH_DIR)/.patched; \
 	fi
