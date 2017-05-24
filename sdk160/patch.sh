@@ -1,8 +1,18 @@
 #!/bin/bash
 
+if [ ! -d "./snx_sdk/app/RTL8188-hostapd" ]; then
+	echo -e "Getting modified hostapd"
+	cd snx_sdk/app
+	git clone https://github.com/jenssegers/RTL8188-hostapd.git
+	cd RTL8188-hostapd
+	/bin/cp -f ../../../misc/RTL8188-hostapd/* .
+	cd ../../../
+fi
+
 echo -e "Make clean"
 cd ../../snx_sdk/buildscript/
 make clean
+
 
 echo -e "Applying patch"
 cd ../../XiaomiXiaofangFirmware/sdk160/
