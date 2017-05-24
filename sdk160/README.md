@@ -32,7 +32,7 @@ This effort is to build a complete custom firmware based upon the Sonix SDK v1.6
 1. connect to the SSID of the camera to appear
 
 In case you get errors during build, it's best to start clean:
-1. cd SN986_1.60_QR_SScan_019a_20160606_0951
+1. cd SN986_1.60_QR_Scan_019a_20160606_0951
 1. ./sdk.cleanup
 1. answer: "y"
 1. /bin/rm -f -r XiaomiXiaofangFirmware
