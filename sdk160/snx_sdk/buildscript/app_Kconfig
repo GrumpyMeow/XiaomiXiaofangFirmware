@@ -177,6 +177,15 @@ config APP_WIRELESS_TOOLS
 	bool "wireless_tools.29"
 	default	y
 
+config APP_LIBNL
+	bool "Netlink Library"
+	default	y
+	
+config APP_IW
+	bool "IW CLI configuration utility"
+		depends on APP_LIBNL
+	default	y
+
 config APP_WPA_SUPPLICANT
 	bool "wpa_supplicant-0.7.3"
 	default	y
@@ -197,6 +206,10 @@ endchoice
 
 config APP_HOSTAPD
 	bool "hostapd-0.8"
+	default	n
+
+config APP_HOSTAPD_RTW
+	bool "hostapd-0.8_rtw"
 	default	y
 	
 

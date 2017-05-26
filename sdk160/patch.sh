@@ -1,8 +1,38 @@
 #!/bin/bash
 
+echo -e "Fetching NETLINK library" 
+cd ../../snx_sdk/app/
+mkdir libnl
+cd libnl
+mkdir src
+INSTALL_DIR=$PWD/output
+mkdir output
+cd src
+
+git clone https://github.com/tgraf/libnl.git
+cd libnl
+autoconf
+./autogen.sh
+./configure --host=arm-linux-gnueabi --prefix=$INSTALL_DIR
+#make
+#make install
+cd ../../../
+
+echo -e "Featching IW package"
+mkdir iw
+cd iw
+mkdir src
+cd src
+git clone https://github.com/Distrotech/iw.git
+cd iw
+
+pwd
+cd ../../../../../snx_sdk/buildscript
+pwd
+
 echo -e "Make clean"
-cd ../../snx_sdk/buildscript/
 make clean
+
 
 
 echo -e "Applying patch"
