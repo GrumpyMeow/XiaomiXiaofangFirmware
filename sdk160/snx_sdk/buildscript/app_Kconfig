@@ -197,12 +197,9 @@ endchoice
 
 config APP_HOSTAPD
 	bool "hostapd-0.8"
-	default	n
+	default	y
 	
-config APP_HOSTAPD8188
-	bool "hostapd-8188"
-	default y
-	
+
 config APP_ISP_TUNING_TOOL
 	bool "isp tuning tool"
 	default	y

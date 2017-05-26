@@ -1374,25 +1374,6 @@ hostapd-0.8:
 	fi
 hostapd-0.8-clean:
 
-hostapd-8188:
-	$(MAKE) -C $(PRJ_DIR)/app/RTL8188-hostapd all KERNEL_DIR=$(NORMAL_KERNEL_DIR) COMPILE_RESCUE=no
-	$(MAKE) -C $(PRJ_DIR)/app/RTL8188-hostapd install INSTALL_DIR=$(PRJ_DIR)/app/RTL8188-hostapd/rootfs KERNEL_DIR=$(NORMAL_KERNEL_DIR) COMPILE_RESCUE=no
-	if [ -f $(PRJ_DIR)/app/RTL8188-hostapd/custom_install ]; then \
-		$(PRJ_DIR)/app/RTL8188-hostapd/custom_install install $(PRJ_DIR)/app/RTL8188-hostapd/rootfs $(AUTOCONF_DIR) normal; \
-	fi
-	if [ -d $(PRJ_DIR)/app/RTL8188-hostapd/rootfs ]; then \
-		cp -av $(PRJ_DIR)/app/RTL8188-hostapd/rootfs/* $(FS_DIR); \
-	fi
-ifeq ($(CONFIG_RESCUE_SYSTEM), y)
-	if [ -f $(PRJ_DIR)/app/RTL8188-hostapd/custom_install ]; then \
-		$(PRJ_DIR)/app/RTL8188-hostapd/custom_install install $(PRJ_DIR)/app/RTL8188-hostapd/rootfs-rescue $(AUTOCONF_DIR) rescue; \
-	fi
-	if [ -d $(PRJ_DIR)/app/RTL8188-hostapd/rootfs-rescue ]; then \
-		cp -av $(PRJ_DIR)/app/RTL8188-hostapd/rootfs-rescue/* $(RESCUE_FS_DIR); \
-	fi
-endif
-hostapd-8188-clean:
-
 ifeq ($(MODULE_ONLY), yes)
 fwupdate:
 else
