@@ -5,7 +5,7 @@ TARGET			?= $(ARCH)-linux
 CROSS_COMPILE	?= $(TARGET)-
 INSTALL_DIR		?= $(PWD)/rootfs
 BIN_INSTALL_DIR	:= $(INSTALL_DIR)/usr/bin
-SRC_DIR		= $(PWD)/src/iw
+SRC_DIR		= $(PWD)/src
 
 .PHONY: all clean distclean install
 

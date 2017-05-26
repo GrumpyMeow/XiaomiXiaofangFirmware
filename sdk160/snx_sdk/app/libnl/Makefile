@@ -6,7 +6,7 @@ CROSS_COMPILE	?= $(TARGET)-
 INSTALL_DIR		?= $(PWD)/output
 BIN_INSTALL_DIR	:= $(INSTALL_DIR)/usr/bin
 
-SRC_DIR		= $(PWD)/src/libnl
+SRC_DIR		= $(PWD)/src
 
 .PHONY: all clean distclean install
 

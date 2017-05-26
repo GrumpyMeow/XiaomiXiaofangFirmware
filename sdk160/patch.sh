@@ -1,47 +1,28 @@
 #!/bin/bash
 
-echo -e "Fetching NETLINK library" 
-cd ../../snx_sdk/app/
-mkdir libnl
-cd libnl
-mkdir src
-INSTALL_DIR=$PWD/output
-mkdir output
-cd src
+SNXSDK=$PWD/../../snx_sdk
+SDK160=$PWD
 
-git clone https://github.com/tgraf/libnl.git
-cd libnl
+echo -e "Fetching sourcecode of NETLINK and IW" 
+git clone https://github.com/tgraf/libnl.git $SNXSDK/app/libnl/src
+git clone https://github.com/Distrotech/iw.git $SNXSDK/app/iw/src
+
+cd $SNXSDK/app/libnl/src
 autoconf
 ./autogen.sh
-./configure --host=arm-linux-gnueabi --prefix=$INSTALL_DIR
-#make
-#make install
-cd ../../../
+./configure --host=arm-linux-gnueabi --prefix=$SNXSDK/app/libnl/output
 
-echo -e "Featching IW package"
-mkdir iw
-cd iw
-mkdir src
-cd src
-git clone https://github.com/Distrotech/iw.git
-cd iw
-
-pwd
-cd ../../../../../snx_sdk/buildscript
-pwd
-
+cd $SNXSDK/buildscript
 echo -e "Make clean"
 make clean
 
-
-
 echo -e "Applying patch"
-cd ../../XiaomiXiaofangFirmware/sdk160/
+cd $SDK160
 echo -e "Applying patch"
-/bin/cp -v -f -R snx_sdk/* ../../snx_sdk/
+/bin/cp -v -f -R snx_sdk/* $SNXSDK/
 
 echo -e "Setting defconfig"
-cd ../../snx_sdk/buildscript/
+cd $SNXSDK/buildscript
 make sn98660_QR_Scan_402mhz_sf_defconfig
 
 echo -e "execute: cd ../../snx_sdk/buildscript/"
