@@ -1438,10 +1438,7 @@ endif
 libnl:
 	$(MAKE) -C $(PRJ_DIR)/app/libnl all COMPILE_RESCUE=no
 	$(MAKE) -C $(PRJ_DIR)/app/libnl install INSTALL_DIR=$(PRJ_DIR)/app/libnl/output COMPILE_RESCUE=no
-	if [ -d $(PRJ_DIR)/app/libnl/output/lib ]; then \
-		cp -av $(PRJ_DIR)/app/libnl/output/lib/libnl-genl-3.so.200 $(FS_DIR)/lib/; \
-		cp -av $(PRJ_DIR)/app/libnl/output/lib/libnl-3.so.200 $(FS_DIR)/lib/; \
-	fi
+	
 libnl-clean:
 	$(MAKE) -C $(PRJ_DIR)/app/libnl clean
 	$(MAKE) -C $(PRJ_DIR)/app/libnl distclean
@@ -1450,8 +1447,12 @@ libnl-clean:
 iw:
 	$(MAKE) -C $(PRJ_DIR)/app/iw all COMPILE_RESCUE=no
 	$(MAKE) -C $(PRJ_DIR)/app/iw install INSTALL_DIR=$(PRJ_DIR)/app/iw/rootfs COMPILE_RESCUE=no
+	
 	if [ -d $(PRJ_DIR)/app/iw/rootfs ]; then \
-		cp -av $(PRJ_DIR)/app/iw/rootfs/* $(FS_DIR); \
+		mkdir --parents $(FS_DIR)/lib/;			\
+		cp -f $(PRJ_DIR)/app/libnl/output/lib/libnl-genl-3.so.200 $(FS_DIR)/lib/; \
+		cp -f $(PRJ_DIR)/app/libnl/output/lib/libnl-3.so.200 $(FS_DIR)/lib/; \
+		cp -f -r $(PRJ_DIR)/app/iw/rootfs/* $(FS_DIR); \
 	fi
 
 iw-clean:

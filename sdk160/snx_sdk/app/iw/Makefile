@@ -12,7 +12,7 @@ SRC_DIR		= $(PWD)/src
 all:
 		export PKG_CONFIG_PATH=$(PWD)/../libnl/output/lib/pkgconfig;			\
 		$(MAKE) -C $(SRC_DIR) iw;	\
-		/bin/cp -f $(SRC_DIR)/iw $(SRC_DIR)/../../rootfs/usr/bin/; 
+		/bin/cp -f $(SRC_DIR)/iw $(SRC_DIR)/../rootfs/usr/bin/; 
 
 clean:
 		$(MAKE) -C $(SRC_DIR) $@;	
