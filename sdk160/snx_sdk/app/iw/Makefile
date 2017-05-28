@@ -6,11 +6,17 @@ CROSS_COMPILE	?= $(TARGET)-
 INSTALL_DIR		?= $(PWD)/rootfs
 BIN_INSTALL_DIR	:= $(INSTALL_DIR)/usr/bin
 SRC_DIR		= $(PWD)/src
+CPP     	:= $(CROSS_COMPILE)g++
+CC      	:= $(CROSS_COMPILE)gcc
+AR      	:= $(CROSS_COMPILE)ar
+RANLIB      := $(CROSS_COMPILE)ranlib
+export PKG_CONFIG_PATH =$(abspath $(PWD)/../libnl/output/lib/pkgconfig )
+
 
 .PHONY: all clean distclean install
 
 all:
-		export PKG_CONFIG_PATH=$(PWD)/../libnl/output/lib/pkgconfig;			\
+
 		$(MAKE) -C $(SRC_DIR) iw;	\
 		/bin/cp -f $(SRC_DIR)/iw $(SRC_DIR)/../rootfs/usr/bin/; 
 

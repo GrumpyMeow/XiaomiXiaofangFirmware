@@ -365,12 +365,12 @@ type=app|rescue
 [libnl]
 path=app/libnl
 depend_module=null
-type=app
+type=app|source
 
 [iw]
 path=app/iw
 depend_module=libnl
-type=app
+type=app|source
 
 
 [wpa_supplicant-0.7.3]

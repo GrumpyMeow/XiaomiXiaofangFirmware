@@ -4,13 +4,18 @@ SNXSDK=$PWD/../../snx_sdk
 SDK160=$PWD
 
 echo -e "Fetching sourcecode of NETLINK and IW" 
-git clone https://github.com/tgraf/libnl.git $SNXSDK/app/libnl/src
-git clone https://github.com/Distrotech/iw.git $SNXSDK/app/iw/src
+if [ ! -d $SNXSDK/app/libnl/src ]; then
+	git clone https://github.com/tgraf/libnl.git $SNXSDK/app/libnl/src
+	cd $SNXSDK/app/libnl/src
+	autoconf
+	./autogen.sh
+	#./configure --host=arm-linux-gnueabi --prefix=$SNXSDK/app/libnl/output
+fi
 
-cd $SNXSDK/app/libnl/src
-autoconf
-./autogen.sh
-./configure --host=arm-linux-gnueabi --prefix=$SNXSDK/app/libnl/output
+if [ ! -d $SNXSDK/app/iw/src ]; then
+	git clone https://github.com/Distrotech/iw.git $SNXSDK/app/iw/src
+fi
+
 
 cd $SNXSDK/buildscript
 echo -e "Make clean"

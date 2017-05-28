@@ -110,10 +110,11 @@ cat /etc/usbd.txt > /proc/usbd/class_mode
 #snx_scan &
 
 ifconfig wlan0 up
+ifconfig wlan1 up
 hostapd -B -P /var/run/hostapd.pid /etc/hostapd.conf
 udhcpd -f /etc/udhcpd.conf &
 
 #if [ -f /etc/wpa_supplicant.conf ]; then
-	/bin/rtw_simple_config -iwlan0 -c /etc/wpa_supplicant.conf 
+	# /bin/rtw_simple_config -iwlan0 -c /etc/wpa_supplicant.conf 
 #fi
 

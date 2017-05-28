@@ -7,24 +7,20 @@ INSTALL_DIR		?= $(PWD)/output
 BIN_INSTALL_DIR	:= $(INSTALL_DIR)/usr/bin
 
 SRC_DIR		= $(PWD)/src
+INSTALL_DIR	= $(PWD)/output
 
 .PHONY: all clean distclean install
 
 all:
-	for i in $(SRC_DIR);	\
-	do						\
-		$(MAKE) -C $$i $@;	\
-	done
+	cd $(SRC_DIR); 	\
+	echo $(TARGET);	\
+	./configure --host=$(TARGET) --target=$(TARGET) --prefix=$(abspath $(INSTALL_DIR)); 	\
+	$(MAKE) -C $(SRC_DIR) $@;				
+	$(MAKE) -C $(SRC_DIR) install INSTALL_DIR=$(abspath $(INSTALL_DIR)); 
 
 clean:
-	for i in $(SRC_DIR);	\
-	do						\
-		$(MAKE) -C $$i $@;	\
-	done
+	$(MAKE) -C $(SRC_DIR) $@;
 
-install:
-	for i in $(SRC_DIR);	\
-	do						\
-		$(MAKE) -C $$i $@ INSTALL_DIR=$(abspath $(BIN_INSTALL_DIR)); \
-	done
+install:	
+	
 

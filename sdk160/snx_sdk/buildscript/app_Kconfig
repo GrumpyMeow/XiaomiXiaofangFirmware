@@ -183,7 +183,6 @@ config APP_LIBNL
 	
 config APP_IW
 	bool "IW CLI configuration utility"
-		depends on APP_LIBNL
 	default	y
 
 config APP_WPA_SUPPLICANT
