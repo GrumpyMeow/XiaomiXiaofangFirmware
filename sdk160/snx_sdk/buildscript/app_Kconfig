@@ -185,6 +185,11 @@ config APP_IW
 	bool "IW CLI configuration utility"
 	default	y
 
+config APP_RTW_TOOLS
+	bool "Realtek Hostapd and WPA_Supplicant tools"
+	default	y
+
+
 config APP_WPA_SUPPLICANT
 	bool "wpa_supplicant-0.7.3"
 	default	y

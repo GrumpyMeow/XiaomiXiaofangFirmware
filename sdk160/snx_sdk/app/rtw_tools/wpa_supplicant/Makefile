@@ -1,3 +1,18 @@
+MAKE            ?= make
+PWD             := $(shell pwd)
+ARCH			?= arm
+TARGET			?= $(ARCH)-linux
+CROSS_COMPILE	?= $(TARGET)-
+INSTALL_DIR		?= $(PWD)/rootfs
+#BIN_INSTALL_DIR	:= $(INSTALL_DIR)/usr/bin
+SRC_DIR		= $(PWD)/hostapd
+SRC_DIR2		= $(PWD)/wpa_supplicant
+CPP     	:= $(CROSS_COMPILE)g++
+CC      	:= $(CROSS_COMPILE)gcc
+AR      	:= $(CROSS_COMPILE)ar
+RANLIB      := $(CROSS_COMPILE)ranlib
+
+
 ifndef CC
 CC=gcc
 endif

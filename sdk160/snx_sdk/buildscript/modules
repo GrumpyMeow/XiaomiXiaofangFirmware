@@ -373,6 +373,12 @@ depend_module=libnl
 type=app|source
 
 
+[rtw_tools]
+path=app/rtw_tools
+depend_module=null
+type=app|source
+
+
 [wpa_supplicant-0.7.3]
 path=app/wpa_supplicant-0.7.3
 depend_module=null
