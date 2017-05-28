@@ -42,5 +42,4 @@ In case you get errors during build, it's best to start clean:
 
 Roadmap:
 
-I switched to using a more recent WLAN driver which support 'Concurrent Mode' and 'Realtek's SimpleConfig'. Concurrent Mode will give the ability to have two wlan devices (wlan0 and wlan1). SimpleConfig is a feature of Realtek to make setting up the device more easy.
-* Add IW to the firmware.
+I switched to using a more recent WLAN driver which support 'Concurrent Mode' and 'Realtek's SimpleConfig'. Concurrent Mode will give the ability to have two wlan devices (wlan0 and wlan1). SimpleConfig is a feature of Realtek to make setting up the device more easy. To complete support for this new driver also IW and a new version of Hostapd must be added to the firmware.
