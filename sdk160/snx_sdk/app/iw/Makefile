@@ -18,6 +18,7 @@ export PKG_CONFIG_PATH =$(abspath $(PWD)/../libnl/output/lib/pkgconfig )
 all:
 
 		$(MAKE) -C $(SRC_DIR) iw;	\
+		mkdir -p $(SRC_DIR)/../rootfs/usr/bin/;  	\
 		/bin/cp -f $(SRC_DIR)/iw $(SRC_DIR)/../rootfs/usr/bin/; 
 
 clean:
