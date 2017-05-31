@@ -97,7 +97,7 @@ config APP_BOA
 
 config APP_EZIPUPDATE
 	bool "ez-ipupdate-3.0.10"
-	default	y
+	default	n
 
 config APP_GALAXYSERVER
 	bool "galaxy-server"
@@ -105,7 +105,7 @@ config APP_GALAXYSERVER
 
 config APP_IPERF
 	bool "iperf-2.0.4"
-	default	y
+	default	n
 
 config APP_IPTABLES
 	bool "iptables-1.4.1"
@@ -131,11 +131,11 @@ config APP_MDNSRESPONDER
 
 #config	APP_NETKIT_FTP
 #	 bool "netkit-ftp-0.17"
-#	 default y
+#	 default n
 
 config APP_SNMP
 	bool "net-snmp-5.7.1"
-	default	y
+	default	n
 
 config APP_NTP
 	bool "ntp-4.2.6p5"
@@ -151,7 +151,7 @@ config APP_RP_PPPOE
 
 config APP_SAMBA
 	bool "samba-2.2.7a"
-	default	y
+	default	n
 
 config APP_SMTPC
 	bool "smtpc-1.0.0"
@@ -179,15 +179,15 @@ config APP_WIRELESS_TOOLS
 
 config APP_LIBNL
 	bool "Netlink Library"
-	default	y
+	default	n
 	
 config APP_IW
 	bool "IW CLI configuration utility"
-	default	y
+	default	n
 
 config APP_RTW_TOOLS
 	bool "Realtek Hostapd and WPA_Supplicant tools"
-	default	y
+	default	n
 
 
 config APP_WPA_SUPPLICANT
@@ -197,7 +197,7 @@ config APP_WPA_SUPPLICANT
 choice
 	prompt "wpa	version"
 		depends	on APP_WPA_SUPPLICANT
-	default	APP_WPA_0_7_3
+	default	APP_WPA_0_8
 
 config APP_WPA_0_7_3
 	bool "0.7.3"
@@ -210,11 +210,11 @@ endchoice
 
 config APP_HOSTAPD
 	bool "hostapd-0.8"
-	default	n
+	default	y
 
 config APP_HOSTAPD_RTW
 	bool "hostapd-0.8_rtw"
-	default	y
+	default	n
 	
 
 config APP_ISP_TUNING_TOOL

@@ -55,8 +55,8 @@ all: precheck
 		echo "Error! Please set kernel directory by 'KERNEL_DIR' variable"; \
 		exit 1; \
 	fi;
-	@ for dir in $(SUB_DIRS-n); do echo "yes: " $$dir; done
-	@ for dir in $(SUB_DIRS-y); do echo "no: " $$dir; done
+	@ for dir in $(SUB_DIRS-n); do echo "no: " $$dir; done
+	@ for dir in $(SUB_DIRS-y); do echo "yes: " $$dir; done
 	@ for dir in $(SUB_DIRS-); do echo "unset: " $$dir; done
 	
 	@ for dir in $(SUB_DIRS-y); do $(MAKE) -C $$dir KERNELDIR=$(abspath $(KERNEL_DIR)/src) INSTALLDIR=$(abspath $(DRIVER_INS_DIR)) || exit 1; done
@@ -67,7 +67,5 @@ clean:
 install: precheck
 	@ for dir in $(SUB_DIRS-y); do $(MAKE) -C $$dir $@ INSTALLDIR=$(abspath $(DRIVER_INS_DIR)) DAT_DIR=$(abspath $(DAT_DIR)) || exit 1; done
 
-	$(STRIP) -d $(DRIVER_INS_DIR)/8188eu.ko
-#	$(STRIP) -d $(DRIVER_INS_DIR)/8712u.ko
-#	$(STRIP) -d $(DRIVER_INS_DIR)/rt5370sta.ko
+	$(STRIP) -d $(DRIVER_INS_DIR)/*.ko
 

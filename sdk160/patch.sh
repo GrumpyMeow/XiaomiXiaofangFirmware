@@ -3,6 +3,18 @@
 SNXSDK=$PWD/../../snx_sdk
 SDK160=$PWD
 
+echo "Todo: remove .o and .ko files from driver/usb-wifi folder"
+
+echo -e "Fetching sourcecode of rtl8188eu driver"
+#if [ ! -d $SNXSDK/driver/usb-wifi/src/driver/rtl8188eu ]; then
+#	git clone https://github.com/lwfinger/rtl8188eu.git $SNXSDK/driver/usb-wifi/src/driver/rtl8188eu
+#fi
+
+if [ ! -d $SNXSDK/kernel/linux-2.6.35.12/src/drivers/staging/rtl8188eu ]; then	
+	git clone https://github.com/lwfinger/rtl8188eu.git $SNXSDK/kernel/linux-2.6.35.12/src/drivers/staging/rtl8188eu
+fi
+
+
 echo -e "Fetching sourcecode of NETLINK and IW" 
 if [ ! -d $SNXSDK/app/libnl/src ]; then
 	git clone https://github.com/tgraf/libnl.git $SNXSDK/app/libnl/src
