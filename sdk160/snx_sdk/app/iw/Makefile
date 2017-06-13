@@ -20,6 +20,9 @@ all:
 		$(MAKE) -C $(SRC_DIR) iw;	\
 		mkdir -p $(SRC_DIR)/../rootfs/usr/bin/;  	\
 		/bin/cp -f $(SRC_DIR)/iw $(SRC_DIR)/../rootfs/usr/bin/; 
+		mkdir -p $(SRC_DIR)/../rootfs/lib/;  	\
+		/bin/cp -f $(PWD)/../libnl/output/lib/libnl-genl-3.so.200 $(SRC_DIR)/../rootfs/lib/; \
+		/bin/cp -f $(PWD)/../libnl/output/lib/libnl-3.so.200 $(SRC_DIR)/../rootfs/lib/;
 
 clean:
 		$(MAKE) -C $(SRC_DIR) $@;	

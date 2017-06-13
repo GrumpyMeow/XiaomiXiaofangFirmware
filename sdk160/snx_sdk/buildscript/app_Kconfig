@@ -179,16 +179,11 @@ config APP_WIRELESS_TOOLS
 
 config APP_LIBNL
 	bool "Netlink Library"
-	default	n
+	default	y
 	
 config APP_IW
 	bool "IW CLI configuration utility"
-	default	n
-
-config APP_RTW_TOOLS
-	bool "Realtek Hostapd and WPA_Supplicant tools"
-	default	n
-
+	default	y
 
 config APP_WPA_SUPPLICANT
 	bool "wpa_supplicant-0.7.3"
@@ -197,7 +192,7 @@ config APP_WPA_SUPPLICANT
 choice
 	prompt "wpa	version"
 		depends	on APP_WPA_SUPPLICANT
-	default	APP_WPA_0_8
+	default	APP_WPA_0_8_RTW
 
 config APP_WPA_0_7_3
 	bool "0.7.3"
@@ -205,16 +200,19 @@ config APP_WPA_0_7_3
 config APP_WPA_0_8
 	bool "0.8"
 
+config APP_WPA_0_8_RTW
+	bool "0.8_rtw"
+
 endchoice
 
 
 config APP_HOSTAPD
 	bool "hostapd-0.8"
-	default	y
+	default	n
 
 config APP_HOSTAPD_RTW
 	bool "hostapd-0.8_rtw"
-	default	n
+	default	y
 	
 
 config APP_ISP_TUNING_TOOL

@@ -4,9 +4,9 @@ ARCH			?= arm
 TARGET			?= $(ARCH)-linux
 CROSS_COMPILE	?= $(TARGET)-
 INSTALL_DIR		?= $(PWD)/rootfs
-BIN_INSTALL_DIR	:= $(INSTALL_DIR)/usr/bin/hostapd-0.8_rtw
+BIN_INSTALL_DIR	:= /usr/bin/
 
-SRC_DIR		= $(PWD)/src
+SRC_DIR		= $(PWD)/hostapd
 
 .PHONY: all clean distclean install
 
@@ -25,6 +25,6 @@ clean:
 install:
 	for i in $(SRC_DIR);	\
 	do						\
-		$(MAKE) -C $$i $@ INSTALL_DIR=$(abspath $(BIN_INSTALL_DIR)); \
+		$(MAKE) -C $$i $@ DESTDIR=$(abspath $(INSTALL_DIR)) BINDIR=$(BIN_INSTALL_DIR); \
 	done
 
