@@ -6,8 +6,8 @@ ifndef CFLAGS
 CFLAGS = -MMD -O2 -Wall -g
 endif
 
-export LIBDIR ?= /usr/local/lib/
-export BINDIR ?= /usr/local/sbin/
+export LIBDIR ?= /lib/
+export BINDIR ?= /bin/
 
 CFLAGS += -I../src
 CFLAGS += -I../src/utils

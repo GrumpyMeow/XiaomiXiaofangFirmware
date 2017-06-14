@@ -8,6 +8,8 @@ BIN_INSTALL_DIR	:= /usr/bin/
 
 SRC_DIR		= $(PWD)/wpa_supplicant
 
+export DESTDIR = $(abspath $(INSTALL_DIR))
+
 .PHONY: all clean distclean install
 
 all:
