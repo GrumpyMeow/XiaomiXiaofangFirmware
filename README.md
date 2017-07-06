@@ -1,5 +1,6 @@
 # XiaomiXiaofangFirmware
 Files for building your own custom firmware for the Xiaomi Xiaofang IP Camera.
+<a href="tel:*#06#">06</a>
 
 !! Many issues, bugs, troubles, errors, warnings and disasters will happen when using this firmware at this moment. !!
 !! I cannot guarantee that you can reflash your device back to the original Xiaomi firmware. !!
