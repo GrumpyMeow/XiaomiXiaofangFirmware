@@ -28,6 +28,6 @@ clean:
 		$(MAKE) -C $(SRC_DIR) $@;	
 
 install:
-		$(MAKE) -C $(SRC_DIR) $@ INSTALL_DIR=$(abspath $(BIN_INSTALL_DIR));
+		$(MAKE) -C $(SRC_DIR) $@ INSTALL_DIR=$(abspath $(BIN_INSTALL_DIR)) DESTDIR=$(abspath $(BIN_INSTALL_DIR));
 
 
